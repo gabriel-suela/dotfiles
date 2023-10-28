@@ -1,0 +1,10 @@
+env:
+  TERM: xterm-256color
+font:
+  size: 11
+  normal:
+    family: JetBrains Mono Nerd Font
+    # family: Fira Code
+  bold:
+    family: JetBrains Mono Nerd Font
+    # family: Fira Code

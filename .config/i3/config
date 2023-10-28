@@ -1,0 +1,123 @@
+set $mod Mod4
+
+font pango:JetBrains Mono Nerd Font 8
+
+workspace_layout default
+hide_edge_borders both
+gaps inner 5
+gaps outer 5
+default_border pixel 1
+default_floating_border pixel 0
+floating_modifier $mod
+
+exec --no-startup-id dex --autostart --environment i3
+exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+exec --no-startup-id nm-applet
+exec --no-startup-id xset s 480 dpms 600 600 600
+exec --no-startup-id /usr/bin/dunst
+exec_always --no-startup-id picom --config ~/.config/picom/picom.conf
+exec_always --no-startup-id autotiling
+
+floating_modifier $mod
+
+tiling_drag modifier titlebar
+
+# start a terminal
+bindsym $mod+Return exec alacritty
+
+# kill focused window
+bindsym $mod+w kill
+
+# start dmenu (a program launcher)
+bindsym $mod+d exec --no-startup-id dmenu_run -fn 'JetBrains Mono Nerd Font:size=9'
+
+# change focus
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+
+# move focused window
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+
+# switch to workspace
+bindsym $mod+1 workspace number $ws1
+bindsym $mod+2 workspace number $ws2
+bindsym $mod+3 workspace number $ws3
+bindsym $mod+4 workspace number $ws4
+bindsym $mod+5 workspace number $ws5
+bindsym $mod+6 workspace number $ws6
+bindsym $mod+7 workspace number $ws7
+bindsym $mod+8 workspace number $ws8
+bindsym $mod+9 workspace number $ws9
+bindsym $mod+0 workspace number $ws10
+workspace 6 output DVI-D-0
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5
+bindsym $mod+Shift+6 move container to workspace number $ws6
+bindsym $mod+Shift+7 move container to workspace number $ws7
+bindsym $mod+Shift+8 move container to workspace number $ws8
+bindsym $mod+Shift+9 move container to workspace number $ws9
+bindsym $mod+Shift+0 move container to workspace number $ws10
+
+for_window [class="Tandem"] floating enable
+for_window [class="Pavucontrol"] floating enable
+
+bindsym $mod+minus resize shrink width 5 px or 5 ppt
+bindsym $mod+equal resize grow width 5 px or 5 ppt
+
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+r restart
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+
+set $white		#ffffff
+set $black		#000000
+set $purple		#887c95
+set $pine #31748f
+set $gold #f6c177
+set $brown #8a7d6f
+set $black #141617
+set $gray #a2a299
+
+# define colors for windows:
+#class		        	border		bground		text		indicator	child_border
+client.focused		    $white		$white		$white		$white		$white
+
+
+bar {
+        status_command i3status
+}
