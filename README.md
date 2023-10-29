@@ -1,6 +1,6 @@
 # Dotfiles Repository
 
-This repository contains my personal dotfiles for customizing various aspects of my Unix-based system. Dotfiles are configuration files used to personalize and tweak the behavior and appearance of your shell and various command-line tools.
+This repository contains my personal dotfiles for customizing various aspects of my linux system.
 
 ## Getting Started
 
