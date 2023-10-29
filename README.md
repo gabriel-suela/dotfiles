@@ -2,6 +2,10 @@
 
 This repository contains my personal dotfiles for customizing various aspects of my linux system.
 
+## Screenshot
+![image](https://github.com/gabriel-suela/dotfiles/assets/96388423/81fd271e-0f97-457a-873e-4a512c7350f6)
+
+
 ## Getting Started
 
 ### Prerequisites
