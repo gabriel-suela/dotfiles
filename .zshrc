@@ -2,18 +2,7 @@
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 export TERM="alacritty"
 
-# Path to your oh-my-zsh installation.
-export ZSH="$HOME/.oh-my-zsh"
-
-# ZSH_THEME="amuse"
-ZSH_THEME="intheloop"
-
 plugins=(git)
-
-source $ZSH/oh-my-zsh.sh
-
-#source /home/suela/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-#source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 autoload -U colors && colors
 PS1="%B%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[magenta]%}%~%{$fg[red]%}]%{$reset_color%}$%b "
