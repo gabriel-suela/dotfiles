@@ -10,13 +10,13 @@ This repository contains my personal dotfiles for customizing various aspects of
 
 ### Prerequisites
 
-Before you begin, ensure that you have the necessary prerequisites:
+Before you begin, ensure that you have the necessary prerequisites (WIP):
 
 ```bash
 wget -qO- https://raw.githubusercontent.com/gabriel-suela/dotfiles/master/init.sh | bash
 ```
 
-### Clone this Repository
+### Clone this Repository (Bare mode)
 
 To clone this dotfiles repository, run the following command in your terminal:
 
