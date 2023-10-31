@@ -18,6 +18,7 @@ exec --no-startup-id /usr/bin/dunst
 exec_always --no-startup-id picom --config ~/.config/picom/picom.conf
 exec_always --no-startup-id autotiling
 exec --no-startup-id exec ~/.config/i3/init.sh
+exec_always --no-startup-id setxkbmap -layout us -variant intl
 
 floating_modifier $mod
 
