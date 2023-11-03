@@ -1,0 +1,37 @@
+#!/bin/bash
+
+vol() {
+    vol=$(pulsemixer --get-volume | awk '{print $1}')
+    mute=$(pulsemixer --get-mute)
+    if [ "$mute" == 1 ]; then
+        echo -e "+@fg=1;vol+@fg=0; muted "
+    elif [ "$mute" == 0 ]; then
+	    echo -e "+@fg=1;vol+@fg=0; $vol% "
+    fi
+}
+
+bat() {
+	power=$(cat /sys/class/power_supply/BAT0/capacity)
+    status=$(cat /sys/class/power_supply/BAT0/status)
+    if [ "$status" == "Charging" ]; then
+        echo -e "+@fg=1;bat+@fg=0; +$power% "
+    elif [ "$status" == "Discharging" ]; then
+        echo -e "+@fg=1;bat+@fg=0; $power% "
+    fi
+}
+
+dte() {
+    dte=$(date +"%a, %b %d")
+    echo -e "+@fg=1;date+@fg=0; $dte "
+}
+
+tie() {
+    tme=$(date +"%I:%M %P")
+    echo -e "+@fg=1;time+@fg=0; $tme "
+}
+
+while :; do
+    echo "$(vol)  $(bat)  $(tie)  $(dte)" 
+	sleep 2
+done
+
