@@ -1,9 +1,7 @@
 * {
   /* `otf-font-awesome` is required to be installed for icons */
-  font-family:
-    Source Sans Pro,
-    Material Design Icons;
-  font-size: 14px;
+  font-family: JetBrains Mono Nerd Font;
+  font-size: 12px;
 }
 
 window#waybar {
