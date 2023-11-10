@@ -1,36 +1,87 @@
 # env:
 #   TERM: xterm-256color
 
-window:
-  decorations: 'none'
-  # opacity: 0.9
 font:
-  size: 10
+  size: 11
   normal:
     family: JetBrains Mono Nerd Font
   bold:
     family: JetBrains Mono Nerd Font
+# colors:
+#   primary:
+#     background: '#101010'
+#     foreground: '#C4C4C4'
+#   cursor:
+#     text: '#F4F4F4'
+#   normal:
+#     black: '#23252B'
+#     red: '#B54036'
+#     green: '#7A7C57'
+#     yellow: '#DEA566'
+#     blue: '#6A7C93'
+#     magenta: '#A4799D'
+#     cyan: '#4F7498'
+#     white: '#C4C4C4'
+#   bright:
+#     black: '#23252B'
+#     red: '#B54036'
+#     green: '#7A7C57'
+#     yellow: '#DEA566'
+#     blue: '#6A7C93'
+#     magenta: '#A4799D'
+#     cyan: '#4F7498'
+#     white: '#C4C4C4'
+colors:
+  name: vscode (dark)
+  author: senpai-10
+  primary:
+    background: '#1E1E1E'
+    foreground: '#D4D4D4'
+  cursor:
+    text: '#1d1f21'
+    cursor: '#cccccc'
+  normal:
+    black: '#000000'
+    red: '#cd3131'
+    green: '#0dbc79'
+    yellow: '#e5e510'
+    blue: '#2472c8'
+    magenta: '#bc3fbc'
+    cyan: '#11a8cd'
+    white: '#e5e5e5'
+  bright:
+    black: '#666666'
+    red: '#f14c4c'
+    green: '#23d18b'
+    yellow: '#f5f543'
+    blue: '#3b8eea'
+    magenta: '#d670d6'
+    cyan: '#29b8db'
+    white: '#e5e5e5'
+# BEGIN ACE
 colors:
   primary:
-    background: '#101010'
-    foreground: '#C4C4C4'
+    background: '#111111'
+    foreground: '#c2c2c2'
   cursor:
-    text: '#F4F4F4'
+    text:       '#111111'
+    cursor:     '#c2c2c2'
   normal:
-    black: '#23252B'
-    red: '#B54036'
-    green: '#7A7C57'
-    yellow: '#DEA566'
-    blue: '#6A7C93'
-    magenta: '#A4799D'
-    cyan: '#4F7498'
-    white: '#C4C4C4'
+    black:      '#111111'
+    red:        '#535353'
+    green:      '#62605E'
+    yellow:     '#656565'
+    blue:       '#867969'
+    magenta:    '#A08D70'
+    cyan:       '#817D8A'
+    white:      '#c2c2c2'
   bright:
-    black: '#23252B'
-    red: '#B54036'
-    green: '#7A7C57'
-    yellow: '#DEA566'
-    blue: '#6A7C93'
-    magenta: '#A4799D'
-    cyan: '#4F7498'
-    white: '#C4C4C4'
+    black:      '#878787'
+    red:        '#535353'
+    green:      '#62605E'
+    yellow:     '#656565'
+    blue:       '#867969'
+    magenta:    '#A08D70'
+    cyan:       '#817D8A'
+    white:      '#c2c2c2'
+# END ACE

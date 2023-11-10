@@ -13,11 +13,12 @@ floating_modifier $mod
 exec --no-startup-id dex --autostart --environment i3
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec --no-startup-id nm-applet
-#exec --no-startup-id xset s 480 dpms 600 600 600
-exec --no-startup-id /usr/bin/dunst
-#exec_always --no-startup-id picom --config ~/.config/picom/picom.conf
+#exec_always --no-startup-id wal -R
+exec --no-startup-id feh --bg-fill ~/wallpaper/fabian-schneider.jpg
+exec_always --no-startup-id dunst --config ~/.config/dunst/dunstrc
+exec_always --no-startup-id picom --config ~/.config/picom/picom.conf
 exec_always --no-startup-id autotiling
-exec_always --no-startup-id ~/.config/polybar/launch.sh
+exec_always --no-startup-id  ~/.config/polybar/launch.sh
 exec --no-startup-id exec ~/.config/i3/init.sh
 exec_always --no-startup-id setxkbmap -layout us -variant intl
 
@@ -26,13 +27,15 @@ floating_modifier $mod
 tiling_drag modifier titlebar
 
 # start a terminal
-bindsym $mod+Return exec alacritty
+bindsym $mod+Return exec kitty
 
 # kill focused window
 bindsym $mod+w kill
 
 # start dmenu (a program launcher)
-bindsym $mod+p exec --no-startup-id dmenu_run -fn 'JetBrains Mono Nerd Font:size=9'
+bindsym $mod+d exec --no-startup-id dmenu_run -fn 'JetBrains Mono Nerd Font:size=9'
+bindsym $mod+Shift+period move container to output right
+bindsym $mod+Shift+comma move container to output left
 
 # change focus
 bindsym $mod+h focus left
@@ -50,7 +53,7 @@ bindsym $mod+Shift+l move right
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
-bindsym $mod+r exec alacritty -e ranger
+#bindsym $mod+r exec kitty -e ranger
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
@@ -71,6 +74,27 @@ set $ws7 "7"
 set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
+
+# Terminal scratchpad
+for_window [instance="ttrm"] floating enable, resize set 800 600
+for_window [instance="ttrm"] move position center
+for_window [instance="ttrm"] move scratchpad
+exec --no-startup-id kitty --class ttrm -e tmux
+bindsym $mod+t [instance="ttrm"] scratchpad show;
+
+# Ranger scratchpad
+for_window [instance="ranger"] floating enable, resize set 800 600
+for_window [instance="ranger"] move position center
+for_window [instance="ranger"] move scratchpad
+exec --no-startup-id kitty --class ranger -e ranger
+bindsym $mod+r [instance="ranger"] scratchpad show;
+
+# Docker scratchpad
+for_window [instance="ldocker"] floating enable, resize set 800 600
+for_window [instance="ldocker"] move position center
+for_window [instance="ldocker"] move scratchpad
+exec --no-startup-id kitty --class ldocker -e lazydocker
+bindsym $mod+c [instance="ldocker"] scratchpad show;
 
 # switch to workspace
 bindsym $mod+1 workspace number $ws1
@@ -117,9 +141,15 @@ set $black #141617
 set $gray #a2a299
 set $blue #005678
 
+set_from_resource $fg i3wm.color7 #f0f0f0
+set_from_resource $bg i3wm.color2 #f0f0f0
+
 # define colors for windows:
 #class		        	border		bground		text		indicator	child_border
-client.focused		    $blue		$blue		$white		$blue		$blue
+client.focused		    $fg			$fg			$fg			$fg			$fg
+
+# client.placeholder      $bg     $bg     $fg  $bg       $bg
+# client.background       $bg
 
 
 # bar {
