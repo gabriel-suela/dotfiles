@@ -19,3 +19,6 @@ To clone this dotfiles repository, run the following command in your terminal:
 ```bash
 git clone --bare https://github.com/gabriel-suela/dotfiles.git $HOME/.dotfiles && source ~/.zshrc 
 ```
+## Screenshot
+![image](https://github.com/gabriel-suela/dotfiles/assets/96388423/9ad8931d-6ebe-480f-8dcb-5aba742fd9a1)
+
