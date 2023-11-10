@@ -9,7 +9,7 @@ This repository contains my personal dotfiles for customizing various aspects of
 Before you begin, ensure that you have the necessary prerequisites (WIP):
 
 ```bash
-wget -qO- https://raw.githubusercontent.com/gabriel-suela/dotfiles/master/init.sh | bash
+wget -qO- https://raw.githubusercontent.com/gabriel-suela/dotfiles/master/install/init.sh | bash
 ```
 
 ### Clone this Repository (Bare mode)
