@@ -1,11 +1,11 @@
 set $mod Mod4
 
-font pango:JetBrains Mono Nerd Font 8
+font pango:Dejavu Sans Mono 8
 
 workspace_layout default
-hide_edge_borders both
+#smart_borders on
 gaps inner 5
-gaps outer 1
+gaps outer 8
 default_border pixel 1
 default_floating_border pixel 0
 floating_modifier $mod
@@ -13,26 +13,23 @@ floating_modifier $mod
 exec --no-startup-id dex --autostart --environment i3
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec --no-startup-id nm-applet
-#exec_always --no-startup-id wal -R
-exec --no-startup-id feh --bg-fill ~/wallpaper/fabian-schneider.jpg
+exec --no-startup-id xrdb merge ~/.Xressources
+exec --no-startup-id ~/.screenlayout/monitor.sh
+exec --no-startup-id sleep 2 & feh --bg-fill ~/Pictures/wall.jpg
 exec_always --no-startup-id dunst --config ~/.config/dunst/dunstrc
-exec_always --no-startup-id picom --config ~/.config/picom/picom.conf
+exec_always --no-startup-id picom &
 exec_always --no-startup-id autotiling
-exec_always --no-startup-id  ~/.config/polybar/launch.sh
-exec --no-startup-id exec ~/.config/i3/init.sh
 exec_always --no-startup-id setxkbmap -layout us -variant intl
 
 floating_modifier $mod
 
 tiling_drag modifier titlebar
 
-# start a terminal
-bindsym $mod+Return exec kitty
-
-# kill focused window
-bindsym $mod+w kill
-
-# start dmenu (a program launcher)
+bindsym $mod+Return exec alacritty
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+r restart
+bindsym $mod+q kill
+bindsym $mod+f fullscreen toggle
 bindsym $mod+d exec --no-startup-id dmenu_run -fn 'JetBrains Mono Nerd Font:size=9'
 bindsym $mod+Shift+period move container to output right
 bindsym $mod+Shift+comma move container to output left
@@ -43,25 +40,15 @@ bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
 
-
 # move focused window
 bindsym $mod+Shift+h move left
 bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
 
-
-# enter fullscreen mode for the focused container
-bindsym $mod+f fullscreen toggle
-#bindsym $mod+r exec kitty -e ranger
-
-# toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
-
-# change focus between tiling / floating windows
+bindsym $mod+w layout tabbed
 bindsym $mod+space focus mode_toggle
-
-# focus the parent container
 bindsym $mod+a focus parent
 
 set $ws1 "1"
@@ -79,21 +66,21 @@ set $ws10 "10"
 for_window [instance="ttrm"] floating enable, resize set 800 600
 for_window [instance="ttrm"] move position center
 for_window [instance="ttrm"] move scratchpad
-exec --no-startup-id kitty --class ttrm -e tmux
+exec --no-startup-id alacritty --class ttrm -e tmux
 bindsym $mod+t [instance="ttrm"] scratchpad show;
 
 # Ranger scratchpad
 for_window [instance="ranger"] floating enable, resize set 800 600
 for_window [instance="ranger"] move position center
 for_window [instance="ranger"] move scratchpad
-exec --no-startup-id kitty --class ranger -e ranger
+exec --no-startup-id alacritty --class ranger -e ranger
 bindsym $mod+r [instance="ranger"] scratchpad show;
 
 # Docker scratchpad
 for_window [instance="ldocker"] floating enable, resize set 800 600
 for_window [instance="ldocker"] move position center
 for_window [instance="ldocker"] move scratchpad
-exec --no-startup-id kitty --class ldocker -e lazydocker
+exec --no-startup-id alacritty --class ldocker -e lazydocker
 bindsym $mod+c [instance="ldocker"] scratchpad show;
 
 # switch to workspace
@@ -107,7 +94,7 @@ bindsym $mod+7 workspace number $ws7
 bindsym $mod+8 workspace number $ws8
 bindsym $mod+9 workspace number $ws9
 bindsym $mod+0 workspace number $ws10
-workspace 6 output DVI-D-0
+
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace number $ws1
@@ -124,41 +111,36 @@ bindsym $mod+Shift+0 move container to workspace number $ws10
 for_window [class="Tandem"] floating enable
 for_window [class="ranger"] floating enable
 for_window [class="Pavucontrol"] floating enable
+workspace 6 output DVI-D-0
 
 bindsym $mod+minus resize shrink width 5 px or 5 ppt
 bindsym $mod+equal resize grow width 5 px or 5 ppt
 
-bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
-set $white		#ffffff
-set $black		#000000
-set $purple		#887c95
+set $white #ffffff
+set $black #000000
+set $purple #887c95
 set $pine #31748f
 set $gold #f6c177
 set $brown #8a7d6f
 set $black #141617
 set $gray #a2a299
-set $blue #005678
-
-set_from_resource $fg i3wm.color7 #f0f0f0
-set_from_resource $bg i3wm.color2 #f0f0f0
+set $blue #275577
 
 # define colors for windows:
 #class		        	border		bground		text		indicator	child_border
-client.focused		    $fg			$fg			$fg			$fg			$fg
-
-# client.placeholder      $bg     $bg     $fg  $bg       $bg
-# client.background       $bg
+client.focused		    $blue		$blue		$white		$blue		$blue
 
 
-# bar {
-# 		status_command i3status
-# 		position top
-# 		
-# 		colors {
-# 			background #222222
-# 			}
-# }
+ bar {
+ 		status_command i3status
+ 		position bottom
+ 		tray_output primary
+ 		tray_padding 3
+ 		colors {
+				background #0c0e0f
+ 			}
+ }
 
 exec --no-startup-id xsetroot -solid "#282828"
