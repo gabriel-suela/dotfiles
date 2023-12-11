@@ -5,7 +5,7 @@ font pango:Dejavu Sans Mono 8
 workspace_layout default
 #smart_borders on
 gaps inner 5
-gaps outer 8
+gaps outer 5
 default_border pixel 1
 default_floating_border pixel 0
 floating_modifier $mod
@@ -13,11 +13,12 @@ floating_modifier $mod
 exec --no-startup-id dex --autostart --environment i3
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec --no-startup-id nm-applet
-exec --no-startup-id xrdb merge ~/.Xressources
+exec --no-startup-id xrdb merge ~/.Xressources && i3-msg restart
 exec --no-startup-id ~/.screenlayout/monitor.sh
-exec --no-startup-id sleep 2 & feh --bg-fill ~/Pictures/wall.jpg
+exec --no-startup-id sleep 2 && feh --bg-fill ~/Pictures/walll.png
 exec_always --no-startup-id dunst --config ~/.config/dunst/dunstrc
-exec_always --no-startup-id picom &
+#exec_always --no-startup-id picom --config ~/.config/picom/picom.conf
+exec --no-startup-id xcompmgr
 exec_always --no-startup-id autotiling
 exec_always --no-startup-id setxkbmap -layout us -variant intl
 
@@ -108,9 +109,16 @@ bindsym $mod+Shift+8 move container to workspace number $ws8
 bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10
 
-for_window [class="Tandem"] floating enable
+# for_window [class="Tandem"] floating enable
 for_window [class="ranger"] floating enable
+for_window [class="awakened-poe-trade"] floating enable
 for_window [class="Pavucontrol"] floating enable
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="bubble"] floating enable
+for_window [window_role="task_dialog"] floating enable
+for_window [window_role="Preferences"] floating enable
+for_window [window_type="dialog"]floating enable
+for_window [window_type="menu"] floating enable
 workspace 6 output DVI-D-0
 
 bindsym $mod+minus resize shrink width 5 px or 5 ppt
