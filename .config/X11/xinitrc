@@ -1,0 +1,4 @@
+dunst &
+xsetroot -cursor_name left_ptr &
+xrdb -load ~/.Xresources &
+exec i3
