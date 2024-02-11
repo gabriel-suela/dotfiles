@@ -5,22 +5,24 @@ font pango:Dejavu Sans Mono 8
 workspace_layout default
 #smart_borders on
 gaps inner 5
-gaps outer 5
-default_border pixel 1
+gaps outer 2
+default_border pixel 2
 default_floating_border pixel 0
 floating_modifier $mod
 
 exec --no-startup-id dex --autostart --environment i3
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec --no-startup-id nm-applet
-exec --no-startup-id xrdb merge ~/.Xressources && i3-msg restart
-exec --no-startup-id ~/.screenlayout/monitor.sh
-exec --no-startup-id sleep 2 && feh --bg-fill ~/Pictures/walll.png
+exec --no-startup-id xrdb merge ~/.Xressources && i3-msg reload
+exec --no-startup-id sleep 1 &&  feh --bg-scale ~/Pictures/wall.webp --bg-fill ~/Pictures/wall.webp
 exec_always --no-startup-id dunst --config ~/.config/dunst/dunstrc
-#exec_always --no-startup-id picom --config ~/.config/picom/picom.conf
-exec --no-startup-id xcompmgr
+exec --no-startup-id picom -b
 exec_always --no-startup-id autotiling
 exec_always --no-startup-id setxkbmap -layout us -variant intl
+exec_always --no-startup-id ~/.config/polybar/launch.sh
+exec --no-startup-id xset s off
+exec --no-startup-id xset -dpms
+exec --no-startup-id xset s noblank
 
 floating_modifier $mod
 
@@ -31,7 +33,6 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 bindsym $mod+q kill
 bindsym $mod+f fullscreen toggle
-bindsym $mod+d exec --no-startup-id dmenu_run -fn 'JetBrains Mono Nerd Font:size=9'
 bindsym $mod+Shift+period move container to output right
 bindsym $mod+Shift+comma move container to output left
 
@@ -52,6 +53,11 @@ bindsym $mod+w layout tabbed
 bindsym $mod+space focus mode_toggle
 bindsym $mod+a focus parent
 
+# run rofi programs
+bindsym $mod+d exec "rofi -show drun -no-default-config -config ~/.config/rofi/main.rasi"
+bindsym $mod+s exec "rofi -show drun -no-default-config -config ~/.config/rofi/full_screen.rasi"
+bindsym $mod+x exec "rofi-powermenu"
+
 set $ws1 "1"
 set $ws2 "2"
 set $ws3 "3"
@@ -62,7 +68,6 @@ set $ws7 "7"
 set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
-
 # Terminal scratchpad
 for_window [instance="ttrm"] floating enable, resize set 800 600
 for_window [instance="ttrm"] move position center
@@ -109,7 +114,7 @@ bindsym $mod+Shift+8 move container to workspace number $ws8
 bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10
 
-# for_window [class="Tandem"] floating enable
+for_window [class="Tandem"] floating enable
 for_window [class="ranger"] floating enable
 for_window [class="awakened-poe-trade"] floating enable
 for_window [class="Pavucontrol"] floating enable
@@ -133,22 +138,13 @@ set $pine #31748f
 set $gold #f6c177
 set $brown #8a7d6f
 set $black #141617
-set $gray #a2a299
+set $gray #636262
 set $blue #275577
+set $oled #353534
+set $green #565948
 
 # define colors for windows:
 #class		        	border		bground		text		indicator	child_border
-client.focused		    $blue		$blue		$white		$blue		$blue
-
-
- bar {
- 		status_command i3status
- 		position bottom
- 		tray_output primary
- 		tray_padding 3
- 		colors {
-				background #0c0e0f
- 			}
- }
+client.focused		 $gray		$gray		$white		$gray		$gray
 
 exec --no-startup-id xsetroot -solid "#282828"
