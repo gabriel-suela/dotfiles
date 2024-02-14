@@ -1,5 +1,5 @@
 if [[ "$(tty)" = "/dev/tty1" ]]; then
-  pgrep i3 || startx ~/.config/X11/xinitrc
+  # pgrep Hyprland || startx ~/.config/X11/Hyprland
 fi
 
 eval "$(gh completion -s zsh)"

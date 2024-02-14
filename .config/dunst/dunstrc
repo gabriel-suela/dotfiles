@@ -3,72 +3,92 @@
 # Copyright (C) 2022 Keyitdev
 
 [global]
-    monitor = 0
+
     follow = mouse
-    width = (300,400)
-    height = 250
-    origin = top-right
-    offset = 20x50
-    indicate_hidden = yes
-    shrink = no
-    transparency = 0
-    notification_height = 0
-    separator_height = 2
-    padding = 12
-    horizontal_padding = 15
-    frame_width = 2
-    frame_color = "#343746"
-    separator_color = frame
-    sort = yes
-    idle_threshold = 120
-    font = JetBrains Nerd Font 12
-    line_height = 0
-    markup = full
-    format = "<b>%s</b>\n%b"
+    stack_duplicates = false
+
+    ### Geometry ###
+
+    width = 400
+    height = 400
+    origin = bottom-right
+    offset = 20x20
+
+    corner_radius = 6
+
+    icon_corner_radius = 6
+
+    padding = 8
+    horizontal_padding = 8
+    text_icon_padding = 0
+
+    frame_width = 1
+    frame_color = "#505050"
+
+    gap_size = 16
+
+	### PROGRESS BAR
+	progress_bar = true
+	progress_bar_height = 10
+	progress_bar_frame_width = 1
+	progress_bar_corner_radius = 5
+	
+    ### Text ###
+
+    font = SF Pro Display 12
+
+    line_height = 6
+
+    format = "<b>%s</b>\n<i>%b</i>"
+    show_indicators = false
     alignment = left
+
     vertical_alignment = center
-    show_age_threshold = 60
-    word_wrap = yes
-    ellipsize = middle
-    ignore_newline = no
-    stack_duplicates = true
-    hide_duplicate_count = false
-    show_indicators = no
+
+    ### Icons ###
+
+    enable_recursive_icon_lookup = true
+
+
     icon_position = left
-    min_icon_size = 50
-    max_icon_size = 50
-    icon_path = /usr/share/icons/Papirus/16x16/
-    sticky_history = no
-    history_length = 50
-    dmenu = /usr/bin/dmenu -p dunst:
-    browser = /usr/bin/sensible-browser
-    always_run_script = true
+
+    # Scale small icons up to this size, set to 0 to disable. Helpful
+    # for e.g. small files or high-dpi screens. In case of conflict,
+    # max_icon_size takes precedence over this.
+    min_icon_size = 64
+
+    max_icon_size = 64
+
+
+    ### Misc/Advanced ###
+
+    # Browser for opening urls in context menu.
+    browser = /usr/bin/xdg-open
+
+    # Define the title of the windows spawned by dunst
     title = Dunst
+
     class = Dunst
-    startup_notification = false
-    verbosity = mesg
-    corner_radius = 10
-    ignore_dbusclose = false
-    force_xinerama = false
+
+
+    ### Wayland ###
+
+    mouse_left_click = do_action, close_current
     mouse_middle_click = do_action, close_current
-    mouse_right_click = close_all
-[experimental]
-    per_monitor_dpi = false
-[shortcuts]
-    close = ctrl+space
-    close_all = ctrl+shift+space
-    history = ctrl+grave
-    context = ctrl+shift+period
+    mouse_right_click = close_current
+
+
 [urgency_low]
-    background = "#1E1E2E"
-    foreground = "#dedede"
+    background = "#15151580"
+    foreground = "#ffffff"
     timeout = 5
+
 [urgency_normal]
-    background = "#1E1E2E"
-    foreground = "#dedede"
+    background = "#15151580"
+    foreground = "#ffffff"
     timeout = 5
+
 [urgency_critical]
-    background = "#1E1E2E"
-    foreground = "#dedede"
-    frame_color = "#f07178"
-    timeout = 0  
+    background = "#15151580"
+    foreground = "#ffffff"
+    timeout = 0
