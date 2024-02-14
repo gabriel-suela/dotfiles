@@ -8,20 +8,20 @@
     width = (300,400)
     height = 250
     origin = top-right
-    offset = 8x47
+    offset = 20x50
     indicate_hidden = yes
     shrink = no
     transparency = 0
     notification_height = 0
     separator_height = 2
     padding = 12
-    horizontal_padding = 12
+    horizontal_padding = 15
     frame_width = 2
     frame_color = "#343746"
     separator_color = frame
     sort = yes
     idle_threshold = 120
-    font = JetBrains Nerd Font 10
+    font = JetBrains Nerd Font 12
     line_height = 0
     markup = full
     format = "<b>%s</b>\n%b"
@@ -47,7 +47,7 @@
     class = Dunst
     startup_notification = false
     verbosity = mesg
-    corner_radius = 20
+    corner_radius = 10
     ignore_dbusclose = false
     force_xinerama = false
     mouse_middle_click = do_action, close_current
@@ -60,15 +60,15 @@
     history = ctrl+grave
     context = ctrl+shift+period
 [urgency_low]
-    background = "#1b1b25"
+    background = "#1E1E2E"
     foreground = "#dedede"
     timeout = 5
 [urgency_normal]
-    background = "#1b1b25"
+    background = "#1E1E2E"
     foreground = "#dedede"
     timeout = 5
 [urgency_critical]
-    background = "#1b1b25"
+    background = "#1E1E2E"
     foreground = "#dedede"
     frame_color = "#f07178"
     timeout = 0  

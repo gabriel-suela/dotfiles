@@ -6,7 +6,7 @@ workspace_layout default
 #smart_borders on
 gaps inner 5
 gaps outer 2
-default_border pixel 2
+default_border pixel 0
 default_floating_border pixel 0
 floating_modifier $mod
 
@@ -141,10 +141,10 @@ set $black #141617
 set $gray #636262
 set $blue #275577
 set $oled #353534
-set $green #565948
+set $green #999f63
 
 # define colors for windows:
 #class		        	border		bground		text		indicator	child_border
-client.focused		 $gray		$gray		$white		$gray		$gray
+client.focused		 $green		$green		$white		$green		$green
 
 exec --no-startup-id xsetroot -solid "#282828"
