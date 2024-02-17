@@ -6,7 +6,7 @@ workspace_layout default
 #smart_borders on
 gaps inner 5
 gaps outer 2
-default_border pixel 0
+default_border pixel 1
 default_floating_border pixel 0
 floating_modifier $mod
 
@@ -14,7 +14,7 @@ exec --no-startup-id dex --autostart --environment i3
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec --no-startup-id nm-applet
 exec --no-startup-id xrdb merge ~/.Xressources && i3-msg reload
-exec --no-startup-id sleep 1 &&  feh --bg-scale ~/Pictures/wall.webp --bg-fill ~/Pictures/wall.webp
+exec --no-startup-id sleep 1 &&  feh --bg-scale ~/Pictures/space.png --bg-fill ~/Pictures/space.png
 exec_always --no-startup-id dunst --config ~/.config/dunst/dunstrc
 exec --no-startup-id picom -b
 exec_always --no-startup-id autotiling
@@ -33,8 +33,9 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 bindsym $mod+q kill
 bindsym $mod+f fullscreen toggle
-bindsym $mod+Shift+period move container to output right
-bindsym $mod+Shift+comma move container to output left
+bindsym $mod+Shift+bracketleft move container to output left
+bindsym $mod+Shift+bracketright move container to output right
+bindsym $mod+Tab exec ~/dotfiles/.config/i3/scripts/cycle_workspaces.sh
 
 # change focus
 bindsym $mod+h focus left
@@ -142,9 +143,12 @@ set $gray #636262
 set $blue #275577
 set $oled #353534
 set $green #999f63
+set $win #323232
+set $inactive #020202
 
 # define colors for windows:
 #class		        	border		bground		text		indicator	child_border
-client.focused		 $green		$green		$white		$green		$green
+client.focused		 $win		$win		$white		$win		$win
+client.focused_inactive $inactive $inactive $white $inactive $inactive
 
 exec --no-startup-id xsetroot -solid "#282828"
