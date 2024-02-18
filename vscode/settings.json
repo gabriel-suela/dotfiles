@@ -1,12 +1,12 @@
 {
   // General Configs
   "editor.fontLigatures": true,
-  "editor.smoothScrolling": true,
+  "editor.smoothScrolling": false,
   "security.workspace.trust.untrustedFiles": "open",
-
+  "debug.internalConsoleOptions": "neverOpen",
   // Font size
   "editor.fontSize": 15,
-  "terminal.integrated.fontSize": 12,
+  "terminal.integrated.fontSize": 15,
 
   // Sops
   "sops.enabled": true,
@@ -27,10 +27,6 @@
   },
 
   "[json]": {
-    "editor.quickSuggestions": {
-      "strings": true
-    },
-    "editor.suggest.insertMode": "replace",
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
 
@@ -66,15 +62,10 @@
   "scm.diffDecorations": "all",
   "files.insertFinalNewline": true,
   "files.autoSave": "afterDelay",
-  "terminal.integrated.fontFamily": "JetBrainsMono Nerd Font",
-  "terminal.integrated.env.osx": {
-    "FIG_NEW_SESSION": "1"
-  },
   "window.titleBarStyle": "native",
   "apc.electron": {
     "titleBarStyle": "hiddenInset"
   },
-  "apc.font.family": "Dank Mono",
   "apc.listRow": {
     "lists": ["explorer-folders-view", "quick-input-list", "results"],
     "height": 30
@@ -82,23 +73,21 @@
   "apc.stylesheet": {
     ".title-actions": "display: none !important",
     ".quick-input-widget.show-file-icons, .editor-widget.find-widget": "box-shadow: none !important",
-    ".filematch .monaco-icon-label:before, .custom-list-row.results .monaco-list-row .monaco-icon-label:before": "background-position: 0 bottom !important",
     ".filematch .monaco-count-badge": "padding: 5px 6px 0 6px !important",
     ".sidebar .title-label": "padding: 0 !important",
     ".monaco-workbench .monaco-list:not(.element-focused):focus:before": "outline: none !important",
     ".sidebar": "border: none !important",
-    ".monaco-editor .cursors-layer .cursor": "background-image: linear-gradient(135deg, #67D0FF 10%, #C45DFF 100%)",
     ".quick-input-list-row div": "display: flex !important; align-items: center !important",
     ".panel .composite.title": "visibility: hidden !important",
     ".title.show-file-icons .label-container .monaco-icon-label.file-icon": "padding-bottom: 6px !important",
     ".sidebar .title-label h2": "line-height: 2.8 !important",
     ".monaco-editor .scroll-decoration": "display: none !important",
-    ".monaco-scrollable-element > .shadow.top": "display: none !important",
-    ".monaco-split-view2 > .monaco-scrollable-element > .split-view-container": "background: #191521 !important"
+    ".monaco-scrollable-element > .shadow.top": "display: none !important"
   },
 
   // Neovim
-  "vscode-neovim.neovimExecutablePaths.linux": "/usr/bin/nvim",
+  "vscode-neovim.useWSL": true,
+  "vscode-neovim.neovimExecutablePaths.linux": "/usr/sbin/nvim",
   "vscode-neovim.neovimInitVimPaths.linux": "$HOME/.config/nvim-vscode/init.vim",
   "extensions.experimental.affinity": {
     "asvetliakov.vscode-neovim": 1
@@ -1079,12 +1068,11 @@
       "command": "workbench.action.toggleZenMode"
     }
   ],
-  "editor.fontFamily": "Caskaydia Cove Nerd Font",
   "workbench.iconTheme": "material-icon-theme",
-  "window.menuBarVisibility": "compact",
+  "window.menuBarVisibility": "toggle",
   "sops.beta": true,
   "editor.cursorSmoothCaretAnimation": "on",
-  "terminal.integrated.smoothScrolling": true,
+  "terminal.integrated.smoothScrolling": false,
   "editor.cursorBlinking": "solid",
   "files.associations": {
     "*.gotmpl": "yaml"
@@ -1094,5 +1082,8 @@
   "vscode_custom_css.imports": [
     "file:///home/suela/.vscode/extensions/brandonkirbyson.vscode-animations-2.0.1/dist/updateHandler.js"
   ],
-  "redhat.telemetry.enabled": false
+  "redhat.telemetry.enabled": false,
+  "window.commandCenter": false,
+  "editor.fontFamily": "JetBrainsMono Nerd Font Mono"
 }
+
