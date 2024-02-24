@@ -35,7 +35,7 @@
 	
     ### Text ###
 
-    font = SF Pro Display 10
+    font = JetBrains Mono Nerd Font 10
 
     line_height = 6
 

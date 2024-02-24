@@ -73,6 +73,6 @@ yellow = "0xf0c674"
 background = "0x101015"
 foreground = "0xc5c8c6"
 
-[shell]
-args = ["-l", "-c", "tmux attach || tmux new-session -s dtsf"]
-program = "zsh"
+# program = "zsh"
+# args = ["-l", "-c", "tmux attach || tmux new-session -s dtsf"]
+# [shell]

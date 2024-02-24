@@ -13,8 +13,8 @@ floating_modifier $mod
 exec --no-startup-id dex --autostart --environment i3
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec --no-startup-id nm-applet
-exec --no-startup-id xrdb merge ~/.Xressources && i3-msg reload
-exec --no-startup-id sleep 1 &&  feh --bg-scale ~/Pictures/space.png --bg-fill ~/Pictures/space.png
+# exec --no-startup-id xrdb merge ~/.Xressources && i3-msg reload
+exec --no-startup-id sleep 1 &&  feh --bg-scale ~/dotfiles/wallpapers/w11.jpg --bg-fill ~/dotfiles/wallpapers/w11.jpg
 exec_always --no-startup-id dunst --config ~/.config/dunst/dunstrc
 exec --no-startup-id picom -b
 exec_always --no-startup-id autotiling
