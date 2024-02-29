@@ -41,63 +41,11 @@ super + ctrl + p
 super + d
     rofi -show drun -theme ~/.config/rofi/launchers/type-1/style-5.rasi
 
-#  Powermenu launcher
-super + k
-    bash ~/.config/rofi/powermenu/launcher.sh
-
-#  Quicklinks launcher
-super + q
-    bash ~/.config/rofi/shortcuts/launcher.sh 
-
-#  Search launcher
-super + r
-    bash ~/.config/rofi/search/launcher.sh
-
-#  Clipboard manager
-super + c
-    bash ~/.config/rofi/clipboard/launcher.sh
-
-#  Monitor on
-super + ctrl + F11
-     bash ~/.config/sxhkd/alerts/system/monitor_on.sh
-
-#  Monitor off
-super + ctrl + F12
-     bash ~/.config/sxhkd/alerts/system/monitor_off.sh
-
-#  Memory popup
-super + ctrl + m
-    bash ~/.config/sxhkd/alerts/info/memory.sh
-
-#  Volume Up
-super + F11
-    bash ~/.config/sxhkd/alerts/volume/volume-increase.sh
-
-#  Volume Down
-super + F10
-    bash ~/.config/sxhkd/alerts/volume/volume-decrease.sh
-
-#  Volume Max
-super + F9
-    bash ~/.config/sxhkd/alerts/volume/volume-max.sh
-
-#  Volume Mute
-super + F12
-    bash ~/.config/sxhkd/alerts/volume/volume-mute.sh
-
 #  ___         _             
 # / __|_  _ __| |_ ___ _ __  
 # \__ \ || (_-<  _/ -_) '  \ 
 # |___/\_, /__/\__\___|_|_|_|
 #      |__/                         
-
-#  Print Like Mac
-super + p
-  bash ~/.config/sxhkd/alerts/system/mac_print.sh
-
-#  Print
-Print
-  bash ~/.config/sxhkd/alerts/system/print.sh
 
 #  lockscreen
 super + l
@@ -128,7 +76,7 @@ super + {t,shift + t,s,f}
         bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
  
 #  focus the node in the given direction
-super + {_,shift + }{Left,Down,Up,Right}
+super + {_,shift + }{h,j,k,l}
     bspc node -{f,s} {west,south,north,east}
  
 #  focus the node for the given path jump
