@@ -38,3 +38,4 @@ bspc rule -a "Tandem" state=floating
 
 # Normal
 bash ~/.config/bspwm/autorun/run.sh
+bash ~/.config/bspwm/scripts/fullscreenfix.sh

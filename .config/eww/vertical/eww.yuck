@@ -16,14 +16,13 @@
 	:geometry (geometry :x "0" 
 						:y "0" 
 						:height "100%" 
-						:width  "30px")
+						:width  "30px"
+            :anchor "top left")
 	:monitor 0
-	:reserve (struts :distance "37px" 
+	:reserve (struts :distance "37px"
 					 :side "left")
-	:wm-ignore false
-	:hexpand   false
-	:vexpand   false
-  :stacking "bg"
+  :stacking "fg"
+  :windowtype "dock"
   :exclusive true
 	(bar)
 )
