@@ -33,5 +33,5 @@ xsetroot -cursor_name left_ptr &
 # Autostart
 # ------
 
-compfy &
+compfy --config ~/.config/compfy/compfy.sample.conf &
 dunst &
