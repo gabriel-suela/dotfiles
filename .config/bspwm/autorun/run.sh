@@ -16,7 +16,7 @@ EWW="/usr/local/bin/eww"
 # Start EWW
 # ---------
 
-$EWW -c "$HOME/.config/eww/$EWW_BAR_PRIMARY" --restart open $EWW_BAR_PRIMARY
+# $EWW -c "$HOME/.config/eww/$EWW_BAR_PRIMARY" --restart open $EWW_BAR_PRIMARY
 
 # ---------
 # Wallpaper
@@ -34,4 +34,5 @@ xsetroot -cursor_name left_ptr &
 # ------
 
 compfy --config ~/.config/compfy/compfy.sample.conf &
+~/.config/polybar/clean/launch.sh &
 dunst &
