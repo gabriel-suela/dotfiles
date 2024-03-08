@@ -1,6 +1,6 @@
 set $mod Mod4
 
-font pango:Dejavu Sans Mono 8
+font pango:JetBrains Mono Nerd Font 9
 
 workspace_layout default
 #smart_borders on
@@ -16,10 +16,10 @@ exec --no-startup-id nm-applet
 # exec --no-startup-id xrdb merge ~/.Xressources && i3-msg reload
 exec --no-startup-id sleep 1 &&  feh --bg-scale ~/dotfiles/wallpapers/w11.jpg --bg-fill ~/dotfiles/wallpapers/w11.jpg
 exec_always --no-startup-id dunst --config ~/.config/dunst/dunstrc
-exec --no-startup-id picom -b
+exec --no-startup-id compfy --config=~/.config/compfy/compfy.sample.conf
 exec_always --no-startup-id autotiling
 exec_always --no-startup-id setxkbmap -layout us -variant intl
-exec_always --no-startup-id ~/.config/polybar/launch.sh
+exec_always --no-startup-id ~/.config/polybar/clean/launch.sh
 exec --no-startup-id xset s off
 exec --no-startup-id xset -dpms
 exec --no-startup-id xset s noblank
@@ -142,7 +142,7 @@ set $black #141617
 set $gray #636262
 set $blue #275577
 set $oled #353534
-set $green #999f63
+set $green #a6bcaa
 set $win #323232
 set $inactive #020202
 
@@ -150,5 +150,10 @@ set $inactive #020202
 #class		        	border		bground		text		indicator	child_border
 client.focused		 $win		$win		$white		$win		$win
 client.focused_inactive $inactive $inactive $white $inactive $inactive
+
+bar {
+    status_command i3status
+    tray_output primary
+}
 
 exec --no-startup-id xsetroot -solid "#282828"
