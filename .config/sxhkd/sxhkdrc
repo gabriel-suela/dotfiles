@@ -39,7 +39,7 @@ super + ctrl + p
 
 #  Program launcher
 super + d
-    rofi -show drun -theme ~/.config/rofi/launchers/type-1/style-5.rasi
+    rofi -show drun -theme ~/.config/rofi/launchers/type-4/style-8.rasi
 
 #  ___         _             
 # / __|_  _ __| |_ ___ _ __  
@@ -47,9 +47,6 @@ super + d
 # |___/\_, /__/\__\___|_|_|_|
 #      |__/                         
 
-#  lockscreen
-super + l
-    betterlockscreen -l
 
 #   Reload Keybinds
 super + Escape

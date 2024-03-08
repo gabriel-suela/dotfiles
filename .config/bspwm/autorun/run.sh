@@ -4,6 +4,7 @@
 killall eww
 killall polybar
 killall compfy
+killall sxhkd
 #------
 # Var's
 # ------
@@ -28,6 +29,10 @@ EWW="/usr/local/bin/eww"
 # ------------
 
 xsetroot -cursor_name left_ptr &
+xset s off &
+xset -dpms &
+xset s noblank &
+sxhkd &
 
 # ------
 # Autostart
