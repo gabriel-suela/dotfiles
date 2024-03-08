@@ -11,6 +11,7 @@ polybar workspaces --config=~/.config/polybar/clean/config.ini &
 polybar volume --config=~/.config/polybar/clean/config.ini &
 polybar layout --config=~/.config/polybar/clean/config.ini &
 polybar time --config=~/.config/polybar/clean/config.ini &
+polybar tray --config=~/.config/polybar/clean/config.ini &
 # polybar second --config=~/.config/polybar/config.ini &
 
 echo "Polybar launched..."
