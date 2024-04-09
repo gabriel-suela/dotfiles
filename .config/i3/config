@@ -24,6 +24,7 @@ exec --no-startup-id xset r rate 300 30
 bindsym $mod+q kill
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
+bindsym $mod+Shift+s exec --no-startup-id flameshot gui
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You want to quit?' -B 'Yes' 'i3-msg exit'"
 bindsym $mod+Shift+bracketleft move container to output left
 bindsym $mod+Shift+bracketright move container to output right
@@ -37,8 +38,11 @@ bindsym $mod+t exec --no-startup-id tandem
 bindsym $mod+e exec --no-startup-id thunar
 
 bindsym $mod+Shift+g exec google-chrome-stable --app="https://chat.openai.com"
+bindsym $mod+Shift+w exec google-chrome-stable --app="https://web.whatsapp.com/"
 bindsym $mod+Shift+m exec google-chrome-stable --app="https://music.youtube.com/"
 assign [class="Google-chrome" instance = "music.youtube.com"] $ws5
+assign [class="Google-chrome" instance = "web.whatsapp.com"] $ws7
+
 
 bindsym $mod+h focus left
 bindsym $mod+j focus down
@@ -103,6 +107,7 @@ for_window [class="Pavucontrol"] floating enable
 # for_window [window_type="dialog"]floating enable
 # for_window [window_type="menu"] floating enable
 workspace 6 output DVI-D-0
+workspace 7 output DVI-D-0
 
 bindsym $mod+minus resize shrink width 5 px or 5 ppt
 bindsym $mod+equal resize grow width 5 px or 5 ppt
