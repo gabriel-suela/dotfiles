@@ -9,6 +9,8 @@ ZSH_THEME="robbyrussell"
 plugins=(git
    zsh-autosuggestions)
 
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=23'
+
 source $ZSH/oh-my-zsh.sh
 alias task="go-task"
 
