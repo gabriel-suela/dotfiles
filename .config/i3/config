@@ -19,7 +19,7 @@ exec --no-startup-id ~/.fehbg
 exec --no-startup-id xset s off
 exec --no-startup-id xset -dpms
 exec --no-startup-id xset s noblank
-exec --no-startup-id xset r rate 300 30
+exec --no-startup-id xset r rate 350 30
 
 bindsym $mod+q kill
 bindsym $mod+Shift+c reload
