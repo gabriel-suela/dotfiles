@@ -1,7 +1,7 @@
 # -- General
 set $mod Mod4
-gaps inner 5
-gaps outer 2
+#gaps inner 5
+#gaps outer 2
 default_border pixel 1
 default_floating_border pixel 0
 floating_modifier $mod
@@ -24,6 +24,7 @@ exec --no-startup-id xset r rate 350 30
 bindsym $mod+q kill
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
+bindsym $mod+v exec --no-startup-id rofi -modi "clipboard:greenclip print" -show clipboard
 bindsym $mod+Shift+s exec --no-startup-id flameshot gui
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You want to quit?' -B 'Yes' 'i3-msg exit'"
 bindsym $mod+Shift+bracketleft move container to output left
@@ -115,8 +116,9 @@ bindsym $mod+equal resize grow width 5 px or 5 ppt
 
 set $purple #322c48
 set $mudgreen #9c9f82
+set $blue #285577
 #class		        	border		bground		text		indicator	child_border
-client.focused		 $mudgreen		$mudgreen		$white		$mudgreen		$mudgreen
+client.focused		 $blue		$blue		$white		$blue		$blue
 # client.focused_inactive $inactive $inactive $white $inactive $inactive
 
 
@@ -124,7 +126,7 @@ bar {
         status_command i3status
         tray_output primary
         colors {
-            focused_workspace $mudgreen $mudgreen #ffffff
+            focused_workspace $blue $blue #ffffff
             # active_workspace #333333 #333333 #888888
             # inactive_workspace #CECECE #333333 #f1f1f1
           }
