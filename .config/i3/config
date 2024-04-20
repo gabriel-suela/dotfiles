@@ -32,7 +32,7 @@ bindsym $mod+Shift+bracketright move container to output right
 
 # -- Keybind
 bindsym $mod+g exec --no-startup-id google-chrome-stable
-bindsym $mod+d exec --no-startup-id dmenu_run
+bindsym $mod+d exec --no-startup-id j4-dmenu-desktop --dmenu="dmenu -fn "JetBrains Mono Nerd Font-8""
 bindsym $mod+Return exec --no-startup-id alacritty
 bindsym $mod+p exec --no-startup-id pavucontrol
 bindsym $mod+t exec --no-startup-id tandem
