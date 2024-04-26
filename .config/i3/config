@@ -5,7 +5,7 @@ set $mod Mod4
 default_border pixel 1
 default_floating_border pixel 0
 floating_modifier $mod
-font pango:JetBrains Mono Nerd Font 8
+font pango:Gohu 8
 
 # -- Starts
 exec --no-startup-id dex --autostart --environment i3
@@ -25,6 +25,7 @@ bindsym $mod+q kill
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 bindsym $mod+v exec --no-startup-id rofi -modi "clipboard:greenclip print" -show clipboard
+bindsym $mod+d exec --no-startup-id rofi -show drun
 bindsym $mod+Shift+s exec --no-startup-id flameshot gui
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You want to quit?' -B 'Yes' 'i3-msg exit'"
 bindsym $mod+Shift+bracketleft move container to output left
@@ -35,8 +36,7 @@ bindsym $mod+comma exec --no-startup-id pamixer --decrease 5 && notify-send "Vol
 
 # -- Keybind
 bindsym $mod+g exec --no-startup-id google-chrome-stable
-bindsym $mod+d exec --no-startup-id dmenu_run -fn "JetBrains Mono Nerd Font 7"
-bindsym $mod+Shift+d exec --no-startup-id j4-dmenu-desktop
+#bindsym $mod+d exec --no-startup-id dmenu_run -fn "JetBrains Mono Nerd Font 7"
 bindsym $mod+Return exec --no-startup-id alacritty
 bindsym $mod+p exec --no-startup-id pavucontrol
 bindsym $mod+t exec --no-startup-id tandem
@@ -66,9 +66,9 @@ bindsym $mod+space focus mode_toggle
 bindsym $mod+a focus parent
 
 # -- Workspaces
-set $ws1 "1"
-set $ws2 "2"
-set $ws3 "3"
+set $ws1 "1:dev"
+set $ws2 "2:web"
+set $ws3 "3:perso"
 set $ws4 "4"
 set $ws5 "5"
 set $ws6 "6"
