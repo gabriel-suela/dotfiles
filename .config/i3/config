@@ -5,7 +5,7 @@ set $mod Mod4
 default_border pixel 1
 default_floating_border pixel 0
 floating_modifier $mod
-font pango:Gohu 8
+font pango:JetBrains Mono Nerd Font 8
 
 # -- Starts
 exec --no-startup-id dex --autostart --environment i3
@@ -66,9 +66,9 @@ bindsym $mod+space focus mode_toggle
 bindsym $mod+a focus parent
 
 # -- Workspaces
-set $ws1 "1:dev"
-set $ws2 "2:web"
-set $ws3 "3:perso"
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
 set $ws4 "4"
 set $ws5 "5"
 set $ws6 "6"
