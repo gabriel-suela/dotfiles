@@ -1,0 +1,94 @@
+{
+  "layer": "top",
+  "position": "top",
+  "exclusive": true,
+  "passthrough": false,
+  "gtk-layer-shell": true,
+  "ipc": "/tmp/waybar.sock",
+  "height": 0,
+  "modules-left": ["hyprland/workspaces"],
+
+  "modules-center": ["clock"],
+
+  "modules-right": ["pulseaudio", "network", "custom/idle", "tray"],
+
+  "hyprland/window": {
+    "separate-outputs": true,
+  },
+
+  "clock": {
+    "format": "  {:%H:%M}",
+    "format-alt": "{:%A, %B %d, %Y (%R)}  ",
+    "tooltip-format": "<tt><small>{calendar}</small></tt>",
+    "calendar": {
+      "mode": "year",
+      "mode-mon-col": 3,
+      "weeks-pos": "right",
+      "on-scroll": 1,
+      "on-click-right": "mode",
+      "format": {
+        "months": "<span color='#ffead3'><b>{}</b></span>",
+        "days": "<span color='#ecc6d9'><b>{}</b></span>",
+        "weeks": "<span color='#99ffdd'><b>W{}</b></span>",
+        "weekdays": "<span color='#ffcc66'><b>{}</b></span>",
+        "today": "<span color='#ff6699'><b><u>{}</u></b></span>",
+      },
+    },
+    "actions": {
+      "on-click-right": "mode",
+      "on-click-forward": "tz_up",
+      "on-click-backward": "tz_down",
+      "on-scroll-up": "shift_up",
+      "on-scroll-down": "shift_down",
+    },
+  },
+  "tray": {
+    "icon-size": 15,
+    "spacing": 10,
+  },
+
+  "network": {
+    "format-wifi": "{icon}  {essid}",
+    "format-ethernet": " {ifname}: Aesthetic",
+    "format-linked": " {ifname} (No IP)",
+    "format-disconnected": "󰤭",
+    "format-alt": " {ifname}: {ipaddr}/{cidr} {signaldBm}dBm",
+    "tooltip-format": "{essid} ({ifname})\n{ipaddr}/{cidr} {signaldBm}dBm",
+    "on-click-right": "nm-connection-editor",
+    "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
+  },
+
+  "pulseaudio": {
+    "format": "{icon} {volume}%",
+    "format-muted": "󰝟",
+    "format-icons": {
+      "default": ["󰕿", "󰖀", "󰕾"],
+    },
+    "on-click-right": "pavucontrol",
+  },
+
+  "hyprland/workspaces": {
+    "format": "{icon}",
+    "on-click": "activate",
+    "format-icons": {
+      "1": "1",
+      "2": "2",
+      "3": "3",
+      "4": "4",
+      "5": "5",
+      "6": "6",
+      "7": "7",
+      "8": "8",
+      "9": "9",
+      "10": "10",
+      "urgent": "",
+      "default": "",
+    },
+    "sort-by-number": true,
+    "persistent-workspaces": {
+      "*": [1, 2, 3],
+    },
+    "on-scroll-up": "hyprctl dispatch workspace e+1",
+    "on-scroll-down": "hyprctl dispatch workspace e-1",
+  },
+}
