@@ -7,7 +7,7 @@ family = "JetBrains Mono Nerd Font"
 #family = "FantasqueSansM Nerd Font"
 #family = "FiraCode Nerd Font"
 #family = "VictorMono Nerd Font "
-style = "Bold"
+style = "Regular"
 
 [window]
 opacity = 0.90
