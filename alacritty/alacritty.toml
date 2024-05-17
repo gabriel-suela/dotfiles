@@ -64,7 +64,7 @@ y = 0
 # cyan    = '#8FBCBB'
 # white   = '#ECEFF4'
 [colors.primary]
-background = '#161617'
+background = '#000000'
 foreground = '#c9c7cd'
 
 [colors.normal]
