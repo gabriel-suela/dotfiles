@@ -1,5 +1,5 @@
 [font]
-size = 11
+size = 12
 
 [font.normal]
 #family = "Iosevka Nerd Font"
@@ -10,7 +10,8 @@ family = "JetBrains Mono Nerd Font"
 style = "Regular"
 
 [window]
-opacity = 0.90
+#opacity = 0.90
+opacity = 1
 
 [window.padding]
 x = 0
@@ -64,7 +65,7 @@ y = 0
 # cyan    = '#8FBCBB'
 # white   = '#ECEFF4'
 [colors.primary]
-background = '#000000'
+background = '#030303'
 foreground = '#c9c7cd'
 
 [colors.normal]
