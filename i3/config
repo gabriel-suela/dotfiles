@@ -119,8 +119,9 @@ set $purple #322c48
 set $mudgreen #9c9f82
 set $blue #285577
 set $white #ffffff
+set $black #111111
 #class		        	border		bground		text		indicator	child_border
-client.focused		 $blue		$blue		$white		$blue		$blue
+client.focused		 $white		$white		$black		$white		$white
 # client.focused_inactive $inactive $inactive $white $inactive $inactive
 
 
