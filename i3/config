@@ -40,6 +40,8 @@ bindsym $mod+Return exec --no-startup-id alacritty
 bindsym $mod+p exec --no-startup-id pavucontrol
 bindsym $mod+t exec --no-startup-id tandem
 bindsym $mod+e exec --no-startup-id thunar
+bindsym $mod+m exec --no-startup-id pactl set-source-mute alsa_input.usb-3142_FIFINE_Microphone-00.mono-fallback toggle
+
 
 bindsym $mod+Shift+g exec google-chrome-stable --app="https://chat.openai.com"
 bindsym $mod+Shift+w exec google-chrome-stable --app="https://web.whatsapp.com/"
