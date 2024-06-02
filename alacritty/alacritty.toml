@@ -1,12 +1,13 @@
 [font]
-size = 10
+size = 10.5
 
 [font.normal]
 #family = "Iosevka Nerd Font"
-family = "JetBrains Mono Nerd Font"
+#family = "JetBrains Mono Nerd Font"
 #family = "MesloLGS Nerd Font"
 #family = "FantasqueSansM Nerd Font"
 #family = "FiraCode Nerd Font"
+family = "Maple Mono"
 #family = "VictorMono Nerd Font "
 style = "Bold"
 
@@ -19,82 +20,34 @@ opacity = 1
 x = 5
 y = 5
 
-# [colors.primary]
-# background = '#10100E'
-# foreground = '#C6C6C4'
-#
-# [colors.normal]
-# black   = '#10100E'
-# red     = '#C40233'
-# green   = '#009F6B'
-# yellow  = '#FFD700'
-# blue    = '#0087BD'
-# magenta = '#9A4EAE'
-# cyan    = '#20B2AA'
-# white   = '#C6C6C4'
-#
-# [colors.bright]
-# black   = '#696969'
-# red     = '#FF2400'
-# green   = '#03C03C'
-# yellow  = '#FDFF00'
-# blue    = '#007FFF'
-# magenta = '#FF1493'
-# cyan    = '#00CCCC'
-# white   = '#FFFAFA'
-
-# [colors.primary]
-# background = '#2E3440'
-# foreground = '#D8DEE9'
-#
-# [colors.normal]
-# black   = '#3B4252'
-# red     = '#BF616A'
-# green   = '#A3BE8C'
-# yellow  = '#EBCB8B'
-# blue    = '#81A1C1'
-# magenta = '#B48EAD'
-# cyan    = '#88C0D0'
-# white   = '#E5E9F0'
-#
-# [colors.bright]
-# black   = '#4C566A'
-# red     = '#BF616A'
-# green   = '#A3BE8C'
-# yellow  = '#EBCB8B'
-# blue    = '#81A1C1'
-# magenta = '#B48EAD'
-# cyan    = '#8FBCBB'
-# white   = '#ECEFF4'
 [colors.bright]
-black = "#535353"
-blue = "#286DC1"
-cyan = "#2FADC1"
-green = "#1AB15A"
-magenta = "#A756B1"
-red = "#CE4A3B"
-white = "#CCCCCC"
-yellow = "#DDAF34"
+black = '#464646'
+blue = '#0a84ff'
+cyan = '#76d6ff'
+green = '#32d74b'
+magenta = '#bf5af2'
+red = '#ff453a'
+white = '#ffffff'
+yellow = '#ffd60a'
 
 [colors.cursor]
-cursor = "CellForeground"
-text = "CellBackground"
+cursor = '#98989d'
+text = '#ffffff'
 
 [colors.normal]
-black = "#1A1A1A"
-blue = "#286DC1"
-cyan = "#2FADC1"
-green = "#1AB15A"
-magenta = "#A756B1"
-red = "#CE4A3B"
-white = "#CCCCCC"
-yellow = "#DDAF34"
+black = '#1a1a1a'
+blue = '#0869cb'
+cyan = '#479ec2'
+green = '#26a439'
+magenta = '#9647bf'
+red = '#cc372e'
+white = '#98989d'
+yellow = '#cdac08'
 
 [colors.primary]
-background = "#1A1A1A"
-foreground = "#CCCCCC"
+background = '#1e1e1e'
+foreground = '#ffffff'
 
 [colors.selection]
-background = "CellForeground"
-text = "CellBackground"
-
+background = '#3f638b'
+text = '#ffffff'

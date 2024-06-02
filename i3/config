@@ -1,7 +1,7 @@
 # -- General
 set $mod Mod4
-#gaps inner 5
-#gaps outer 2
+gaps inner 5
+gaps outer 2
 default_border pixel 1
 default_floating_border pixel 0
 floating_modifier $mod
