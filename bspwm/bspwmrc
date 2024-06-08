@@ -1,6 +1,6 @@
 #!/bin/bash
 # Set the number of workspaces
-bspc monitor HDMI-0 -d 1 2 3 4 5 6
+bspc monitor HDMI-0 -d web term work 4 5 6
 bspc monitor DVI-D-0 -d 7 8 9 10
 
 # Launch keybindings daemon
@@ -27,8 +27,11 @@ bspc config pointer_action1 move
 bspc config pointer_action2 resize_side
 bspc config pointer_action2 resize_corner
 
-# Set background and top bar
+bspc rule -a pavucontrol desktop='^8' state=floating follow=on
+bspc rule -a Lxappearance desktop='^8' state=floating follow=on
+bspc rule -a Thunar state=floating follow=on
 
 dunst &
 picom &
 polybar -c ~/.config/polybar/config.ini &
+setxkbmap -layout us -variant intl &

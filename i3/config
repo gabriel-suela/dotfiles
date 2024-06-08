@@ -117,13 +117,13 @@ bindsym $mod+minus resize shrink width 5 px or 5 ppt
 bindsym $mod+equal resize grow width 5 px or 5 ppt
 
 
-set $purple #322c48
 set $mudgreen #9c9f82
 set $blue #285577
 set $white #ffffff
 set $black #111111
+set $purple #9d7cd8
 #class		        	border		bground		text		indicator	child_border
-client.focused		 $black		$black		$white		$black		$black
+client.focused		 $purple		$purple		$white		$purple		$purple
 # client.focused_inactive $inactive $inactive $white $inactive $inactive
 
 
