@@ -1,6 +1,6 @@
 [user]
 	email = gscsuela@gmail.com
 	name = gabriel-suela
-	signingkey = C89FF184D4033338
+	signingkey = D4033338
 [commit]
 	gpgsign = true
