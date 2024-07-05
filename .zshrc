@@ -1,5 +1,7 @@
 export PATH=$HOME/bin:$HOME/.local/bin:$HOME/.local/scripts:$PATH
 export ZSH="$HOME/.oh-my-zsh"
+export GPG_TTY=$(tty)
+export EDITOR=nvim
 
 ZSH_THEME="robbyrussell"
 
@@ -10,15 +12,10 @@ source $ZSH/oh-my-zsh.sh
 alias task="go-task"
 bindkey -s ^f "tmux-sessionizer\n"
 
+
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/home/suela/google-cloud-sdk/path.zsh.inc' ]; then . '/home/suela/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/home/suela/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/suela/google-cloud-sdk/completion.zsh.inc'; fi
 
 # >>> mamba initialize >>>
 # !! Contents within this block are managed by 'mamba init' !!
@@ -32,3 +29,9 @@ else
 fi
 unset __mamba_setup
 # <<< mamba initialize <<<
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/home/suela/google-cloud-sdk/path.zsh.inc' ]; then . '/home/suela/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/home/suela/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/suela/google-cloud-sdk/completion.zsh.inc'; fi

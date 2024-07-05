@@ -48,6 +48,8 @@ bindsym $mod+Shift+w exec google-chrome-stable --app="https://web.whatsapp.com/"
 bindsym $mod+Shift+m exec google-chrome-stable --app="https://music.youtube.com/"
 assign [class="Google-chrome" instance = "music.youtube.com"] $ws5
 assign [class="Google-chrome" instance = "web.whatsapp.com"] $ws7
+assign [class="steam"] $ws4
+assign [class="Tandem"] $ws5
 
 
 bindsym $mod+h focus left
