@@ -4,3 +4,4 @@
 vim.opt.clipboard = "unnamedplus"
 
 vim.cmd([[au BufNewFile,BufRead *.yaml.gotmpl setf yaml]])
+vim.g.lazyvim_prettier_needs_config = false

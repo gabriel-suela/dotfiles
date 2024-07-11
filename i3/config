@@ -35,7 +35,7 @@ bindsym $mod+comma exec --no-startup-id pamixer --decrease 5 && notify-send "Vol
 
 # -- Keybind
 bindsym $mod+g exec --no-startup-id google-chrome-stable
-bindsym $mod+d exec --no-startup-id dmenu_run
+bindsym $mod+d exec --no-startup-id rofi -show drun -config ~/.config/rofi/config.rasi
 bindsym $mod+Return exec --no-startup-id alacritty
 bindsym $mod+p exec --no-startup-id pavucontrol
 bindsym $mod+t exec --no-startup-id tandem
@@ -105,7 +105,8 @@ bindsym $mod+Shift+0 move container to workspace number $ws10
 #for_window [class="Tandem"] floating enable
 for_window [class="ranger"] floating enable
 for_window [class="awakened-poe-trade"] floating enable
-for_window [class="Pavucontrol"] floating enable
+for_window [class="pavucontrol"] floating enable
+for_window [class="Lxappearance"] floating enable
 # for_window [window_role="pop-up"] floating enable
 # for_window [window_role="bubble"] floating enable
 # for_window [window_role="task_dialog"] floating enable
@@ -125,7 +126,7 @@ set $white #ffffff
 set $black #111111
 set $purple #9d7cd8
 #class		        	border		bground		text		indicator	child_border
-client.focused		 $purple		$purple		$white		$purple		$purple
+client.focused		 $blue		$blue		$white		$blue		$blue
 # client.focused_inactive $inactive $inactive $white $inactive $inactive
 
 

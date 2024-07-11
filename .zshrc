@@ -1,6 +1,5 @@
 export PATH=$HOME/bin:$HOME/.local/bin:$HOME/.local/scripts:$PATH
 export ZSH="$HOME/.oh-my-zsh"
-export GPG_TTY=$(tty)
 export EDITOR=nvim
 
 ZSH_THEME="robbyrussell"
