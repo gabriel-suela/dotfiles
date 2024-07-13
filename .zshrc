@@ -10,6 +10,9 @@ source $ZSH/oh-my-zsh.sh
 
 alias task="go-task"
 bindkey -s ^f "tmux-sessionizer\n"
+alias sopsd="sops --decrypt" 
+alias sopsdi="sops --decrypt --implace" 
+alias sopsei="sops --encrypt --implace" 
 
 
 export NVM_DIR="$HOME/.nvm"
