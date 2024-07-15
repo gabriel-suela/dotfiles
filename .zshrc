@@ -14,6 +14,10 @@ alias sopsd="sops --decrypt"
 alias sopsdi="sops --decrypt --implace" 
 alias sopsei="sops --encrypt --implace" 
 
+gch() {
+ git checkout "$(git branch --all | fzf --height=20% --reverse --info=inline | tr -d '[:space:]')"
+}
+
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
