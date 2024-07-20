@@ -11,8 +11,8 @@ source $ZSH/oh-my-zsh.sh
 alias task="go-task"
 bindkey -s ^f "tmux-sessionizer\n"
 alias sopsd="sops --decrypt" 
-alias sopsdi="sops --decrypt --implace" 
-alias sopsei="sops --encrypt --implace" 
+alias sopsdi="sops --decrypt --in-place" 
+alias sopsei="sops --encrypt --in-place" 
 
 gch() {
  git checkout "$(git branch --all | fzf --height=20% --reverse --info=inline | tr -d '[:space:]')"
