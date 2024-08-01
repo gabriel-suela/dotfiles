@@ -18,6 +18,8 @@ gch() {
  git checkout "$(git branch --all | fzf --height=20% --reverse --info=inline | tr -d '[:space:]')"
 }
 
+eval "$(zoxide init zsh)"
+
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
