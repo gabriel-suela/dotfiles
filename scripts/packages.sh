@@ -11,7 +11,7 @@ SEA="\\033[38;5;49m"
 ARROW="${SEA}\xE2\x96\xB6${NC}"
 
 # List of packages to install
-packages=("alacritty" "ttf-jetbrains-mono-nerd" "tmux" "flameshot" "python" "python-pip" "tandem-chat" "steam" "github-cli" "lazygit" "lazydocker" "helm" "helmfile" "ripgrep" "sops" "go-yq" "sops" "neovim" "yarn" "unzip" "zsh" "go-task" "fzf" "docker" "docker-compose" "kind" "kubectl" "azure-cli" "cilium-cli" "k9s")
+packages=("tmux" "python" "python-pip" "lazygit" "lazydocker" "helm" "helmfile" "ripgrep" "sops" "go-yq" "sops" "neovim" "yarn" "unzip" "zsh" "go-task" "fzf" "docker" "docker-compose" "kind" "kubectl" "azure-cli" "cilium-cli" "k9s")
 
 logStep "Check if yay is installed"
 if ! command -v yay &>/dev/null; then
@@ -19,7 +19,7 @@ if ! command -v yay &>/dev/null; then
 	logStep "Install yay"
 	sudo pacman -S --needed base-devel git
 	git clone https://aur.archlinux.org/yay.git
-	cd yay
+	cd yay || exit
 	makepkg -si
 	cd ..
 	rm -rf yay
@@ -68,5 +68,5 @@ logStep "nvm"
 wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 
 logStep "Docker without sudo"
-sudo usermod -aG docker $USER
+sudo usermod -aG docker "$USER"
 echo -e "${ARROW} ${CYAN}Please reboot your computer to complete this setup.${NC}"
