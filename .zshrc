@@ -1,12 +1,10 @@
-export PATH=$HOME/bin:$HOME/.local/bin:$HOME/.local/scripts:$PATH
+export PATH=$HOME/bin:$HOME/.local/bin:$HOME/.local/scripts:${KREW_ROOT:-$HOME/.krew}/bin:$PATH
 export ZSH="$HOME/.oh-my-zsh"
 export EDITOR=nvim
 
 ZSH_THEME="robbyrussell"
 
 plugins=(git)
-
-source $ZSH/oh-my-zsh.sh
 
 alias task="go-task"
 bindkey -s ^f "tmux-sessionizer\n"
@@ -29,6 +27,9 @@ eval "$(zoxide init zsh)"
   }
 }
 
+fpath+=($HOME/.zsh/pure)
+autoload -U promptinit; promptinit
+prompt pure
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm

@@ -20,35 +20,30 @@ opacity = 1
 [window.padding]
 x = 5
 #y = 5
-
-[colors.bright]
-black = '#464646'
-blue = '#0a84ff'
-cyan = '#76d6ff'
-green = '#32d74b'
-magenta = '#bf5af2'
-red = '#ff453a'
-white = '#ffffff'
-yellow = '#ffd60a'
-
-[colors.cursor]
-cursor = '#98989d'
-text = '#ffffff'
+[colors.primary]
+background = '#242933'
+foreground = '#BBBDAF'
 
 [colors.normal]
-black = '#1a1a1a'
-blue = '#0869cb'
-cyan = '#479ec2'
-green = '#26a439'
-magenta = '#9647bf'
-red = '#cc372e'
-white = '#98989d'
-yellow = '#cdac08'
+black = '#191C1D'
+red = '#BD6062'
+green = '#A3D6A9'
+yellow = '#F0DFAF'
+blue = '#8FB4D8'
+magenta = '#C7A9D9'
+cyan = '#B6D7A8'
+white = '#BDC5BD'
 
-[colors.primary]
-background = '#1e1e1e'
-foreground = '#ffffff'
+[colors.bright]
+black = '#727C7C'
+red = '#D18FAF'
+green = '#B7CEB0'
+yellow = '#BCBCBC'
+blue = '#E0CF9F'
+magenta = '#C7A9D9'
+cyan = '#BBDA97'
+white = '#BDC5BD'
 
 [colors.selection]
-background = '#3f638b'
-text = '#ffffff'
+text = '#000000'
+background = '#F0DFAF'

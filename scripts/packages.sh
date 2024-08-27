@@ -47,9 +47,6 @@ ln -s ~/dotfiles/scripts/tmux-sessionizer ~/.local/scripts/
 
 logStep "Installing manual bins"
 
-logStep "oh-my-zsh"
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-
 logStep "gcloud"
 curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-linux-x86_64.tar.gz
 tar -xf google-cloud-cli-linux-x86_64.tar.gz
@@ -63,9 +60,6 @@ source ~/.zshrc
 
 logStep "Tmux TPM"
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-
-logStep "nvm"
-wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 
 logStep "Docker without sudo"
 sudo usermod -aG docker "$USER"
