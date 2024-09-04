@@ -2,9 +2,10 @@ export PATH=$HOME/bin:$HOME/.local/bin:$HOME/.local/scripts:${KREW_ROOT:-$HOME/.
 export ZSH="$HOME/.oh-my-zsh"
 export EDITOR=nvim
 
-ZSH_THEME="robbyrussell"
+ZSH_THEME="dstufft"
 
 plugins=(git)
+source $ZSH/oh-my-zsh.sh
 
 alias task="go-task"
 bindkey -s ^f "tmux-sessionizer\n"
@@ -26,10 +27,6 @@ eval "$(zoxide init zsh)"
     echo -en '"\x07'
   }
 }
-
-fpath+=($HOME/.zsh/pure)
-autoload -U promptinit; promptinit
-prompt pure
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -53,3 +50,8 @@ if [ -f '/home/suela/google-cloud-sdk/path.zsh.inc' ]; then . '/home/suela/googl
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/home/suela/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/suela/google-cloud-sdk/completion.zsh.inc'; fi
+
+export HISTFILE="$HOME/.zsh_history"
+export HISTSIZE=1000000000
+export SAVEHIST=1000000000
+setopt EXTENDED_HISTORY
