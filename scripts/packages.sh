@@ -11,7 +11,7 @@ SEA="\\033[38;5;49m"
 ARROW="${SEA}\xE2\x96\xB6${NC}"
 
 # List of packages to install
-packages=("flameshot" "ripgrep" "xclip" "tmux" "python" "python-pip" "lazygit" "lazydocker" "helm" "helmfile" "ripgrep" "sops" "go-yq" "sops" "neovim" "yarn" "unzip" "zsh" "go-task" "fzf" "docker" "docker-compose" "kind" "kubectl" "azure-cli" "cilium-cli" "k9s")
+packages=("ripgrep" "xclip" "tmux" "python" "python-pip" "lazygit" "lazydocker" "helm" "helmfile" "kustomize" "ripgrep" "sops" "go-yq" "sops" "neovim" "yarn" "unzip" "zsh" "go-task" "fzf" "docker" "docker-compose" "kind" "kubectl" "azure-cli" "cilium-cli" "k9s")
 
 logStep "Check if yay is installed"
 if ! command -v yay &>/dev/null; then
