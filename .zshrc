@@ -2,7 +2,7 @@ export PATH=$HOME/bin:$HOME/.local/bin:$HOME/.local/scripts:${KREW_ROOT:-$HOME/.
 export ZSH="$HOME/.oh-my-zsh"
 export EDITOR=nvim
 
-ZSH_THEME="dstufft"
+ZSH_THEME="frontcube"
 
 plugins=(git)
 source $ZSH/oh-my-zsh.sh
@@ -45,13 +45,13 @@ fi
 unset __mamba_setup
 # <<< mamba initialize <<<
 
+export HISTFILE="$HOME/.zsh_history"
+export HISTSIZE=1000000000
+export SAVEHIST=1000000000
+setopt EXTENDED_HISTORY
+
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/home/suela/google-cloud-sdk/path.zsh.inc' ]; then . '/home/suela/google-cloud-sdk/path.zsh.inc'; fi
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/home/suela/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/suela/google-cloud-sdk/completion.zsh.inc'; fi
-
-export HISTFILE="$HOME/.zsh_history"
-export HISTSIZE=1000000000
-export SAVEHIST=1000000000
-setopt EXTENDED_HISTORY
