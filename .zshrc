@@ -2,7 +2,7 @@ export PATH=$HOME/bin:$HOME/.local/bin:$HOME/.local/scripts:${KREW_ROOT:-$HOME/.
 export ZSH="$HOME/.oh-my-zsh"
 export EDITOR=nvim
 
-ZSH_THEME="frontcube"
+ZSH_THEME="robbyrussell"
 
 plugins=(git)
 source $ZSH/oh-my-zsh.sh
