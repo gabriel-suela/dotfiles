@@ -1,72 +1,101 @@
-# -- General
 set $mod Mod4
-gaps inner 5
-gaps outer 2
-default_border pixel 1
-default_floating_border pixel 0
-floating_modifier $mod
-font pango:JetBrains Mono Nerd Font 9
 
-# -- Starts
+font pango:JetBrains Mono Nerd Font 10
+
 exec --no-startup-id dex --autostart --environment i3
+exec --no-startup-id dunst
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec --no-startup-id nm-applet
-exec --no-startup-id dunst
-exec --no-startup-id picom --config ~/.config/picom/picom.conf
-exec_always --no-startup-id polybar -c ~/.config/polybar/config.ini
-exec_always --no-startup-id autotiling
-exec_always --no-startup-id setxkbmap -layout us -variant intl
-exec --no-startup-id ~/.fehbg
-exec --no-startup-id xset s off
-exec --no-startup-id xset -dpms
-exec --no-startup-id xset s noblank
-exec --no-startup-id xset r rate 350 30
 
-bindsym $mod+q kill
-bindsym $mod+Shift+c reload
-bindsym $mod+Shift+r restart
-bindsym $mod+Shift+s exec --no-startup-id flameshot gui
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You want to quit?' -B 'Yes' 'i3-msg exit'"
-bindsym $mod+Shift+bracketleft move container to output left
-bindsym $mod+Shift+bracketright move container to output right
+#launches udiskie to allow for usb mounting(hopefully)
+exec --no-startup-id udiskie &
 
-bindsym $mod+period exec --no-startup-id pamixer --increase 5 && notify-send "Volume" "$(pamixer --get-volume-human)"
-bindsym $mod+comma exec --no-startup-id pamixer --decrease 5 && notify-send "Volume" "$(pamixer --get-volume-human)"
+#start up applications
 
-# -- Keybind
-bindsym $mod+g exec --no-startup-id google-chrome-stable
-bindsym $mod+d exec --no-startup-id rofi -show drun -config ~/.config/rofi/config.rasi
-bindsym $mod+Return exec --no-startup-id alacritty
-bindsym $mod+p exec --no-startup-id pavucontrol
-bindsym $mod+t exec --no-startup-id tandem
-bindsym $mod+e exec --no-startup-id thunar
+# Use pactl to adjust volume in PulseAudio.
+set $refresh_i3status killall -SIGUSR1 i3status
+
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioPause exec playerctl play-pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+
 bindsym $mod+m exec --no-startup-id pactl set-source-mute alsa_input.usb-3142_FIFINE_Microphone-00.mono-fallback toggle
 
 
-bindsym $mod+Shift+g exec google-chrome-stable --app="https://chat.openai.com"
-bindsym $mod+Shift+w exec google-chrome-stable --app="https://web.whatsapp.com/"
-bindsym $mod+Shift+m exec google-chrome-stable --app="https://music.youtube.com/"
-assign [class="Google-chrome" instance = "music.youtube.com"] $ws5
-assign [class="Google-chrome" instance = "web.whatsapp.com"] $ws7
-assign [class="steam"] $ws4
-assign [class="Tandem"] $ws5
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
 
+# move tiling windows via drag & drop by left-clicking into the title bar,
+# or left-clicking anywhere into the window while holding the floating modifier.
+tiling_drag modifier titlebar
+#default_border none
+default_border pixel 2
+default_floating_border pixel 2
+#GRUVBOX COLOR SCHEME
+# class                 border  backgr. text    indicator child_border
+client.focused          #98971a #285577 #ffffff #504945   #504945
+client.focused_inactive #333333 #5f676a #ffffff #282828   #282828
+client.unfocused        #333333 #222222 #888888 #282828   #282828
+client.urgent           #2f343a #900000 #ffffff #900000   #282828
+client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
+client.background       #ffffff
 
+#config displays
+exec_always --no-startup-id picom --blur-method dual_kawase --blur-strength 6 --backend glx --fade-in-step=1 --fade-out-step=1 --fade-delta=0 &
+exec_always --no-startup-id setxkbmap -layout us -variant intl
+exec_always --no-startup-id autotiling
+# start a terminal
+bindsym $mod+Return exec --no-startup-id alacritty
+
+# kill focused window
+bindsym $mod+q kill
+
+#run rofi
+bindsym $mod+d exec --no-startup-id rofi -disable-history -show drun
+bindsym $mod+Shift+q exec --no-startup-id rofi -show power-menu -modi power-menu:rofi-power-menu
+
+gaps inner 10
+gaps outer 10
+
+# change focus
 bindsym $mod+h focus left
 bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
+
+# move focused window
 bindsym $mod+Shift+h move left
 bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
 
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
-bindsym $mod+w layout tabbed
+
+# change container layout (stacked, tabbed, toggle split)
+#bindsym $mod+s layout stacking
+#bindsym $mod+w layout tabbed
+#bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
 
-# -- Workspaces
+# focus the parent container
+bindsym $mod+a focus parent
+
+#flameshot shortcut
+bindsym $mod+Shift+s exec --no-startup-id flameshot gui
+
+# Define names for default workspaces for which we configure key bindings later on.
+# We use variables to avoid repeating the names in multiple places.
 set $ws1 "1"
 set $ws2 "2"
 set $ws3 "3"
@@ -78,6 +107,17 @@ set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
 
+# Rules
+#for_window [class="Tandem"] floating enable
+for_window [class="ranger"] floating enable
+for_window [class="awakened-poe-trade"] floating enable
+for_window [class="pavucontrol"] floating enable
+for_window [class="Lxappearance"] floating enable
+
+bindsym $mod+minus resize shrink width 5 px or 5 ppt
+bindsym $mod+equal resize grow width 5 px or 5 ppt
+
+# switch to workspace
 bindsym $mod+1 workspace number $ws1
 bindsym $mod+2 workspace number $ws2
 bindsym $mod+3 workspace number $ws3
@@ -89,6 +129,7 @@ bindsym $mod+8 workspace number $ws8
 bindsym $mod+9 workspace number $ws9
 bindsym $mod+0 workspace number $ws10
 
+# move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace number $ws1
 bindsym $mod+Shift+2 move container to workspace number $ws2
 bindsym $mod+Shift+3 move container to workspace number $ws3
@@ -100,43 +141,31 @@ bindsym $mod+Shift+8 move container to workspace number $ws8
 bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10
 
+# reload the configuration file
+bindsym $mod+Shift+c reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
-# Rules
-#for_window [class="Tandem"] floating enable
-for_window [class="ranger"] floating enable
-for_window [class="awakened-poe-trade"] floating enable
-for_window [class="pavucontrol"] floating enable
-for_window [class="Lxappearance"] floating enable
-# for_window [window_role="pop-up"] floating enable
-# for_window [window_role="bubble"] floating enable
-# for_window [window_role="task_dialog"] floating enable
-# for_window [window_role="Preferences"] floating enable
-# for_window [window_type="dialog"]floating enable
-# for_window [window_type="menu"] floating enable
-workspace 6 output DVI-D-0
-workspace 7 output DVI-D-0
+# finds out, if available)
+#bar {
+#        status_command i3status
+#}
 
-bindsym $mod+minus resize shrink width 5 px or 5 ppt
-bindsym $mod+equal resize grow width 5 px or 5 ppt
+#configure workspace 7 (default for steam)
+exec --no-startup-id i3-msg "workspace 7; append_layout /home/bailey/.config/i3/workspace-steam.json"
+exec --no-startup-id i3-msg "workspace 7; exec /usr/bin/steam-runtime -silent %U"
 
-
-set $mudgreen #9c9f82
-set $blue #285577
-set $white #ffffff
-set $black #111111
-set $purple #9d7cd8
-#class		        	border		bground		text		indicator	child_border
-client.focused		 $blue		$blue		$white		$blue		$blue
-# client.focused_inactive $inactive $inactive $white $inactive $inactive
+exec --no-startup-id sleep 10 && vesktop --start-minimized
+exec --no-startup-id sleep 2 && i3-msg 'workspace 1'
 
 
-# bar {
-#         status_command i3status
-#         tray_output primary
-#         colors {
-#             focused_workspace $blue $blue #ffffff
-#             # active_workspace #333333 #333333 #888888
-#             # inactive_workspace #CECECE #333333 #f1f1f1
-#           }
-#
-# }
+
+
+bindsym $mod+s workspace $ws7; exec steam
+
+
+# Starts polybar
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+
