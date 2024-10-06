@@ -47,17 +47,6 @@ ln -s ~/dotfiles/scripts/tmux-sessionizer ~/.local/scripts/
 
 logStep "Installing manual bins"
 
-logStep "gcloud"
-curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-linux-x86_64.tar.gz
-tar -xf google-cloud-cli-linux-x86_64.tar.gz
-./google-cloud-sdk/install.sh
-rm ./google-cloud-sdk
-
-logStep "Micromamba"
-curl -Ls https://micro.mamba.pm/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
-./bin/micromamba shell init -s zsh -p ~/micromamba
-source ~/.zshrc
-
 logStep "Tmux TPM"
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
