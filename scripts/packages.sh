@@ -1,55 +1,118 @@
 #!/bin/bash
 
-# Colors
+# Colors and Emoji
 GREEN='\033[00;32m'
 NC='\033[0m'
 RED='\033[00;31m'
 CYAN='\033[00;36m'
 SEA="\\033[38;5;49m"
-
-# Emoji
 ARROW="${SEA}\xE2\x96\xB6${NC}"
 
-# List of packages to install
-packages=( "ripgrep" "xclip" "tmux" "python" "python-pip" "lazygit" "lazydocker" "helm" "helmfile" "kustomize" "ripgrep" "sops" "go-yq" "sops" "neovim" "yarn" "unzip" "zsh" "go-task" "fzf" "docker" "docker-compose" "kind" "kubectl" "azure-cli" "cilium-cli" "k9s")
+# Packages to install
+packages=( "zoxide" "ripgrep" "xclip" "tmux" "python" "python-pip" "lazygit" "lazydocker" "helm" "helmfile" "kustomize" "sops" "go-yq" "neovim" "yarn" "unzip" "zsh" "go-task" "fzf" "docker" "docker-compose" "kind" "kubectl" "azure-cli" "cilium-cli" "k9s" )
 
-logStep "Check if yay is installed"
-if ! command -v yay &>/dev/null; then
-	echo -e "${RED}yay not found, installing yay...${NC}"
-	logStep "Install yay"
-	sudo pacman -S --needed base-devel git
-	git clone https://aur.archlinux.org/yay.git
-	cd yay || exit
-	makepkg -si
-	cd ..
-	rm -rf yay
-else
-	logStep "${GREEN}yay is already installed${NC}"
-fi
+logStep() {
+    echo -e "${CYAN}==> ${1}${NC}"
+}
 
-logStep "Update yay"
-yay -Syu
+install_yay() {
+    if ! command -v yay &>/dev/null; then
+        logStep "Installing yay..."
+        sudo pacman -S --needed base-devel git
+        git clone https://aur.archlinux.org/yay.git
+        cd yay || exit
+        makepkg -si
+        cd .. && rm -rf yay
+    else
+        logStep "${GREEN}yay is already installed${NC}"
+    fi
+}
 
-logStep "Install packages"
-for package in "${packages[@]}"; do
-	yay -S --noconfirm "$package"
-done
+update_yay() {
+    logStep "Updating yay"
+    yay -Syu
+}
 
-logStep "All aur packages have been installed."
+install_packages() {
+    logStep "Installing packages"
+    for package in "${packages[@]}"; do
+        if ! yay -Q "$package" &>/dev/null; then
+            yay -S --noconfirm "$package"
+        else
+            logStep "${GREEN}$package is already installed${NC}"
+        fi
+    done
+}
 
-logStep "Creating symlinks"
-ln -s ~/dotfiles/.gitconfig ~/.config/
-ln -s ~/dotfiles/.zshrc ~/.config/
-ln -s ~/dotfiles/alacritty/ ~/.config/
-ln -s ~/dotfiles/tmux/ ~/.config/
-mkdir ~/.local/scripts
-ln -s ~/dotfiles/scripts/tmux-sessionizer ~/.local/scripts/
+create_symlinks() {
+    logStep "Creating symlinks"
+    [[ -L ~/.config/.gitconfig ]] || ln -sf ~/dotfiles/.gitconfig ~/.config/
+    [[ -L ~/.config/.zshrc ]] || ln -sf ~/dotfiles/.zshrc ~/.config/
+    [[ -d ~/.config/alacritty ]] || ln -sf ~/dotfiles/alacritty/ ~/.config/
+    [[ -d ~/.config/tmux ]] || ln -sf ~/dotfiles/tmux/ ~/.config/
+    mkdir -p ~/.local/scripts/
+    [[ -L ~/.local/scripts/tmux-sessionizer ]] || ln -sf ~/dotfiles/scripts/tmux-sessionizer ~/.local/scripts/
+}
 
-logStep "Installing manual bins"
+install_manual_bins() {
+    logStep "Installing manual bins"
+    
+    # Install Google Cloud CLI
+    logStep "Installing Google Cloud CLI"
+    curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-linux-x86_64.tar.gz
+    tar -xf google-cloud-cli-linux-x86_64.tar.gz -C ~
+    ~/google-cloud-sdk/install.sh
+    if ! grep -q "google-cloud-sdk" ~/.zshrc; then
+        echo 'export PATH="$HOME/google-cloud-sdk/bin:$PATH"' >> ~/.zshrc
+        logStep "Added Google Cloud CLI to .zshrc"
+    else
+        logStep "${GREEN}Google Cloud CLI already in .zshrc${NC}"
+    fi
+    rm google-cloud-cli-linux-x86_64.tar.gz
 
-logStep "Tmux TPM"
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+    # Tmux TPM Installation
+    logStep "Installing Tmux Plugin Manager (TPM)"
+    if [[ ! -d ~/.tmux/plugins/tpm ]]; then
+        git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+        logStep "TPM installed successfully"
+    else
+        logStep "${GREEN}TPM already installed${NC}"
+    fi
+}
 
-logStep "Docker without sudo"
-sudo usermod -aG docker "$USER"
-echo -e "${ARROW} ${CYAN}Please reboot your computer to complete this setup.${NC}"
+docker_without_sudo() {
+    logStep "Adding user to docker group"
+    sudo usermod -aG docker "$USER"
+    echo -e "${ARROW} ${CYAN}Please reboot your computer to complete this setup.${NC}"
+}
+
+# Ensure Zsh is the default shell
+set_default_shell_to_zsh() {
+    if [[ "$SHELL" != "$(which zsh)" ]]; then
+        logStep "Setting Zsh as the default shell"
+        chsh -s "$(which zsh)" "$USER"
+    else
+        logStep "${GREEN}Zsh is already the default shell${NC}"
+    fi
+}
+
+# Source the .zshrc to ensure the system picks up Zsh configurations without reboot
+source_zshrc_if_exists() {
+    if [[ -f ~/.zshrc ]]; then
+        logStep "Sourcing .zshrc"
+        source ~/.zshrc
+    else
+        logStep "${RED}.zshrc not found${NC}"
+    fi
+}
+
+# Main Execution
+install_yay
+update_yay
+install_packages
+create_symlinks
+install_manual_bins
+docker_without_sudo
+set_default_shell_to_zsh
+source_zshrc_if_exists
+
