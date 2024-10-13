@@ -9,7 +9,7 @@ SEA="\\033[38;5;49m"
 ARROW="${SEA}\xE2\x96\xB6${NC}"
 
 # Packages to install
-packages=( "zoxide" "ripgrep" "xclip" "tmux" "python" "python-pip" "lazygit" "lazydocker" "helm" "helmfile" "kustomize" "sops" "go-yq" "neovim" "yarn" "unzip" "zsh" "go-task" "fzf" "docker" "docker-compose" "kind" "kubectl" "azure-cli" "cilium-cli" "k9s" )
+packages=( "picom" "rofi" "feh" "tandem-chat" "ttf-jetbrains-mono-nerd" "lxappearance" "pavucontrol" "thunar" "gvfs" "github-cli" "arch-gaming-meta" "zoxide" "ripgrep" "xclip" "tmux" "python" "python-pip" "lazygit" "lazydocker" "helm" "helmfile" "kustomize" "sops" "go-yq" "neovim" "yarn" "unzip" "zsh" "go-task" "fzf" "docker" "docker-compose" "kind" "kubectl" "azure-cli" "cilium-cli" "k9s" )
 
 logStep() {
     echo -e "${CYAN}==> ${1}${NC}"
@@ -48,6 +48,10 @@ create_symlinks() {
     logStep "Creating symlinks"
     [[ -L ~/.config/.gitconfig ]] || ln -sf ~/dotfiles/.gitconfig ~/.config/
     [[ -L ~/.config/.zshrc ]] || ln -sf ~/dotfiles/.zshrc ~/.config/
+    [[ -L ~/.config/i3 ]] || ln -sf ~/dotfiles/i3 ~/.config/
+    [[ -L ~/.config/picom ]] || ln -sf ~/dotfiles/picom ~/.config/
+    [[ -L ~/.config/dunst ]] || ln -sf ~/dotfiles/dunst ~/.config/
+    [[ -L ~/.config/rofi ]] || ln -sf ~/dotfiles/rofi ~/.config/
     [[ -d ~/.config/alacritty ]] || ln -sf ~/dotfiles/alacritty/ ~/.config/
     [[ -d ~/.config/tmux ]] || ln -sf ~/dotfiles/tmux/ ~/.config/
     mkdir -p ~/.local/scripts/
@@ -86,6 +90,12 @@ docker_without_sudo() {
     echo -e "${ARROW} ${CYAN}Please reboot your computer to complete this setup.${NC}"
 }
 
+poping_sound() {
+  echo "0" | sudo tee /sys/module/snd_hda_intel/parameters/power_save
+  echo "options snd_hda_intel power_save=0" | sudo tee -a /etc/modprobe.d/audio_disable_powersave.conf
+}
+
+
 # Ensure Zsh is the default shell
 set_default_shell_to_zsh() {
     if [[ "$SHELL" != "$(which zsh)" ]]; then
@@ -113,6 +123,7 @@ install_packages
 create_symlinks
 install_manual_bins
 docker_without_sudo
+poping_sound
 set_default_shell_to_zsh
 source_zshrc_if_exists
 
