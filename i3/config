@@ -43,7 +43,7 @@ client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
 client.background       #ffffff
 
 #config displays
-exec_always --no-startup-id picom --blur-method dual_kawase --blur-strength 6 --backend glx --fade-in-step=1 --fade-out-step=1 --fade-delta=0 &
+exec_always --no-startup-id picom &
 exec_always --no-startup-id setxkbmap -layout us -variant intl
 exec_always --no-startup-id autotiling
 # start a terminal
@@ -151,15 +151,14 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
 # finds out, if available)
-#bar {
-#        status_command i3status
-#}
+bar {
+       status_command i3status
+       font pango:JetBrains Mono Nerd Font 8
+}
 
 #configure workspace 7 (default for steam)
-exec --no-startup-id i3-msg "workspace 7; append_layout /home/bailey/.config/i3/workspace-steam.json"
 exec --no-startup-id i3-msg "workspace 7; exec /usr/bin/steam-runtime -silent %U"
 
-exec --no-startup-id sleep 10 && vesktop --start-minimized
 exec --no-startup-id sleep 2 && i3-msg 'workspace 1'
 
 bindsym $mod+s workspace $ws7; exec steam
