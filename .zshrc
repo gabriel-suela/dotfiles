@@ -1,57 +1,36 @@
-export PATH=$HOME/bin:$HOME/.local/bin:$HOME/.local/scripts:${KREW_ROOT:-$HOME/.krew}/bin:$PATH
-export ZSH="$HOME/.oh-my-zsh"
-export EDITOR=nvim
+#            _              
+#    _______| |__  _ __ ___ 
+#   |_  / __| '_ \| '__/ __|
+#  _ / /\__ \ | | | | | (__ 
+# (_)___|___/_| |_|_|  \___|
+#                           
+# -----------------------------------------------------
+# ML4W zshrc loader
+# -----------------------------------------------------
 
-ZSH_THEME="robbyrussell"
+# DON'T CHANGE THIS FILE
 
-plugins=(git)
-source $ZSH/oh-my-zsh.sh
+# You can define your custom configuration by adding
+# files in ~/.config/zshrc 
+# or by creating a folder ~/.config/zshrc/custom
+# with copies of files from ~/.config/zshrc 
+# -----------------------------------------------------
 
-alias task="go-task"
-bindkey -s ^f "tmux-sessionizer\n"
-alias sopsd="sops --decrypt" 
-alias sopsdi="sops --decrypt --in-place" 
-alias sopsei="sops --encrypt --in-place" 
+# -----------------------------------------------------
+# Load modular configarion
+# -----------------------------------------------------
 
-gch() {
- git checkout "$(git branch --all | fzf --height=20% --reverse --info=inline | tr -d '[:space:]')"
-}
+for f in ~/.config/zshrc/*; do 
+    if [ ! -d $f ] ;then
+        c=`echo $f | sed -e "s=.config/zshrc=.config/zshrc/custom="`
+        [[ -f $c ]] && source $c || source $f
+    fi
+done
 
-eval "$(zoxide init zsh)"
+# -----------------------------------------------------
+# Load single customization file (if exists)
+# -----------------------------------------------------
 
-# wsl only
-[[ -n "$WT_SESSION" ]] && {
-  chpwd() {
-    echo -en '\e]9;9;"'
-    wslpath -w "$PWD" | tr -d '\n'
-    echo -en '"\x07'
-  }
-}
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-# >>> mamba initialize >>>
-# !! Contents within this block are managed by 'mamba init' !!
-export MAMBA_EXE='/home/suela/.local/bin/micromamba';
-export MAMBA_ROOT_PREFIX='/home/suela/micromamba';
-__mamba_setup="$("$MAMBA_EXE" shell hook --shell zsh --root-prefix "$MAMBA_ROOT_PREFIX" 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__mamba_setup"
-else
-    alias micromamba="$MAMBA_EXE"  # Fallback on help from mamba activate
+if [ -f ~/.zshrc_custom ] ;then
+    source ~/.zshrc_custom
 fi
-unset __mamba_setup
-# <<< mamba initialize <<<
-
-export HISTFILE="$HOME/.zsh_history"
-export HISTSIZE=1000000000
-export SAVEHIST=1000000000
-setopt EXTENDED_HISTORY
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/home/suela/google-cloud-sdk/path.zsh.inc' ]; then . '/home/suela/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/home/suela/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/suela/google-cloud-sdk/completion.zsh.inc'; fi
