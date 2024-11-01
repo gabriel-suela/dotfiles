@@ -1,1 +1,0 @@
-../dotfiles-m4/.config/zshrc

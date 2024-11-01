@@ -9,7 +9,7 @@ SEA="\\033[38;5;49m"
 ARROW="${SEA}\xE2\x96\xB6${NC}"
 
 # Packages to install
-packages=( "picom" "rofi" "feh" "tandem-chat" "ttf-jetbrains-mono-nerd" "lxappearance" "pavucontrol" "thunar" "gvfs" "github-cli" "arch-gaming-meta" "zoxide" "ripgrep" "xclip" "tmux" "python" "python-pip" "lazygit" "lazydocker" "helm" "helmfile" "kustomize" "sops" "go-yq" "neovim" "yarn" "unzip" "zsh" "go-task" "fzf" "docker" "docker-compose" "kind" "kubectl" "azure-cli" "cilium-cli" "k9s" )
+packages=(  "zoxide" "ripgrep" "xclip" "tmux" "python" "python-pip" "lazygit" "lazydocker" "helm" "helmfile" "kustomize" "sops" "go-yq" "neovim" "yarn" "unzip" "zsh" "go-task" "fzf" "docker" "docker-compose" "kind" "kubectl" "azure-cli" "cilium-cli" "k9s" )
 
 logStep() {
     echo -e "${CYAN}==> ${1}${NC}"
@@ -48,11 +48,12 @@ create_symlinks() {
     logStep "Creating symlinks"
     [[ -L ~/.config/.gitconfig ]] || ln -sf ~/dotfiles/.gitconfig ~/.config/
     [[ -L ~/.config/.zshrc ]] || ln -sf ~/dotfiles/.zshrc ~/.config/
-    [[ -L ~/.config/i3 ]] || ln -sf ~/dotfiles/i3 ~/.config/
-    [[ -L ~/.config/picom ]] || ln -sf ~/dotfiles/picom ~/.config/
-    [[ -L ~/.config/dunst ]] || ln -sf ~/dotfiles/dunst ~/.config/
-    [[ -L ~/.config/rofi ]] || ln -sf ~/dotfiles/rofi ~/.config/
-    [[ -d ~/.config/alacritty ]] || ln -sf ~/dotfiles/alacritty/ ~/.config/
+    # [[ -L ~/.config/i3 ]] || ln -sf ~/dotfiles/i3 ~/.config/
+    [[ -L ~/.config/zshrc ]] || ln -sf ~/dotfiles/zshrc ~/.config/
+    # [[ -L ~/.config/picom ]] || ln -sf ~/dotfiles/picom ~/.config/
+    # [[ -L ~/.config/dunst ]] || ln -sf ~/dotfiles/dunst ~/.config/
+    # [[ -L ~/.config/rofi ]] || ln -sf ~/dotfiles/rofi ~/.config/
+    # [[ -d ~/.config/alacritty ]] || ln -sf ~/dotfiles/alacritty/ ~/.config/
     [[ -d ~/.config/tmux ]] || ln -sf ~/dotfiles/tmux/ ~/.config/
     mkdir -p ~/.local/scripts/
     [[ -L ~/.local/scripts/tmux-sessionizer ]] || ln -sf ~/dotfiles/scripts/tmux-sessionizer ~/.local/scripts/
