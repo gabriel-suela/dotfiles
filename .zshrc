@@ -15,8 +15,11 @@ plugins=(
     copybuffer
     dirhistory
 )
+
 # Set-up oh-my-zsh
 source $ZSH/oh-my-zsh.sh
+source /home/suela/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
 # -----------------------------------------------------
 # Set-up FZF key bindings (CTRL R for fuzzy history finder)
 # -----------------------------------------------------
@@ -33,6 +36,11 @@ alias task="go-task"
 alias sopsd="sops --decrypt" 
 alias sopsdi="sops --decrypt --in-place" 
 alias sopsei="sops --encrypt --in-place" 
+
+# WSL
+if [[ -n "$WSL_DISTRO_NAME" ]]; then
+  export BROWSER="/mnt/c/Program Files/Google/Chrome/Application/chrome.exe"
+fi
 
 # -----------------------------------------------------
 # AUTOSTART
@@ -65,9 +73,6 @@ if [ -f '/home/suela/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/suela
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
-source /home/suela/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-source /home/suela/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
