@@ -9,8 +9,12 @@ SEA="\\033[38;5;49m"
 ARROW="${SEA}\xE2\x96\xB6${NC}"
 
 # Packages to install
-packages=( "zoxide" "ripgrep" "xclip" "tmux" "python" "python-pip" "lazygit" "lazydocker" "helm" "helmfile" "kustomize" "sops" "go-yq" "neovim" "yarn" "unzip" "zsh" "go-task" "fzf" "docker" "docker-compose" "kind" "kubectl" "azure-cli" "cilium-cli" "k9s" )
-
+download_packages() {
+  if grep -qi "microsoft" /proc/version || uname -r | grep -qi "microsoft"; then
+    packages=( "zoxide" "ripgrep" "tmux" "python" "python-pip" "lazygit" "lazydocker" "helm" "helmfile" "kustomize" "sops" "go-yq" "neovim" "yarn" "unzip" "zsh" "go-task" "fzf" "docker" "docker-compose" "kind" "kubectl" "azure-cli" "cilium-cli" "k9s" )
+  else
+    packages=( "stremio" "apple-fonts" "ttf-jetbrains-mono-nerd" "flameshot" "github-cli" "google-chrome" "bitwarden" "alacritty" "zoxide" "ripgrep" "tmux" "python" "python-pip" "lazygit" "lazydocker" "helm" "helmfile" "kustomize" "sops" "go-yq" "neovim" "yarn" "unzip" "zsh" "go-task" "fzf" "docker" "docker-compose" "kind" "kubectl" "azure-cli" "cilium-cli" "k9s" )
+}
 logStep() {
     echo -e "${CYAN}==> ${1}${NC}"
 }
@@ -115,6 +119,7 @@ poping_sound() {
 
 
 # Main Execution
+download_packages
 install_yay
 update_yay
 install_packages
