@@ -1,5 +1,8 @@
 #!/bin/bash
 
+REPO_URL="git@github.com:gabriel-suela/dotfiles.git"
+REPO_DIR="~/"
+
 # Colors and Emoji
 GREEN='\033[00;32m'
 NC='\033[0m'
@@ -8,15 +11,45 @@ CYAN='\033[00;36m'
 SEA="\\033[38;5;49m"
 ARROW="${SEA}\xE2\x96\xB6${NC}"
 
-# Packages to install
-download_packages() {
-  if grep -qi "microsoft" /proc/version || uname -r | grep -qi "microsoft"; then
-    packages=( "zoxide" "ripgrep" "tmux" "python" "python-pip" "lazygit" "lazydocker" "helm" "helmfile" "kustomize" "sops" "go-yq" "neovim" "yarn" "unzip" "zsh" "go-task" "fzf" "docker" "docker-compose" "kind" "kubectl" "azure-cli" "cilium-cli" "k9s" )
-  else
-    packages=( "tandem-chat" "stremio" "apple-fonts" "ttf-jetbrains-mono-nerd" "flameshot" "github-cli" "google-chrome" "bitwarden" "alacritty" "zoxide" "ripgrep" "tmux" "python" "python-pip" "lazygit" "lazydocker" "helm" "helmfile" "kustomize" "sops" "go-yq" "neovim" "yarn" "unzip" "zsh" "go-task" "fzf" "docker" "docker-compose" "kind" "kubectl" "azure-cli" "cilium-cli" "k9s" )
-}
 logStep() {
     echo -e "${CYAN}==> ${1}${NC}"
+}
+
+# Clone the repository if it doesn't exist already
+clone_repo() {
+    if [[ ! -d "$REPO_DIR" ]]; then
+        logStep "Cloning repository from $REPO_URL"
+        git clone "$REPO_URL"
+    else
+        logStep "${GREEN}Repository already exists. Skipping clone.${NC}"
+    fi
+}
+
+
+# Packages to install
+download_packages() {
+  common_packages=(
+    "zoxide" "ripgrep" "tmux" "python" "python-pip" "lazygit" "lazydocker"
+    "helm" "helmfile" "kustomize" "sops" "go-yq" "neovim" "yarn" "unzip"
+    "go-task" "fzf" "docker" "docker-compose" "kind" "kubectl" "azure-cli"
+    "cilium-cli" "k9s"
+  )
+  
+  wsl_packages=(
+    "zsh"
+  )
+  
+  non_wsl_packages=(
+    "tandem-chat" "stremio" "apple-fonts" "ttf-jetbrains-mono-nerd"
+    "flameshot" "github-cli" "google-chrome" "bitwarden" "alacritty"
+  )
+
+  # Choose packages based on the environment (WSL or not)
+  if grep -qi "microsoft" /proc/version || uname -r | grep -qi "microsoft"; then
+    packages=("${common_packages[@]}" "${wsl_packages[@]}")
+  else
+    packages=("${common_packages[@]}" "${non_wsl_packages[@]}")
+  fi
 }
 
 install_yay() {
@@ -103,6 +136,9 @@ install_manual_bins() {
     else
         logStep "${GREEN}TPM already installed${NC}"
     fi
+
+    logStep "Installing Starship"
+    curl -sS https://starship.rs/install.sh | sh
 }
 
 docker_without_sudo() {
@@ -116,6 +152,21 @@ poping_sound() {
   echo "options snd_hda_intel power_save=0" | sudo tee -a /etc/modprobe.d/audio_disable_powersave.conf
 }
 
+set_default_shell_to_zsh() {
+    logStep "Setting default shell to zsh"
+    chsh -s $(which zsh)
+    source_zshrc_if_exists  # Ensure .zshrc is sourced after setting the default shell
+}
+
+source_zshrc_if_exists() {
+    # Ensure that the symlinked .zshrc is sourced
+    if [[ -L ~/.zshrc ]]; then
+        logStep "Sourcing symlinked .zshrc"
+        source ~/.zshrc
+    else
+        logStep "${RED}Warning: .zshrc symlink does not exist!${NC}"
+    fi
+}
 
 
 # Main Execution
