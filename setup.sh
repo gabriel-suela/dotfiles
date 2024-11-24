@@ -13,7 +13,7 @@ download_packages() {
   if grep -qi "microsoft" /proc/version || uname -r | grep -qi "microsoft"; then
     packages=( "zoxide" "ripgrep" "tmux" "python" "python-pip" "lazygit" "lazydocker" "helm" "helmfile" "kustomize" "sops" "go-yq" "neovim" "yarn" "unzip" "zsh" "go-task" "fzf" "docker" "docker-compose" "kind" "kubectl" "azure-cli" "cilium-cli" "k9s" )
   else
-    packages=( "stremio" "apple-fonts" "ttf-jetbrains-mono-nerd" "flameshot" "github-cli" "google-chrome" "bitwarden" "alacritty" "zoxide" "ripgrep" "tmux" "python" "python-pip" "lazygit" "lazydocker" "helm" "helmfile" "kustomize" "sops" "go-yq" "neovim" "yarn" "unzip" "zsh" "go-task" "fzf" "docker" "docker-compose" "kind" "kubectl" "azure-cli" "cilium-cli" "k9s" )
+    packages=( "tandem-chat" "stremio" "apple-fonts" "ttf-jetbrains-mono-nerd" "flameshot" "github-cli" "google-chrome" "bitwarden" "alacritty" "zoxide" "ripgrep" "tmux" "python" "python-pip" "lazygit" "lazydocker" "helm" "helmfile" "kustomize" "sops" "go-yq" "neovim" "yarn" "unzip" "zsh" "go-task" "fzf" "docker" "docker-compose" "kind" "kubectl" "azure-cli" "cilium-cli" "k9s" )
 }
 logStep() {
     echo -e "${CYAN}==> ${1}${NC}"

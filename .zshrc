@@ -26,9 +26,6 @@ source /home/suela/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source <(fzf --zsh)
 bindkey -s ^f "tmux-sessionizer\n"
 eval "$(starship init zsh)"
-
-alias ls='eza -a --icons'
-alias ll='eza -al --icons'
 alias lt='eza -a --tree --level=1 --icons'
 alias v='$EDITOR'
 alias vim='$EDITOR'
