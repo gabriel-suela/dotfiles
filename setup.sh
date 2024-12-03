@@ -139,6 +139,10 @@ install_manual_bins() {
 
     logStep "Installing Starship"
     curl -sS https://starship.rs/install.sh | sh
+
+    logStep "Zsh Pure Theme"
+    mkdir -p "$HOME/.zsh"
+    git clone https://github.com/sindresorhus/pure.git "$HOME/.zsh/pure"
 }
 
 docker_without_sudo() {

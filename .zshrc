@@ -20,12 +20,16 @@ plugins=(
 source $ZSH/oh-my-zsh.sh
 source /home/suela/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
+# .zshrc
+fpath+=($HOME/.zsh/pure)
+autoload -U promptinit; promptinit
+prompt pure
+
 # -----------------------------------------------------
 # Set-up FZF key bindings (CTRL R for fuzzy history finder)
 # -----------------------------------------------------
 source <(fzf --zsh)
 bindkey -s ^f "tmux-sessionizer\n"
-eval "$(starship init zsh)"
 alias lt='eza -a --tree --level=1 --icons'
 alias v='$EDITOR'
 alias vim='$EDITOR'
@@ -46,14 +50,14 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 # >>> mamba initialize >>>
-# !! Contents within this block are managed by 'mamba init' !!
+# !! Contents within this block are managed by 'micromamba shell init' !!
 export MAMBA_EXE='/home/suela/.local/bin/micromamba';
 export MAMBA_ROOT_PREFIX='/home/suela/micromamba';
 __mamba_setup="$("$MAMBA_EXE" shell hook --shell zsh --root-prefix "$MAMBA_ROOT_PREFIX" 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__mamba_setup"
 else
-    alias micromamba="$MAMBA_EXE"  # Fallback on help from mamba activate
+    alias micromamba="$MAMBA_EXE"  # Fallback on help from micromamba activate
 fi
 unset __mamba_setup
 # <<< mamba initialize <<<
