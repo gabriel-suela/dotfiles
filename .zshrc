@@ -25,6 +25,8 @@ fpath+=($HOME/.zsh/pure)
 autoload -U promptinit; promptinit
 prompt pure
 
+eval "$(zoxide init zsh)"
+
 # -----------------------------------------------------
 # Set-up FZF key bindings (CTRL R for fuzzy history finder)
 # -----------------------------------------------------
