@@ -156,23 +156,6 @@ poping_sound() {
   echo "options snd_hda_intel power_save=0" | sudo tee -a /etc/modprobe.d/audio_disable_powersave.conf
 }
 
-set_default_shell_to_zsh() {
-    logStep "Setting default shell to zsh"
-    chsh -s $(which zsh)
-    source_zshrc_if_exists  # Ensure .zshrc is sourced after setting the default shell
-}
-
-source_zshrc_if_exists() {
-    # Ensure that the symlinked .zshrc is sourced
-    if [[ -L ~/.zshrc ]]; then
-        logStep "Sourcing symlinked .zshrc"
-        source ~/.zshrc
-    else
-        logStep "${RED}Warning: .zshrc symlink does not exist!${NC}"
-    fi
-}
-
-
 # Main Execution
 download_packages
 install_yay
