@@ -1,9 +1,9 @@
 [font]
-size = 10
+size = 12
 
 [font.normal]
-#family = "Iosevka Nerd Font"
-family = "JetBrains Mono Nerd Font"
+family = "Iosevka Term"
+# family = "JetBrains Mono Nerd Font"
 #family = "MesloLGS Nerd Font"
 #family = "FantasqueSansM Nerd Font"
 #family = "FiraCode Nerd Font"
@@ -18,41 +18,42 @@ startup_mode = "Maximized"
 opacity = 1
 
 [window.padding]
-x = 5
+# x = 5
 
+[colors]
+draw_bold_text_with_bright_colors = false
+
+# Default colors
 [colors.primary]
-foreground = "#c5c8c6"
-background = "#1d1f21"
+background = '#161617'
+foreground = '0xc1c1c1'
 
+# Colors the cursor will use if `custom_cursor_colors` is true
+[colors.cursor]
+text = '0x000000'
+cursor = '0xc1c1c1'
+
+# Normal colors
 [colors.normal]
-black = "#1d1f21"
-red = "#cc6666"
-green = "#b5bd68"
-yellow = "#f0c674"
-blue = "#81a2be"
-magenta = "#b294bb"
-cyan = "#8abeb7"
-white = "#c5c8c6"
+black = '0x000000'
+red = '0x5f8787'
+green = '0x9b8d7f'
+yellow = '0x8c7f70'
+blue = '0x888888'
+magenta = '0x999999'
+cyan = '0xaaaaaa'
+white = '0xc1c1c1'
 
+# Bright colors
 [colors.bright]
-black = "#666666"
-red = "#d54e53"
-green = "#b9ca4a"
-yellow = "#e7c547"
-blue = "#7aa6da"
-magenta = "#c397d8"
-cyan = "#70c0b1"
-white = "#eaeaea"
-
-[colors.dim]
-black = "#131415"
-red = "#864343"
-green = "#777c44"
-yellow = "#9e824c"
-blue = "#556a7d"
-magenta = "#75617b"
-cyan = "#5b7d78"
-white = "#828482"
+black = '0x333333'
+red = '0xaaaaaa'
+green = '0x121212'
+yellow = '0x222222'
+blue = '0x999999'
+magenta = '0x999999'
+cyan = '0x444444'
+white = '0xc1c1c1'
 
 [colors.hints]
 start = { foreground = "#1d1f21", background = "#e9ff5e" }
