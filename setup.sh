@@ -32,7 +32,7 @@ download_packages() {
     "zoxide" "ripgrep" "tmux" "python" "python-pip" "lazygit" "lazydocker"
     "helm" "helmfile" "kustomize" "sops" "go-yq" "neovim" "yarn" "unzip"
     "go-task" "fzf" "docker" "docker-compose" "kind" "kubectl" "azure-cli"
-    "cilium-cli" "k9s"
+    "cilium-cli" "k9s" "github-cli"
   )
   
   wsl_packages=(
@@ -41,7 +41,7 @@ download_packages() {
   
   non_wsl_packages=(
     "tandem-chat" "stremio" "apple-fonts" "ttf-jetbrains-mono-nerd"
-    "flameshot" "github-cli" "google-chrome" "bitwarden" "alacritty"
+    "flameshot" "google-chrome" "bitwarden" "alacritty"
   )
 
   # Choose packages based on the environment (WSL or not)

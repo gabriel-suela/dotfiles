@@ -1,6 +1,6 @@
 set $mod Mod4
 
-font pango:JetBrains Mono Nerd Font 10
+font pango:Iosevka Term 12
 
 exec --no-startup-id dex --autostart --environment i3
 exec --no-startup-id dunst
@@ -115,6 +115,8 @@ for_window [class="ranger"] floating enable
 for_window [class="awakened-poe-trade"] floating enable
 for_window [class="pavucontrol"] floating enable
 for_window [class="Lxappearance"] floating enable
+for_window [class="Thunar"] floating enable
+for_window [class="Google-chrome" window_role="pop-up" ] floating enable
 
 bindsym $mod+minus resize shrink width 5 px or 5 ppt
 bindsym $mod+equal resize grow width 5 px or 5 ppt
@@ -157,11 +159,11 @@ bar {
 }
 
 #configure workspace 7 (default for steam)
-exec --no-startup-id i3-msg "workspace 7; exec /usr/bin/steam-runtime -silent %U"
+exec --no-startup-id i3-msg "workspace 7; exec /usr/bin/tandem -silent %U"
 
 exec --no-startup-id sleep 2 && i3-msg 'workspace 1'
 
-bindsym $mod+s workspace $ws7; exec steam
+bindsym $mod+s workspace $ws8; exec steam
 
 
 # Starts polybar
