@@ -4,7 +4,7 @@
 export EDITOR=nvim
 export PATH="/usr/lib/ccache/bin/:$PATH"
 export PATH=$HOME/bin:$HOME/.local/bin:$HOME/.local/scripts:${KREW_ROOT:-$HOME/.krew}/bin:$PATH
-export ZSH="$HOME/.oh-my-zsh"
+#export ZSH="$HOME/.oh-my-zsh"
 
 plugins=(
     git
@@ -17,7 +17,7 @@ plugins=(
 )
 
 # Set-up oh-my-zsh
-source $ZSH/oh-my-zsh.sh
+#source $ZSH/oh-my-zsh.sh
 source /home/suela/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # .zshrc
@@ -83,3 +83,4 @@ if [ -f '/home/suela/google-cloud-sdk/path.zsh.inc' ]; then . '/home/suela/googl
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/home/suela/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/suela/google-cloud-sdk/completion.zsh.inc'; fi
+source /home/suela/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
