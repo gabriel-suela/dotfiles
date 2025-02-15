@@ -157,6 +157,7 @@ poping_sound() {
 }
 
 # Main Execution
+clone_repo
 download_packages
 install_yay
 update_yay
