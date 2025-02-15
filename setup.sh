@@ -1,6 +1,6 @@
 #!/bin/bash
 
-REPO_URL="git@github.com:gabriel-suela/dotfiles.git"
+REPO_URL="https://github.com/gabriel-suela/dotfiles.git"
 REPO_DIR="~/"
 
 # Colors and Emoji
