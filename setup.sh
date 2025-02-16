@@ -57,7 +57,7 @@ install_yay() {
         logStep "Installing yay..."
         sudo pacman -S --needed base-devel git
         git clone https://aur.archlinux.org/yay.git
-        cd yay || exit
+        cd yay || exit 
         makepkg -si
         cd .. && rm -rf yay
     else
@@ -86,7 +86,6 @@ create_symlinks() {
 
     # Detect if running in WSL
     if grep -qi "microsoft" /proc/version || uname -r | grep -qi "microsoft"; then
-        # We're in WSL, so symlink only uncommented lines
         [[ -L ~/.config/.gitconfig ]] || ln -sf ~/dotfiles/.gitconfig ~/
         [[ -L ~/.config/.zshrc ]] || ln -sf ~/dotfiles/.zshrc ~/
         [[ -L ~/.config/starship/starship.toml ]] || ln -sf ~/dotfiles/starship/starship.toml ~/.config/
@@ -96,11 +95,9 @@ create_symlinks() {
         [[ -L ~/.local/scripts/tmux-sessionizer ]] || ln -sf ~/dotfiles/scripts/tmux-sessionizer ~/.local/scripts/
 
     else
-        # Not in WSL, symlink all files
         [[ -L ~/.config/i3 ]] || ln -sf ~/dotfiles/i3 ~/.config/
         [[ -L ~/.config/picom ]] || ln -sf ~/dotfiles/picom ~/.config/
         [[ -L ~/.config/dunst ]] || ln -sf ~/dotfiles/dunst ~/.config/
-        [[ -L ~/.config/starship/starship.toml ]] || ln -sf ~/dotfiles/starship/starship.toml ~/.config/
         [[ -L ~/.config/rofi ]] || ln -sf ~/dotfiles/rofi ~/.config/
         [[ -d ~/.config/alacritty ]] || ln -sf ~/dotfiles/alacritty/ ~/.config/
         [[ -L ~/.config/.gitconfig ]] || ln -sf ~/dotfiles/.gitconfig ~/
@@ -114,7 +111,10 @@ create_symlinks() {
 
 install_manual_bins() {
     logStep "Installing manual bins"
-    
+
+    # OhMyZsh
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
     # Install Google Cloud CLI
     logStep "Installing Google Cloud CLI"
     curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-linux-x86_64.tar.gz
@@ -136,9 +136,6 @@ install_manual_bins() {
     else
         logStep "${GREEN}TPM already installed${NC}"
     fi
-
-    logStep "Installing Starship"
-    curl -sS https://starship.rs/install.sh | sh
 
     logStep "Zsh Pure Theme"
     mkdir -p "$HOME/.zsh"
@@ -162,10 +159,8 @@ download_packages
 install_yay
 update_yay
 install_packages
-create_symlinks
 install_manual_bins
+create_symlinks
 docker_without_sudo
 poping_sound
-set_default_shell_to_zsh
-source_zshrc_if_exists
 
