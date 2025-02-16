@@ -25,40 +25,25 @@ draw_bold_text_with_bright_colors = false
 
 # Default colors
 [colors.primary]
-background = '#161617'
-foreground = '0xc1c1c1'
+background = "#1F1F1F"
+foreground = "#CCCCCC"
 
-# Colors the cursor will use if `custom_cursor_colors` is true
-[colors.cursor]
-text = '0x000000'
-cursor = '0xc1c1c1'
-
-# Normal colors
 [colors.normal]
-black = '0x000000'
-red = '0x5f8787'
-green = '0x9b8d7f'
-yellow = '0x8c7f70'
-blue = '0x888888'
-magenta = '0x999999'
-cyan = '0xaaaaaa'
-white = '0xc1c1c1'
+black   = "#000000"
+red     = "#d6181b"
+green   = "#6A9955"
+yellow  = "#e4d201"
+blue    = "#569cd6"
+magenta = "#bc3fbc"
+cyan    = "#4EC9B0"
+white   = "#e5e5e5"
 
-# Bright colors
 [colors.bright]
-black = '0x333333'
-red = '0xaaaaaa'
-green = '0x121212'
-yellow = '0x222222'
-blue = '0x999999'
-magenta = '0x999999'
-cyan = '0x444444'
-white = '0xc1c1c1'
-
-[colors.hints]
-start = { foreground = "#1d1f21", background = "#e9ff5e" }
-end = { foreground = "#e9ff5e", background = "#1d1f21" }
-
-[colors.search]
-matches = { foreground = "#000000", background = "#ffffff" }
-focused_match = { foreground = "#ffffff", background = "#000000" }
+black   = "#666666"
+red     = "#ce9178"
+green   = "#b5cea8"
+yellow  = "#DCDCAA"
+blue    = "#9cdcfe"
+magenta = "#d670d6"
+cyan    = "#9cdcfe"
+white   = "#e5e5e5"

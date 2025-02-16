@@ -155,7 +155,7 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 # finds out, if available)
 bar {
        status_command i3status
-       font pango:JetBrains Mono Nerd Font 8
+       font pango:Iosevka Term 10
 }
 
 #configure workspace 7 (default for steam)
