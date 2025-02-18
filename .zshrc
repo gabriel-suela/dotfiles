@@ -6,6 +6,11 @@ export PATH="/usr/lib/ccache/bin/:$PATH"
 export PATH=$HOME/bin:$HOME/.local/bin:$HOME/.local/scripts:${KREW_ROOT:-$HOME/.krew}/bin:$PATH
 export ZSH="$HOME/.oh-my-zsh"
 
+# Autostart from tty if im running a WM without a LM
+if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
+  exec startx
+fi
+
 plugins=(
     git
     sudo
@@ -26,6 +31,12 @@ autoload -U promptinit; promptinit
 prompt pure
 
 eval "$(zoxide init zsh)"
+
+gcof() {
+  
+  git branch --all | sed -E 's|^\*? +||; s|remotes/origin/||' | sort -u | fzf --height 40% --border --prompt "Checkout branch: " | xargs git checkout
+
+}
 
 # -----------------------------------------------------
 # Set-up FZF key bindings (CTRL R for fuzzy history finder)

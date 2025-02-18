@@ -2,16 +2,14 @@ set $mod Mod4
 
 font pango:Iosevka Term 12
 
+#start up applications
 exec --no-startup-id dex --autostart --environment i3
 exec --no-startup-id dunst
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec --no-startup-id nm-applet
 exec --no-startup-id greenclip daemon & 
+exec --no-startup-id feh --bg-fill ~/Pictures/7fh7uau5rfje1.jpeg
 
-#launches udiskie to allow for usb mounting(hopefully)
-exec --no-startup-id udiskie &
-
-#start up applications
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
@@ -71,10 +69,6 @@ bindsym $mod+Shift+h move left
 bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
-
-
-# split in vertical orientation
-# bindsym $mod+v split v
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
@@ -159,13 +153,12 @@ bar {
 }
 
 #configure workspace 7 (default for steam)
-exec --no-startup-id i3-msg "workspace 7; exec /usr/bin/tandem -silent %U"
+exec --no-startup-id sleep 2 && i3-msg "workspace 7; exec /usr/bin/tandem -silent %U"
 
-exec --no-startup-id sleep 2 && i3-msg 'workspace 1'
+exec --no-startup-id sleep 4 && i3-msg 'workspace 1'
 
 bindsym $mod+s workspace $ws8; exec steam
 
 
 # Starts polybar
-exec_always --no-startup-id $HOME/.config/polybar/launch.sh
-
+# exec_always --no-startup-id $HOME/.config/polybar/launch.sh

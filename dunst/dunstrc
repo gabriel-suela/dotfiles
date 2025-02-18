@@ -123,7 +123,7 @@
 
     ### Text ###
 
-    font = Monospace 8
+    font = Iosevka Term 10
 
     # The spacing between lines.  If the height is smaller than the
     # font height, it will get raised to the font height.
@@ -166,7 +166,7 @@
     # YELLOW THEME
     #format = "<b><span foreground='#eca021'>%s</span></b>\n%b"
     # BLUE THEME
-    format = "<b><span foreground='#5d75a1'>%s</span></b>\n%b"
+    format = "<b><span foreground='#e6e6e6'>%s</span></b>\n%b"
 
     # Alignment of message text.
     # Possible values are "left", "center" and "right".
