@@ -32,7 +32,7 @@ download_packages() {
     "zoxide" "ripgrep" "tmux" "python" "python-pip" "lazygit" "lazydocker"
     "helm" "helmfile" "kustomize" "sops" "go-yq" "neovim" "yarn" "unzip"
     "go-task" "fzf" "docker" "docker-compose" "kind" "kubectl" "azure-cli"
-    "cilium-cli" "k9s" "github-cli"
+    "cilium-cli" "k9s" "github-cli" "dyff"
   )
   
   wsl_packages=(
@@ -115,6 +115,17 @@ install_manual_bins() {
     # OhMyZsh
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
+    # zsh-syntax-highlighting
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git
+
+    # win32yank
+    logStep "Installing Win32Yank"
+    curl https://github.com/equalsraf/win32yank/releases/download/v0.1.1/win32yank-x64.zip
+    unzip win32yank-x64.zip
+    chmod +x win32yank.exe
+    sudo mv win32yank.exe /usr/bin/
+    rm win32yank-x64.zip
+
     # Install Google Cloud CLI
     logStep "Installing Google Cloud CLI"
     curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-linux-x86_64.tar.gz
@@ -127,6 +138,21 @@ install_manual_bins() {
         logStep "${GREEN}Google Cloud CLI already in .zshrc${NC}"
     fi
     rm google-cloud-cli-linux-x86_64.tar.gz
+
+    # zsh-syntax-highlighting
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git
+
+    # kubectl krew
+    logStep "Installing Kubectl-krew"
+    (
+      set -x; cd "$(mktemp -d)" &&
+      OS="$(uname | tr '[:upper:]' '[:lower:]')" &&
+      ARCH="$(uname -m | sed -e 's/x86_64/amd64/' -e 's/\(arm\)\(64\)\?.*/\1\2/' -e 's/aarch64$/arm64/')" &&
+      KREW="krew-${OS}_${ARCH}" &&
+      curl -fsSLO "https://github.com/kubernetes-sigs/krew/releases/latest/download/${KREW}.tar.gz" &&
+      tar zxvf "${KREW}.tar.gz" &&
+      ./"${KREW}" install krew
+    )
 
     # Tmux TPM Installation
     logStep "Installing Tmux Plugin Manager (TPM)"
