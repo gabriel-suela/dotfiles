@@ -87,6 +87,7 @@ create_symlinks() {
     # Detect if running in WSL
     if grep -qi "microsoft" /proc/version || uname -r | grep -qi "microsoft"; then
         [[ -L ~/.config/.gitconfig ]] || ln -sf ~/dotfiles/.gitconfig ~/
+        [[ -L ~/.gnupg/gpg-agent.conf ]] || ln -sf ~/dotfiles/gpg-agent.conf ~/.gnupg/gpg-agent.conf
         [[ -L ~/.config/.zshrc ]] || ln -sf ~/dotfiles/.zshrc ~/
         [[ -L ~/.config/starship/starship.toml ]] || ln -sf ~/dotfiles/starship/starship.toml ~/.config/
         [[ -L ~/.config/zshrc ]] || ln -sf ~/dotfiles/zshrc ~/.config/
@@ -98,6 +99,7 @@ create_symlinks() {
         [[ -L ~/.config/i3 ]] || ln -sf ~/dotfiles/i3 ~/.config/
         [[ -L ~/.config/picom ]] || ln -sf ~/dotfiles/picom ~/.config/
         [[ -L ~/.config/dunst ]] || ln -sf ~/dotfiles/dunst ~/.config/
+        [[ -L ~/.gnupg/gpg-agent.conf ]] || ln -sf ~/dotfiles/gpg-agent.conf ~/.gnupg/gpg-agent.conf
         [[ -L ~/.config/rofi ]] || ln -sf ~/dotfiles/rofi ~/.config/
         [[ -d ~/.config/alacritty ]] || ln -sf ~/dotfiles/alacritty/ ~/.config/
         [[ -L ~/.config/.gitconfig ]] || ln -sf ~/dotfiles/.gitconfig ~/
