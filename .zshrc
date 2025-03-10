@@ -5,6 +5,7 @@ export EDITOR=nvim
 export PATH="/usr/lib/ccache/bin/:$PATH"
 export PATH=$HOME/bin:$HOME/.local/bin:$HOME/.local/scripts:${KREW_ROOT:-$HOME/.krew}/bin:$PATH
 export ZSH="$HOME/.oh-my-zsh"
+HELM_DIFF_THREE_WAY_MERGE=true
 
 # Autostart from tty if im running a WM without a LM
 if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
@@ -53,7 +54,7 @@ alias sopsei="sops --encrypt --in-place"
 
 # WSL
 if [[ -n "$WSL_DISTRO_NAME" ]]; then
-  export BROWSER="/mnt/c/Program Files/Google/Chrome/Application/chrome.exe"
+  export BROWSER="/mnt/c/Program Files/Zen Browser/zen.exe"
 fi
 
 # -----------------------------------------------------
