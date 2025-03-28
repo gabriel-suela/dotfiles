@@ -5,7 +5,7 @@ export EDITOR=nvim
 export PATH="/usr/lib/ccache/bin/:$PATH"
 export PATH=$HOME/bin:$HOME/.local/bin:$HOME/.local/scripts:${KREW_ROOT:-$HOME/.krew}/bin:$PATH
 export ZSH="$HOME/.oh-my-zsh"
-HELM_DIFF_THREE_WAY_MERGE=true
+export HELM_DIFF_THREE_WAY_MERGE=true
 
 # Autostart from tty if im running a WM without a LM
 if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
@@ -26,6 +26,7 @@ plugins=(
 source $ZSH/oh-my-zsh.sh
 source /home/suela/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
+#export PS1="\n$PS1"
 # .zshrc
 fpath+=($HOME/.zsh/pure)
 autoload -U promptinit; promptinit
@@ -54,7 +55,7 @@ alias sopsei="sops --encrypt --in-place"
 
 # WSL
 if [[ -n "$WSL_DISTRO_NAME" ]]; then
-  export BROWSER="/mnt/c/Program Files/Zen Browser/zen.exe"
+  export BROWSER="/mnt/c/Program Files/Google/Chrome/Application/chrome.exe"
 fi
 
 # -----------------------------------------------------
