@@ -2,8 +2,8 @@
 size = 10.5
 
 [font.normal]
-family = "Iosevka Term"
-# family = "JetBrains Mono Nerd Font"
+# family = "Iosevka Term"
+family = "JetBrains Mono Nerd Font"
 #family = "MesloLGS Nerd Font"
 #family = "FantasqueSansM Nerd Font"
 #family = "FiraCode Nerd Font"
