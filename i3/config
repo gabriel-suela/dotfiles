@@ -9,6 +9,7 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec --no-startup-id nm-applet
 exec --no-startup-id greenclip daemon & 
 exec --no-startup-id feh --bg-fill ~/Pictures/7fh7uau5rfje1.jpeg
+exec --no-startup-id xrandr --output DisplayPort-1 --mode 2560x1440 --rate 75
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
@@ -28,7 +29,7 @@ floating_modifier $mod
 # or left-clicking anywhere into the window while holding the floating modifier.
 tiling_drag modifier titlebar
 #default_border none
-default_border pixel 2
+default_border pixel 1
 default_floating_border pixel 2
 
 #GRUVBOX COLOR SCHEME

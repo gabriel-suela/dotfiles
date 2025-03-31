@@ -26,6 +26,20 @@ clone_repo() {
 }
 
 
+install_yay() {
+    if ! command -v yay &>/dev/null; then
+        logStep "Installing yay..."
+        sudo pacman -S --needed base-devel git
+        git clone https://aur.archlinux.org/yay.git
+        cd yay || exit 
+        makepkg -si
+        cd .. && rm -rf yay
+    else
+        logStep "${GREEN}yay is already installed${NC}"
+    fi
+}
+
+
 # Packages to install
 download_packages() {
   common_packages=(
@@ -52,18 +66,6 @@ download_packages() {
   fi
 }
 
-install_yay() {
-    if ! command -v yay &>/dev/null; then
-        logStep "Installing yay..."
-        sudo pacman -S --needed base-devel git
-        git clone https://aur.archlinux.org/yay.git
-        cd yay || exit 
-        makepkg -si
-        cd .. && rm -rf yay
-    else
-        logStep "${GREEN}yay is already installed${NC}"
-    fi
-}
 
 update_yay() {
     logStep "Updating yay"
@@ -108,6 +110,7 @@ create_symlinks() {
         [[ -d ~/.config/tmux ]] || ln -sf ~/dotfiles/tmux/ ~/.config/
         mkdir -p ~/.local/scripts/
         [[ -L ~/.local/scripts/tmux-sessionizer ]] || ln -sf ~/dotfiles/scripts/tmux-sessionizer ~/.local/scripts/
+        [[ -L ~/.local/scripts/sysmaintence.sh ]] || ln -sf ~/dotfiles/scripts/sysmaintence.sh ~/.local/scripts/
     fi
 }
 
@@ -183,8 +186,8 @@ poping_sound() {
 
 # Main Execution
 clone_repo
-download_packages
 install_yay
+download_packages
 update_yay
 install_packages
 install_manual_bins
