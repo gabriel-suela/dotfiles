@@ -26,6 +26,9 @@ plugins=(
 source $ZSH/oh-my-zsh.sh
 source /home/suela/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
+# dotbins - Add platform-specific binaries to PATH
+source "$HOME/.dotbins/shell/zsh.sh"
+
 #export PS1="\n$PS1"
 # .zshrc
 fpath+=($HOME/.zsh/pure)
@@ -48,6 +51,7 @@ bindkey -s ^f "tmux-sessionizer\n"
 alias lt='eza -a --tree --level=1 --icons'
 alias v='$EDITOR'
 alias vim='$EDITOR'
+alias dbsync="GITHUB_TOKEN=$(gh auth token) dotbins sync"
 alias task="go-task"
 alias sopsd="sops --decrypt" 
 alias sopsdi="sops --decrypt --in-place" 

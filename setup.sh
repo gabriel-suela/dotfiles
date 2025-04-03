@@ -43,10 +43,7 @@ install_yay() {
 # Packages to install
 download_packages() {
   common_packages=(
-    "zoxide" "ripgrep" "tmux" "python" "python-pip" "lazygit" "lazydocker"
-    "helm" "helmfile" "kustomize" "sops" "go-yq" "neovim" "yarn" "unzip"
-    "go-task" "fzf" "docker" "docker-compose" "kind" "kubectl" "azure-cli"
-    "cilium-cli" "k9s" "github-cli" "dyff"
+    "ripgrep" "tmux" "python" "python-pip" "neovim" "yarn" "unzip" "docker" "docker-compose" "kubectl" "github-cli" 
   )
   
   wsl_packages=(
@@ -146,6 +143,12 @@ install_manual_bins() {
 
     # zsh-syntax-highlighting
     git clone https://github.com/zsh-users/zsh-syntax-highlighting.git
+
+    logStep "Installing uv package manager"
+    curl -LsSf https://astral.sh/uv/install.sh | sh
+
+    logStep "Installing dotbins"
+    uv tool install dotbins
 
     # kubectl krew
     logStep "Installing Kubectl-krew"
