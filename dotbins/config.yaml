@@ -1,0 +1,22 @@
+plataforms:
+  linux:
+    - amd64
+tools:
+  zoxide: ajeetdsouza/zoxide
+  fzf: junegunn/fzf
+  kubectl-krew:
+    repo: kubernetes-sigs/krew
+    extract_archive: true
+    path_in_archive: krew-linux_amd64
+  dyff: homeport/dyff
+  helmfile: helmfile/helmfile
+  kustomize: kubernetes-sigs/kustomize
+  sops: getsops/sops
+  cilium: cilium/cilium-cli
+  lazygit: jesseduffield/lazygit
+  lazydocker: jesseduffield/lazydocker
+  kind: kubernetes-sigs/kind
+  task: go-task/task
+  yq: mikefarah/yq
+  # helm: helm/helm
+  k9s: derailed/k9s

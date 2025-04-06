@@ -8,7 +8,7 @@ exec --no-startup-id dunst
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec --no-startup-id nm-applet
 exec --no-startup-id greenclip daemon & 
-exec --no-startup-id feh --bg-fill ~/Pictures/7fh7uau5rfje1.jpeg
+exec --no-startup-id feh --bg-fill ~/Pictures/open.png
 exec --no-startup-id xrandr --output DisplayPort-1 --mode 2560x1440 --rate 75
 
 # Use pactl to adjust volume in PulseAudio.
