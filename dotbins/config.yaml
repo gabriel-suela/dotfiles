@@ -18,5 +18,4 @@ tools:
   kind: kubernetes-sigs/kind
   task: go-task/task
   yq: mikefarah/yq
-  # helm: helm/helm
   k9s: derailed/k9s

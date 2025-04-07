@@ -52,7 +52,6 @@ alias lt='eza -a --tree --level=1 --icons'
 alias v='$EDITOR'
 alias vim='$EDITOR'
 alias dbsync="GITHUB_TOKEN=$(gh auth token) dotbins sync"
-alias task="go-task"
 alias sopsd="sops --decrypt" 
 alias sopsdi="sops --decrypt --in-place" 
 alias sopsei="sops --encrypt --in-place" 
@@ -81,10 +80,10 @@ fi
 unset __mamba_setup
 # <<< mamba initialize <<<
 
+source /home/suela/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/home/suela/google-cloud-sdk/path.zsh.inc' ]; then . '/home/suela/google-cloud-sdk/path.zsh.inc'; fi
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/home/suela/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/suela/google-cloud-sdk/completion.zsh.inc'; fi
-
-source /home/suela/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
