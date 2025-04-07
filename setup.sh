@@ -1,7 +1,7 @@
 #!/bin/bash
 
 REPO_URL="https://github.com/gabriel-suela/dotfiles.git"
-REPO_DIR="~/"
+REPO_DIR="~/dotfiles"
 
 # Colors and Emoji
 GREEN='\033[00;32m'
@@ -29,7 +29,7 @@ clone_repo() {
 install_yay() {
     if ! command -v yay &>/dev/null; then
         logStep "Installing yay..."
-        sudo pacman -S --needed base-devel git
+        sudo pacman -S base-devel git
         git clone https://aur.archlinux.org/yay.git
         cd yay || exit 
         makepkg -si
@@ -43,7 +43,7 @@ install_yay() {
 # Packages to install
 download_packages() {
   common_packages=(
-    "ripgrep" "tmux" "python" "python-pip" "neovim" "yarn" "unzip" "docker" "docker-compose" "kubectl" "github-cli" 
+    "ripgrep" "tmux" "python" "python-pip" "neovim" "yarn" "unzip" "docker" "docker-compose" "kubectl" "github-cli" "zsh"
   )
   
   wsl_packages=(
@@ -89,22 +89,28 @@ create_symlinks() {
         [[ -L ~/.gnupg/gpg-agent.conf ]] || ln -sf ~/dotfiles/gpg-agent.conf ~/.gnupg/gpg-agent.conf
         [[ -L ~/.config/.zshrc ]] || ln -sf ~/dotfiles/.zshrc ~/
         [[ -L ~/.config/starship/starship.toml ]] || ln -sf ~/dotfiles/starship/starship.toml ~/.config/
+        [[ -L ~/.gnupg/gpg-agent.conf ]] || ln -sf ~/dotfiles/gpg-agent.conf ~/.gnupg/gpg-agent.conf
+        [[ -L ~/.gnupg/gpg.conf ]] || ln -sf ~/dotfiles/gpg.conf ~/.gnupg/gpg.conf
         [[ -L ~/.config/zshrc ]] || ln -sf ~/dotfiles/zshrc ~/.config/
         [[ -d ~/.config/tmux ]] || ln -sf ~/dotfiles/tmux/ ~/.config/
         mkdir -p ~/.local/scripts/
         [[ -L ~/.local/scripts/tmux-sessionizer ]] || ln -sf ~/dotfiles/scripts/tmux-sessionizer ~/.local/scripts/
+        [[ -L ~/.local/scripts/sysmaintence.sh ]] || ln -sf ~/dotfiles/scripts/sysmaintence.sh ~/.local/scripts/
 
     else
         [[ -L ~/.config/i3 ]] || ln -sf ~/dotfiles/i3 ~/.config/
         [[ -L ~/.config/picom ]] || ln -sf ~/dotfiles/picom ~/.config/
         [[ -L ~/.config/dunst ]] || ln -sf ~/dotfiles/dunst ~/.config/
         [[ -L ~/.gnupg/gpg-agent.conf ]] || ln -sf ~/dotfiles/gpg-agent.conf ~/.gnupg/gpg-agent.conf
+        [[ -L ~/.gnupg/gpg.conf ]] || ln -sf ~/dotfiles/gpg.conf ~/.gnupg/gpg.conf
         [[ -L ~/.config/rofi ]] || ln -sf ~/dotfiles/rofi ~/.config/
         [[ -d ~/.config/alacritty ]] || ln -sf ~/dotfiles/alacritty/ ~/.config/
         [[ -L ~/.config/.gitconfig ]] || ln -sf ~/dotfiles/.gitconfig ~/
         [[ -L ~/.config/.zshrc ]] || ln -sf ~/dotfiles/.zshrc ~/
         [[ -L ~/.config/zshrc ]] || ln -sf ~/dotfiles/zshrc ~/.config/
         [[ -d ~/.config/tmux ]] || ln -sf ~/dotfiles/tmux/ ~/.config/
+        [[ -L ~/.config/dotbins ]] || ln -sf ~/dotfiles/dotbins ~/.config
+
         mkdir -p ~/.local/scripts/
         [[ -L ~/.local/scripts/tmux-sessionizer ]] || ln -sf ~/dotfiles/scripts/tmux-sessionizer ~/.local/scripts/
         [[ -L ~/.local/scripts/sysmaintence.sh ]] || ln -sf ~/dotfiles/scripts/sysmaintence.sh ~/.local/scripts/
@@ -119,14 +125,6 @@ install_manual_bins() {
 
     # zsh-syntax-highlighting
     git clone https://github.com/zsh-users/zsh-syntax-highlighting.git
-
-    # win32yank
-    logStep "Installing Win32Yank"
-    curl https://github.com/equalsraf/win32yank/releases/download/v0.1.1/win32yank-x64.zip
-    unzip win32yank-x64.zip
-    chmod +x win32yank.exe
-    sudo mv win32yank.exe /usr/bin/
-    rm win32yank-x64.zip
 
     # Install Google Cloud CLI
     logStep "Installing Google Cloud CLI"
@@ -149,18 +147,6 @@ install_manual_bins() {
 
     logStep "Installing dotbins"
     uv tool install dotbins
-
-    # kubectl krew
-    logStep "Installing Kubectl-krew"
-    (
-      set -x; cd "$(mktemp -d)" &&
-      OS="$(uname | tr '[:upper:]' '[:lower:]')" &&
-      ARCH="$(uname -m | sed -e 's/x86_64/amd64/' -e 's/\(arm\)\(64\)\?.*/\1\2/' -e 's/aarch64$/arm64/')" &&
-      KREW="krew-${OS}_${ARCH}" &&
-      curl -fsSLO "https://github.com/kubernetes-sigs/krew/releases/latest/download/${KREW}.tar.gz" &&
-      tar zxvf "${KREW}.tar.gz" &&
-      ./"${KREW}" install krew
-    )
 
     # Tmux TPM Installation
     logStep "Installing Tmux Plugin Manager (TPM)"
@@ -188,7 +174,7 @@ poping_sound() {
 }
 
 # Main Execution
-#clone_repo
+clone_repo
 install_yay
 download_packages
 update_yay
