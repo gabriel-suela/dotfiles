@@ -16,6 +16,10 @@ tools:
   lazygit: jesseduffield/lazygit
   lazydocker: jesseduffield/lazydocker
   kind: kubernetes-sigs/kind
+  openbao:
+    repo: openbao/openbao
+    extract_archive: true
+    path_in_archive: bao
   task: go-task/task
   yq: mikefarah/yq
   k9s: derailed/k9s
