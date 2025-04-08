@@ -46,6 +46,7 @@ alias lt='eza -a --tree --level=1 --icons'
 alias v='$EDITOR'
 alias vim='$EDITOR'
 alias dbsync="GITHUB_TOKEN=$(gh auth token) dotbins sync"
+alias k="kubectl"
 
 # WSL
 if [[ -n "$WSL_DISTRO_NAME" ]]; then
