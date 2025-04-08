@@ -2,9 +2,7 @@
 # INIT
 # -----------------------------------------------------
 export EDITOR=nvim
-export PATH="/usr/lib/ccache/bin/:$PATH"
-export PATH=$HOME/bin:$HOME/.local/bin:$HOME/.local/scripts:${KREW_ROOT:-$HOME/.krew}/bin:$PATH
-export ZSH="$HOME/.oh-my-zsh"
+export PATH="/usr/lib/ccache/bin:$HOME/bin:$HOME/.local/bin:$HOME/.local/scripts:${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 export HELM_DIFF_THREE_WAY_MERGE=true
 
 # Autostart from tty if im running a WM without a LM
@@ -21,10 +19,6 @@ plugins=(
     copybuffer
     dirhistory
 )
-
-# Set-up oh-my-zsh
-source $ZSH/oh-my-zsh.sh
-source /home/suela/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # dotbins - Add platform-specific binaries to PATH
 source "$HOME/.dotbins/shell/zsh.sh"
@@ -52,9 +46,6 @@ alias lt='eza -a --tree --level=1 --icons'
 alias v='$EDITOR'
 alias vim='$EDITOR'
 alias dbsync="GITHUB_TOKEN=$(gh auth token) dotbins sync"
-alias sopsd="sops --decrypt" 
-alias sopsdi="sops --decrypt --in-place" 
-alias sopsei="sops --encrypt --in-place" 
 
 # WSL
 if [[ -n "$WSL_DISTRO_NAME" ]]; then
@@ -79,8 +70,6 @@ else
 fi
 unset __mamba_setup
 # <<< mamba initialize <<<
-
-source /home/suela/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/home/suela/google-cloud-sdk/path.zsh.inc' ]; then . '/home/suela/google-cloud-sdk/path.zsh.inc'; fi

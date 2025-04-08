@@ -1,186 +1,212 @@
 #!/bin/bash
 
+# Configuration
 REPO_URL="https://github.com/gabriel-suela/dotfiles.git"
-REPO_DIR="~/dotfiles"
+REPO_DIR="$HOME/dotfiles"
 
-# Colors and Emoji
-GREEN='\033[00;32m'
+# Colors and formatting
+GREEN='\033[0;32m'
+RED='\033[0;31m'
+CYAN='\033[0;36m'
 NC='\033[0m'
-RED='\033[00;31m'
-CYAN='\033[00;36m'
-SEA="\\033[38;5;49m"
-ARROW="${SEA}\xE2\x96\xB6${NC}"
+ARROW="\033[1;36m→${NC}"
 
-logStep() {
+# Detect environment
+IS_WSL=false
+if grep -qi "microsoft" /proc/version || uname -r | grep -qi "microsoft"; then
+    IS_WSL=true
+fi
+
+# Helper functions
+log_step() {
     echo -e "${CYAN}==> ${1}${NC}"
 }
 
-# Clone the repository if it doesn't exist already
-clone_repo() {
-    if [[ ! -d "$REPO_DIR" ]]; then
-        logStep "Cloning repository from $REPO_URL"
-        git clone "$REPO_URL"
-    else
-        logStep "${GREEN}Repository already exists. Skipping clone.${NC}"
+log_success() {
+    echo -e "${GREEN}✓ ${1}${NC}"
+}
+
+log_error() {
+    echo -e "${RED}✗ ${1}${NC}"
+}
+
+run_cmd() {
+    echo -e "${ARROW} ${CYAN}Running: ${1}${NC}"
+    eval "$1"
+    if [ $? -ne 0 ]; then
+        log_error "Command failed: $1"
+        exit 1
     fi
 }
 
+# Main functions
+clone_repo() {
+    if [ ! -d "$REPO_DIR" ]; then
+        log_step "Cloning dotfiles repository"
+        run_cmd "git clone $REPO_URL $REPO_DIR"
+    else
+        log_success "Dotfiles repository already exists"
+    fi
+}
 
 install_yay() {
-    if ! command -v yay &>/dev/null; then
-        logStep "Installing yay..."
-        sudo pacman -S base-devel git
-        git clone https://aur.archlinux.org/yay.git
-        cd yay || exit 
-        makepkg -si
-        cd .. && rm -rf yay
+    if ! command -v yay &> /dev/null; then
+        log_step "Installing yay (AUR helper)"
+        run_cmd "sudo pacman -S --needed --noconfirm base-devel git"
+        run_cmd "git clone https://aur.archlinux.org/yay.git /tmp/yay"
+        run_cmd "cd /tmp/yay && makepkg -si --noconfirm"
+        run_cmd "rm -rf /tmp/yay"
     else
-        logStep "${GREEN}yay is already installed${NC}"
+        log_success "yay is already installed"
     fi
-}
-
-
-# Packages to install
-download_packages() {
-  common_packages=(
-    "ripgrep" "tmux" "python" "python-pip" "neovim" "yarn" "unzip" "docker" "docker-compose" "kubectl" "github-cli" "zsh"
-  )
-  
-  wsl_packages=(
-    "zsh"
-  )
-  
-  non_wsl_packages=(
-    "tandem-chat" "stremio" "apple-fonts" "ttf-jetbrains-mono-nerd"
-    "flameshot" "google-chrome" "bitwarden" "alacritty"
-  )
-
-  # Choose packages based on the environment (WSL or not)
-  if grep -qi "microsoft" /proc/version || uname -r | grep -qi "microsoft"; then
-    packages=("${common_packages[@]}" "${wsl_packages[@]}")
-  else
-    packages=("${common_packages[@]}" "${non_wsl_packages[@]}")
-  fi
-}
-
-
-update_yay() {
-    logStep "Updating yay"
-    yay -Syu
 }
 
 install_packages() {
-    logStep "Installing packages"
-    for package in "${packages[@]}"; do
-        if ! yay -Q "$package" &>/dev/null; then
-            yay -S --noconfirm "$package"
+    local common_packages=(
+        ripgrep tmux python python-pip neovim yarn unzip 
+        docker docker-compose kubectl github-cli zsh
+    )
+    
+    local wsl_packages=(
+        # Additional WSL-specific packages
+    )
+    
+    local desktop_packages=(
+        flameshot google-chrome bitwarden alacritty
+        ttf-jetbrains-mono-nerd
+    )
+
+    local packages=("${common_packages[@]}")
+    
+    if $IS_WSL; then
+        packages+=("${wsl_packages[@]}")
+    else
+        packages+=("${desktop_packages[@]}")
+    fi
+
+    log_step "Installing system packages"
+    run_cmd "yay -Syu --noconfirm"
+    
+    for pkg in "${packages[@]}"; do
+        if ! yay -Qi "$pkg" &> /dev/null; then
+            run_cmd "yay -S --noconfirm $pkg"
         else
-            logStep "${GREEN}$package is already installed${NC}"
+            log_success "$pkg is already installed"
         fi
     done
 }
 
-create_symlinks() {
-    logStep "Creating symlinks"
+setup_symlinks() {
+    log_step "Setting up configuration symlinks"
+    
+    # Common symlinks for both environments
+    local common_links=(
+        ".gitconfig"
+        ".zshrc"
+        ".gnupg/gpg-agent.conf"
+        ".config/dotbins"
+        ".gnupg/gpg.conf"
+        ".config/tmux"
+        ".local/scripts/tmux-sessionizer"
+        ".local/scripts/sysmaintence.sh"
+    )
+    
+    # Desktop-only symlinks
+    if ! $IS_WSL; then
+        common_links+=(
+            ".config/i3"
+            ".config/picom"
+            ".config/dunst"
+            ".config/rofi"
+            ".config/alacritty"
+        )
+    fi
+    
+    # Create directories first
+    run_cmd "mkdir -p $HOME/.config $HOME/.local/scripts $HOME/.gnupg"
+    
+    # Create symlinks
+    for link in "${common_links[@]}"; do
+        local src="$REPO_DIR/${link##*/}"
+        local dest="$HOME/$link"
+        
+        # Handle directory symlinks
+        if [[ "$link" == */ ]]; then
+            src="$REPO_DIR/${link%/}"
+        fi
+        
+        if [ ! -e "$dest" ]; then
+            run_cmd "ln -sf $src $dest"
+        else
+            log_success "$dest already exists"
+        fi
+    done
+}
 
-    # Detect if running in WSL
-    if grep -qi "microsoft" /proc/version || uname -r | grep -qi "microsoft"; then
-        [[ -L ~/.config/.gitconfig ]] || ln -sf ~/dotfiles/.gitconfig ~/
-        [[ -L ~/.gnupg/gpg-agent.conf ]] || ln -sf ~/dotfiles/gpg-agent.conf ~/.gnupg/gpg-agent.conf
-        [[ -L ~/.config/.zshrc ]] || ln -sf ~/dotfiles/.zshrc ~/
-        [[ -L ~/.config/starship/starship.toml ]] || ln -sf ~/dotfiles/starship/starship.toml ~/.config/
-        [[ -L ~/.gnupg/gpg-agent.conf ]] || ln -sf ~/dotfiles/gpg-agent.conf ~/.gnupg/gpg-agent.conf
-        [[ -L ~/.gnupg/gpg.conf ]] || ln -sf ~/dotfiles/gpg.conf ~/.gnupg/gpg.conf
-        [[ -L ~/.config/zshrc ]] || ln -sf ~/dotfiles/zshrc ~/.config/
-        [[ -d ~/.config/tmux ]] || ln -sf ~/dotfiles/tmux/ ~/.config/
-        mkdir -p ~/.local/scripts/
-        [[ -L ~/.local/scripts/tmux-sessionizer ]] || ln -sf ~/dotfiles/scripts/tmux-sessionizer ~/.local/scripts/
-        [[ -L ~/.local/scripts/sysmaintence.sh ]] || ln -sf ~/dotfiles/scripts/sysmaintence.sh ~/.local/scripts/
-
+install_additional_tools() {
+    log_step "Installing additional tools"
+    
+    # Google Cloud CLI
+    if [ ! -d "$HOME/google-cloud-sdk" ]; then
+        run_cmd "curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-linux-x86_64.tar.gz"
+        run_cmd "tar -xf google-cloud-cli-linux-x86_64.tar.gz -C $HOME"
+        run_cmd "$HOME/google-cloud-sdk/install.sh --quiet"
+        run_cmd "rm google-cloud-cli-linux-x86_64.tar.gz"
+        
+        if ! grep -q "google-cloud-sdk" "$HOME/.zshrc"; then
+            echo 'export PATH="$HOME/google-cloud-sdk/bin:$PATH"' >> "$HOME/.zshrc"
+        fi
     else
-        [[ -L ~/.config/i3 ]] || ln -sf ~/dotfiles/i3 ~/.config/
-        [[ -L ~/.config/picom ]] || ln -sf ~/dotfiles/picom ~/.config/
-        [[ -L ~/.config/dunst ]] || ln -sf ~/dotfiles/dunst ~/.config/
-        [[ -L ~/.gnupg/gpg-agent.conf ]] || ln -sf ~/dotfiles/gpg-agent.conf ~/.gnupg/gpg-agent.conf
-        [[ -L ~/.gnupg/gpg.conf ]] || ln -sf ~/dotfiles/gpg.conf ~/.gnupg/gpg.conf
-        [[ -L ~/.config/rofi ]] || ln -sf ~/dotfiles/rofi ~/.config/
-        [[ -d ~/.config/alacritty ]] || ln -sf ~/dotfiles/alacritty/ ~/.config/
-        [[ -L ~/.config/.gitconfig ]] || ln -sf ~/dotfiles/.gitconfig ~/
-        [[ -L ~/.config/.zshrc ]] || ln -sf ~/dotfiles/.zshrc ~/
-        [[ -L ~/.config/zshrc ]] || ln -sf ~/dotfiles/zshrc ~/.config/
-        [[ -d ~/.config/tmux ]] || ln -sf ~/dotfiles/tmux/ ~/.config/
-        [[ -L ~/.config/dotbins ]] || ln -sf ~/dotfiles/dotbins ~/.config
-
-        mkdir -p ~/.local/scripts/
-        [[ -L ~/.local/scripts/tmux-sessionizer ]] || ln -sf ~/dotfiles/scripts/tmux-sessionizer ~/.local/scripts/
-        [[ -L ~/.local/scripts/sysmaintence.sh ]] || ln -sf ~/dotfiles/scripts/sysmaintence.sh ~/.local/scripts/
+        log_success "Google Cloud SDK already installed"
+    fi
+    
+    # Pure Zsh theme
+    if [ ! -d "$HOME/.zsh/pure" ]; then
+        run_cmd "git clone https://github.com/sindresorhus/pure.git $HOME/.zsh/pure"
+    fi
+    
+    # Tmux Plugin Manager
+    if [ ! -d "$HOME/.tmux/plugins/tpm" ]; then
+        run_cmd "git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm"
+    fi
+    
+    # UV package manager
+    if ! command -v uv &> /dev/null; then
+        run_cmd "curl -LsSf https://astral.sh/uv/install.sh | sh"
     fi
 }
 
-install_manual_bins() {
-    logStep "Installing manual bins"
-
-    # OhMyZsh
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-
-    # zsh-syntax-highlighting
-    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git
-
-    # Install Google Cloud CLI
-    logStep "Installing Google Cloud CLI"
-    curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-linux-x86_64.tar.gz
-    tar -xf google-cloud-cli-linux-x86_64.tar.gz -C ~
-    ~/google-cloud-sdk/install.sh
-    if ! grep -q "google-cloud-sdk" ~/.zshrc; then
-        echo 'export PATH="$HOME/google-cloud-sdk/bin:$PATH"' >> ~/.zshrc
-        logStep "Added Google Cloud CLI to .zshrc"
-    else
-        logStep "${GREEN}Google Cloud CLI already in .zshrc${NC}"
+post_install_tasks() {
+    log_step "Running post-install tasks"
+    
+    # Docker without sudo
+    if ! $IS_WSL; then
+        if ! groups | grep -q docker; then
+            run_cmd "sudo usermod -aG docker $USER"
+            log_success "Added user to docker group (requires logout/reboot)"
+        fi
     fi
-    rm google-cloud-cli-linux-x86_64.tar.gz
-
-    # zsh-syntax-highlighting
-    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git
-
-    logStep "Installing uv package manager"
-    curl -LsSf https://astral.sh/uv/install.sh | sh
-
-    logStep "Installing dotbins"
-    uv tool install dotbins
-
-    # Tmux TPM Installation
-    logStep "Installing Tmux Plugin Manager (TPM)"
-    if [[ ! -d ~/.tmux/plugins/tpm ]]; then
-        git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-        logStep "TPM installed successfully"
-    else
-        logStep "${GREEN}TPM already installed${NC}"
+    
+    # Audio power saving fix (desktop only)
+    if ! $IS_WSL; then
+        if [ ! -f "/etc/modprobe.d/audio_disable_powersave.conf" ]; then
+            echo "options snd_hda_intel power_save=0" | sudo tee /etc/modprobe.d/audio_disable_powersave.conf >/dev/null
+        fi
     fi
-
-    logStep "Zsh Pure Theme"
-    mkdir -p "$HOME/.zsh"
-    git clone https://github.com/sindresorhus/pure.git "$HOME/.zsh/pure"
 }
 
-docker_without_sudo() {
-    logStep "Adding user to docker group"
-    sudo usermod -aG docker "$USER"
-    echo -e "${ARROW} ${CYAN}Please reboot your computer to complete this setup.${NC}"
+main() {
+    echo -e "\n${CYAN}Starting Arch Linux setup${NC}\n"
+    
+    clone_repo
+    install_yay
+    install_packages
+    setup_symlinks
+    install_additional_tools
+    post_install_tasks
+    
+    echo -e "\n${GREEN}Setup completed successfully!${NC}"
+    echo -e "${CYAN}Note: Some changes may require a logout/reboot to take effect.${NC}\n"
 }
 
-poping_sound() {
-  echo "0" | sudo tee /sys/module/snd_hda_intel/parameters/power_save
-  echo "options snd_hda_intel power_save=0" | sudo tee -a /etc/modprobe.d/audio_disable_powersave.conf
-}
-
-# Main Execution
-clone_repo
-install_yay
-download_packages
-update_yay
-install_packages
-install_manual_bins
-create_symlinks
-docker_without_sudo
-poping_sound
-
+main
