@@ -37,6 +37,24 @@ gcof() {
 
 }
 
+
+#
+HISTFILE=~/.history
+HISTSIZE=100000
+SAVEHIST=100000
+setopt inc_append_history
+bindkey "\e[A" history-beginning-search-backward
+bindkey "\e[B" history-beginning-search-forward
+autoload -U compinit && compinit
+
+bindkey '^[f' forward-word
+bindkey '^[b' backward-word
+
+alias ls='ls --color=auto -hv'
+alias grep='grep --color=auto'
+alias diff='diff --color=auto'
+alias ip='ip -c=auto'
+
 # -----------------------------------------------------
 # Set-up FZF key bindings (CTRL R for fuzzy history finder)
 # -----------------------------------------------------
