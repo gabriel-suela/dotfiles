@@ -164,6 +164,11 @@ install_additional_tools() {
     if [ ! -d "$HOME/.zsh/pure" ]; then
         run_cmd "git clone https://github.com/sindresorhus/pure.git $HOME/.zsh/pure"
     fi
+
+    # zsh-syntax-highlighting
+    if [ ! -d "$HOME/zsh-syntax-highlighting/" ]; then
+      run_cmd "git clone https://github.com/zsh-users/zsh-syntax-highlighting.git"
+    fi
     
     # Tmux Plugin Manager
     if [ ! -d "$HOME/.tmux/plugins/tpm" ]; then
