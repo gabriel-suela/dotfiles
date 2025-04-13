@@ -71,8 +71,9 @@ bindkey "\e[A" history-beginning-search-backward
 bindkey "\e[B" history-beginning-search-forward
 autoload -U compinit && compinit
 
-bindkey '^[f' forward-word
-bindkey '^[b' backward-word
+bindkey '^[[1;5C' emacs-forward-word
+bindkey '^[[1;5D' emacs-backward-word
+bindkey "^[[3~" delete-char
 
 alias ls='ls --color=auto -hv'
 alias grep='grep --color=auto'

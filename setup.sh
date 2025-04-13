@@ -117,7 +117,7 @@ install_packages() {
 
 setup_symlinks() {
     log_step "Setting up configuration symlinks"
-    
+
     # Common symlinks for both environments
     local common_links=(
         ".gitconfig"
@@ -129,7 +129,7 @@ setup_symlinks() {
         ".local/scripts/tmux-sessionizer"
         ".local/scripts/sysmaintence.sh"
     )
-    
+
     # Desktop-only symlinks
     if ! $IS_WSL; then
         common_links+=(
@@ -140,22 +140,17 @@ setup_symlinks() {
             ".config/alacritty"
         )
     fi
-    
-    # Create directories first
-    run_cmd "mkdir -p $HOME/.config $HOME/.local/scripts $HOME/.gnupg"
-    
-    # Create symlinks
+
     for link in "${common_links[@]}"; do
-        local src="$REPO_DIR/${link##*/}"
+        local src="$REPO_DIR/$link"
         local dest="$HOME/$link"
-        
-        # Handle directory symlinks
-        if [[ "$link" == */ ]]; then
-            src="$REPO_DIR/${link%/}"
-        fi
-        
+
+        # Make sure the destination directory exists
+        run_cmd "mkdir -p $(dirname "$dest")"
+
         if [ ! -e "$dest" ]; then
             run_cmd "ln -sf $src $dest"
+            log_success "Linked $dest -> $src"
         else
             log_success "$dest already exists"
         fi
@@ -208,11 +203,11 @@ post_install_tasks() {
     log_step "Running post-install tasks"
     
     # Docker without sudo
-    if ! $IS_WSL; then
-        if ! groups | grep -q docker; then
-            run_cmd "sudo usermod -aG docker $USER"
-            log_success "Added user to docker group (requires logout/reboot)"
-        fi
+    if ! groups | grep -q docker; then
+        run_cmd "sudo usermod -aG docker $USER"
+        log_success "Added user to docker group (requires logout/reboot)"
+        run_cmd "systemctl enable docker"
+        log_success "Docker service has been enabled by default (requires logout/reboot)"
     fi
     
     # Audio power saving fix (desktop only)
