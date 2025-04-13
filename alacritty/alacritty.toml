@@ -3,6 +3,9 @@ normal = {family = "JetBrainsMono Nerd Font", style="ExtraBold"}
 size = 11.5
 offset = {x = 0, y = 0}
 
+[terminal.shell]
+program = "/bin/zsh"
+
 [window]
 #opacity = 0.90
 #opacity = 0.95
@@ -42,3 +45,5 @@ blue    = "#9cdcfe"
 magenta = "#d670d6"
 cyan    = "#9cdcfe"
 white   = "#e5e5e5"
+
+[terminal]

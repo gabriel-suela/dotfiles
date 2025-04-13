@@ -83,7 +83,7 @@ alias ip='ip -c=auto'
 # Set-up FZF key bindings (CTRL R for fuzzy history finder)
 # -----------------------------------------------------
 source <(fzf --zsh)
-bindkey -s ^f "tmux-sessionizer\n"
+bindkey -s "^F" "tmux-sessionizer\n"
 alias lt='eza -a --tree --level=1 --icons'
 alias v='$EDITOR'
 alias vim='$EDITOR'
@@ -120,3 +120,5 @@ if [ -f '/home/suela/google-cloud-sdk/path.zsh.inc' ]; then . '/home/suela/googl
 # The next line enables shell command completion for gcloud.
 if [ -f '/home/suela/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/suela/google-cloud-sdk/completion.zsh.inc'; fi
 source /home/suela/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+. "$HOME/.local/bin/env"

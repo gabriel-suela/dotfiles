@@ -1,8 +1,10 @@
 #!/bin/bash
 
 # Configuration
-REPO_URL="https://github.com/gabriel-suela/dotfiles.git"
+REPO_URL="git@github.com:gabriel-suela/dotfiles.git"
 REPO_DIR="$HOME/dotfiles"
+NVIM_REPO="git@github.com:gabriel-suela/nvim.git"
+NVIM_DIR="$HOME/.config/nvim"
 
 # Colors and formatting
 GREEN='\033[0;32m'
@@ -40,6 +42,23 @@ run_cmd() {
 }
 
 # Main functions
+#
+
+ssh_gen() {
+  log_step "Generating new ssh key"
+  ssh-keygen -t ed25519 -C "gscsuela@gmail.com"
+}
+
+clone_nvim() {
+    if [ ! -d "$NVIM_DIR" ]; then
+        log_step "Cloning nvim repository"
+        run_cmd "git clone $NVIM_REPO $NVIM_DIR"
+    else
+        log_success "Dotfiles repository already exists"
+    fi
+
+}
+
 clone_repo() {
     if [ ! -d "$REPO_DIR" ]; then
         log_step "Cloning dotfiles repository"
@@ -73,7 +92,7 @@ install_packages() {
     
     local desktop_packages=(
         flameshot google-chrome bitwarden alacritty
-        ttf-jetbrains-mono-nerd
+        ttf-jetbrains-mono-nerd arch-gaming-meta tandem-chat
     )
 
     local packages=("${common_packages[@]}")
@@ -167,7 +186,7 @@ install_additional_tools() {
 
     # zsh-syntax-highlighting
     if [ ! -d "$HOME/zsh-syntax-highlighting/" ]; then
-      run_cmd "git clone https://github.com/zsh-users/zsh-syntax-highlighting.git"
+      run_cmd "git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $HOME" 
     fi
     
     # Tmux Plugin Manager
@@ -178,6 +197,10 @@ install_additional_tools() {
     # UV package manager
     if ! command -v uv &> /dev/null; then
         run_cmd "curl -LsSf https://astral.sh/uv/install.sh | sh"
+    fi
+
+    if ! command -v nvm &> /dev/null; then
+      run_cmd "curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.2/install.sh | bash"
     fi
 }
 
@@ -203,7 +226,9 @@ post_install_tasks() {
 main() {
     echo -e "\n${CYAN}Starting Arch Linux setup${NC}\n"
     
+    ssh_gen
     clone_repo
+    clone_nvim
     install_yay
     install_packages
     setup_symlinks
