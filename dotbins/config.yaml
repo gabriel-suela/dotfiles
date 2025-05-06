@@ -11,6 +11,21 @@ tools:
   dyff: homeport/dyff
   helmfile: helmfile/helmfile
   kustomize: kubernetes-sigs/kustomize
+  github-cli: cli/cli
+  mkcert: FiloSottile/mkcert
+  rclone: rclone/rclone
+  tetragon:
+    repo: cilium/tetragon
+    extract_archive: true
+    path_in_archive: tetra
+  hubble: cilium/hubble
+  argo: argoproj/argo-workflows
+  vals: helmfile/vals
+  vcluster:
+    repo: loft-sh/vcluster
+    tag: v0.23.1
+  velero: vmware-tanzu/velero
+  micromamba: mamba-org/micromamba-releases
   sops: getsops/sops
   cilium: cilium/cilium-cli
   lazygit: jesseduffield/lazygit

@@ -88,7 +88,7 @@ bindkey -s "^F" "tmux-sessionizer\n"
 alias lt='eza -a --tree --level=1 --icons'
 alias v='$EDITOR'
 alias vim='$EDITOR'
-alias dbsync="GITHUB_TOKEN=$(gh auth token) dotbins sync"
+#alias dbsync="GITHUB_TOKEN=$(gh auth token) dotbins sync"
 alias k="kubectl"
 
 # WSL
@@ -102,18 +102,6 @@ fi
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-# >>> mamba initialize >>>
-# !! Contents within this block are managed by 'micromamba shell init' !!
-export MAMBA_EXE='/home/suela/.local/bin/micromamba';
-export MAMBA_ROOT_PREFIX='/home/suela/micromamba';
-__mamba_setup="$("$MAMBA_EXE" shell hook --shell zsh --root-prefix "$MAMBA_ROOT_PREFIX" 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__mamba_setup"
-else
-    alias micromamba="$MAMBA_EXE"  # Fallback on help from micromamba activate
-fi
-unset __mamba_setup
-# <<< mamba initialize <<<
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/home/suela/google-cloud-sdk/path.zsh.inc' ]; then . '/home/suela/google-cloud-sdk/path.zsh.inc'; fi

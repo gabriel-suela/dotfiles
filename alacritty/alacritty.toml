@@ -1,6 +1,6 @@
 [font]
-normal = {family = "JetBrainsMono Nerd Font", style="ExtraBold"}
-size = 11.5
+normal = {family = "JetBrainsMono Nerd Font", style="Bold"}
+size = 10.5
 offset = {x = 0, y = 0}
 
 [terminal.shell]
