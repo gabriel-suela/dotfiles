@@ -11,7 +11,7 @@ tools:
   dyff: homeport/dyff
   helmfile: helmfile/helmfile
   kustomize: kubernetes-sigs/kustomize
-  github-cli: cli/cli
+  gh: cli/cli
   mkcert: FiloSottile/mkcert
   rclone: rclone/rclone
   tetragon:
@@ -36,5 +36,6 @@ tools:
     extract_archive: true
     path_in_archive: bao
   task: go-task/task
+  tofu: opentofu/opentofu
   yq: mikefarah/yq
   k9s: derailed/k9s

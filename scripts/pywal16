@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+# Refresh Xresources
+ln -sf ~/.cache/wal/colors.Xresources ~/.Xresources
+cat ~/.Xresources ~/.cache/wal/xrdb_extra | xrdb -merge
+xdotool key super+ctrl+backslash
+echo "Xft.dpi: 96" | xrdb -merge
+
+# Restart dunst cleanly
+pkill dunst && setsid -f dunst
+
+# Confirmation
+notify-send "Wallpaper and colorscheme changed"

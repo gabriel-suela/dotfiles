@@ -121,6 +121,7 @@ setup_symlinks() {
     # Common symlinks for both environments
     local common_links=(
         ".gitconfig"
+        ".xprofile"
         ".zshrc"
         ".gnupg/gpg-agent.conf"
         ".config/dotbins"
@@ -128,6 +129,8 @@ setup_symlinks() {
         ".config/tmux"
         ".local/scripts/tmux-sessionizer"
         ".local/scripts/sysmaintence.sh"
+        ".local/scripts/pywal16"
+        ".local/scripts/wallpapermenu"
     )
 
     # Desktop-only symlinks

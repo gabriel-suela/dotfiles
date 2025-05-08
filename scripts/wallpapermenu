@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+FOLDER="$HOME/pics"
+SCRIPT="$HOME/.local/scripts/pywal16"
+
+# Use dmenu to pick a file
+CHOICE=$(find "$FOLDER" -type f \( -iname "*.jpg" -o -iname "*.png" \) | dmenu -i -l 10 -p "Choose wallpaper:")
+
+if [[ -n "$CHOICE" ]]; then
+    # Set wallpaper using nitrogen
+    nitrogen --set-zoom-fill "$CHOICE" --save
+
+    # Generate color scheme with wal
+    wal -i "$CHOICE"
+
+    # Run optional post-wal script
+    [[ -x "$SCRIPT" ]] && "$SCRIPT"
+else
+    echo "No wallpaper selected."
+    exit 1
+fi
