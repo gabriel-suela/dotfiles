@@ -24,6 +24,8 @@ tools:
   vcluster:
     repo: loft-sh/vcluster
     tag: v0.23.1
+    asset_patterns:
+      linux: vcluster
   velero: vmware-tanzu/velero
   micromamba: mamba-org/micromamba-releases
   sops: getsops/sops
