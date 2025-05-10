@@ -5,6 +5,7 @@ export XDG_CACHE_HOME="$HOME/.cache"
 
 
 # dwm
+xrandr --output DisplayPort-1 --mode 2560x1440 --rate 75
 dunst &
 picom &
 dwmblocks &
