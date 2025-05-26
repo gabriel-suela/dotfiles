@@ -33,7 +33,7 @@ tools:
   lazygit: jesseduffield/lazygit
   lazydocker: jesseduffield/lazydocker
   kind: kubernetes-sigs/kind
-  openbao:
+  bao:
     repo: openbao/openbao
     extract_archive: true
     path_in_archive: bao

@@ -7,6 +7,6 @@ dunst &
 picom &
 dwmblocks &
 wal -R &
-pywal16 &
+~/.local/scripts/pywal16 &
 # set bg
 feh --bg-fill "$(< "${HOME}/.cache/wal/wal")" &
