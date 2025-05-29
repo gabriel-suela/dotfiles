@@ -4,7 +4,7 @@ FOLDER="$HOME/pics"
 SCRIPT="$HOME/.local/scripts/pywal16"
 
 # Use dmenu to pick a file
-CHOICE=$(find "$FOLDER" -type f \( -iname "*.jpg" -o -iname "*.png" \) | dmenu -i -l 10 -p "Choose wallpaper:")
+CHOICE=$(find "$FOLDER" -type f \( -iname "*.jpg" -o -iname "*.png" \) | dmenu -i -c -l 10 -p "Choose wallpaper:")
 
 if [[ -n "$CHOICE" ]]; then
     # Set wallpaper using nitrogen
