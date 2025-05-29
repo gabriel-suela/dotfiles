@@ -1,4 +1,4 @@
-# -----------------------------------------------------
+#li -----------------------------------------------------
 # INIT
 # -----------------------------------------------------
 export EDITOR=nvim
@@ -76,6 +76,7 @@ bindkey '^[[1;5D' emacs-backward-word
 bindkey "^[[3~" delete-char
 
 alias ls='ls --color=auto -hv'
+alias v='nvim'
 alias grep='grep --color=auto'
 alias diff='diff --color=auto'
 alias ip='ip -c=auto'

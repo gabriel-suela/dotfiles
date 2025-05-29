@@ -1,5 +1,6 @@
 # follow XDG base dir specification
 export XDG_CONFIG_HOME="$HOME/.config"
+export PATH="/usr/lib/ccache/bin:$HOME/bin:$HOME/.local/bin:$HOME/.local/scripts:${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
 # dwm
 xrandr --output DisplayPort-1 --mode 2560x1440 --rate 75

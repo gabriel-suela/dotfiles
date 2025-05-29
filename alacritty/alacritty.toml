@@ -1,14 +1,15 @@
+
 [font]
 normal = {family = "JetBrainsMono Nerd Font", style="Bold"}
-size = 12
+size = 11.5
 offset = {x = 0, y = 0}
 
 [terminal.shell]
 program = "/bin/zsh"
 
 [window]
-# opacity = 0.90
-opacity = 0.98
+opacity = 0.95
+# opacity = 0.98
 startup_mode = "Maximized"
 # opacity = 1
 
@@ -21,29 +22,32 @@ save_to_clipboard = true
 [colors]
 draw_bold_text_with_bright_colors = false
 
+[general]
+import = ["~/.cache/wal/colors-alacritty.toml"]
+
 # Default colors
-[colors.primary]
-background = "#1F1F1F"
-foreground = "#CCCCCC"
-
-[colors.normal]
-black   = "#000000"
-red     = "#d6181b"
-green   = "#6A9955"
-yellow  = "#e4d201"
-blue    = "#569cd6"
-magenta = "#bc3fbc"
-cyan    = "#4EC9B0"
-white   = "#e5e5e5"
-
-[colors.bright]
-black   = "#666666"
-red     = "#ce9178"
-green   = "#b5cea8"
-yellow  = "#DCDCAA"
-blue    = "#9cdcfe"
-magenta = "#d670d6"
-cyan    = "#9cdcfe"
-white   = "#e5e5e5"
-
-[terminal]
+# [colors.primary]
+# background = "#1F1F1F"
+# foreground = "#CCCCCC"
+#
+# [colors.normal]
+# black   = "#000000"
+# red     = "#d6181b"
+# green   = "#6A9955"
+# yellow  = "#e4d201"
+# blue    = "#569cd6"
+# magenta = "#bc3fbc"
+# cyan    = "#4EC9B0"
+# white   = "#e5e5e5"
+#
+# [colors.bright]
+# black   = "#666666"
+# red     = "#ce9178"
+# green   = "#b5cea8"
+# yellow  = "#DCDCAA"
+# blue    = "#9cdcfe"
+# magenta = "#d670d6"
+# cyan    = "#9cdcfe"
+# white   = "#e5e5e5"
+#
+# [terminal]
