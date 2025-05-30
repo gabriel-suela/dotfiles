@@ -2,5 +2,36 @@
 	email = gscsuela@gmail.com
 	name = gabriel-suela
 	signingkey = D4033338
+[core]
+  compression = 9
+  preloadindex = true
+[status]
+  branch = true
+  showStatus = true
+  # showUntrackedFiles = true
+[diff]
+  rename = copies
+  context = 3
+  interHunkContext = 10
+
+[color "diff"]
+  meta = black bold
+  frag = magenta
+  context = white
+  whitespace = yellow reverse
+  old = red
+
+[push]
+  default = current
+  followTags = true
+
+[pull]
+  default = current
+  rebase = true
+
+[rebase]
+  autoStash = true
+  missingCommitsCheck = warn
+
 [commit]
 	gpgsign = true

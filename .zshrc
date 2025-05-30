@@ -76,6 +76,15 @@ bindkey '^[[1;5D' emacs-backward-word
 bindkey "^[[3~" delete-char
 
 alias ls='ls --color=auto -hv'
+alias gs='git status --short'
+alias gp='git push'
+alias ga='git add'
+alias gd='git diff'
+alias gu='git pull'
+alias gl='git log'
+alias gb='git branch'
+alias gcl='git clone'
+alias gm='git commit'
 alias v='nvim'
 alias grep='grep --color=auto'
 alias diff='diff --color=auto'
