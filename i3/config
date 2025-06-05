@@ -6,6 +6,7 @@ font pango:JetBrains Nerd Font 12
 exec --no-startup-id dex --autostart --environment i3
 exec --no-startup-id dunst
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+exec --no-startup-id amixer -c 4 sset PCM 100%
 exec --no-startup-id nm-applet
 exec --no-startup-id greenclip daemon & 
 exec --no-startup-id feh --bg-fill ~/Pictures/open.png

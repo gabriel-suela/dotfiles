@@ -8,8 +8,8 @@ offset = {x = 0, y = 0}
 program = "/bin/zsh"
 
 [window]
-opacity = 0.95
-# opacity = 0.98
+# opacity = 0.95
+opacity = 1
 startup_mode = "Maximized"
 # opacity = 1
 
@@ -22,8 +22,8 @@ save_to_clipboard = true
 [colors]
 draw_bold_text_with_bright_colors = false
 
-[general]
-import = ["~/.cache/wal/colors-alacritty.toml"]
+# [general]
+# import = ["~/.cache/wal/colors-alacritty.toml"]
 
 # Default colors
 # [colors.primary]

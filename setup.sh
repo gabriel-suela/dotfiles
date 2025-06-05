@@ -83,7 +83,7 @@ install_yay() {
 install_packages() {
     local common_packages=(
         ripgrep tmux python python-pip neovim yarn unzip 
-        docker docker-compose kubectl github-cli zsh
+        docker docker-compose kubectl zsh
     )
     
     local wsl_packages=(
@@ -91,8 +91,8 @@ install_packages() {
     )
     
     local desktop_packages=(
-        flameshot google-chrome bitwarden alacritty
-        ttf-jetbrains-mono-nerd arch-gaming-meta tandem-chat
+        flameshot zen-browser bitwarden alacritty
+        ttf-jetbrains-mono-nerd wine umu-launcher tandem-chat
     )
 
     local packages=("${common_packages[@]}")

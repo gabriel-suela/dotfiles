@@ -5,6 +5,11 @@ export EDITOR=nvim
 export PATH="/usr/lib/ccache/bin:$HOME/bin:$HOME/.local/bin:$HOME/.local/scripts:${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 export HELM_DIFF_THREE_WAY_MERGE=true
 
+# Onlinefix vars
+export WINEPREFIX='~/.local/share/Steam/steamapps/compatdata/480'
+export WINEDLLOVERRIDES="OnlineFix64=n;SteamOverlay64=n;winmm=n,b;dnet=n;steam\_api64=n"
+export GAMEID=480
+
 # Autostart from tty if im running a WM without a LM
 if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
   exec startx
