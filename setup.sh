@@ -49,16 +49,6 @@ ssh_gen() {
   ssh-keygen -t ed25519 -C "gscsuela@gmail.com"
 }
 
-clone_nvim() {
-    if [ ! -d "$NVIM_DIR" ]; then
-        log_step "Cloning nvim repository"
-        run_cmd "git clone $NVIM_REPO $NVIM_DIR"
-    else
-        log_success "Dotfiles repository already exists"
-    fi
-
-}
-
 clone_repo() {
     if [ ! -d "$REPO_DIR" ]; then
         log_step "Cloning dotfiles repository"
@@ -129,8 +119,6 @@ setup_symlinks() {
         ".config/tmux"
         ".local/scripts/tmux-sessionizer"
         ".local/scripts/sysmaintence.sh"
-        ".local/scripts/pywal16"
-        ".local/scripts/wallpapermenu"
     )
 
     # Desktop-only symlinks
@@ -184,7 +172,7 @@ install_additional_tools() {
 
     # zsh-syntax-highlighting
     if [ ! -d "$HOME/zsh-syntax-highlighting/" ]; then
-      run_cmd "git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $HOME" 
+      run_cmd "git clone https://github.com/zsh-users/zsh-syntax-highlighting.git" 
     fi
     
     # Tmux Plugin Manager
@@ -204,6 +192,8 @@ install_additional_tools() {
 
 post_install_tasks() {
     log_step "Running post-install tasks"
+
+    gcloud components install gke-gcloud-auth-plugin
     
     # Docker without sudo
     if ! groups | grep -q docker; then

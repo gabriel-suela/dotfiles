@@ -125,5 +125,3 @@ if [ -f '/home/suela/google-cloud-sdk/path.zsh.inc' ]; then . '/home/suela/googl
 # The next line enables shell command completion for gcloud.
 if [ -f '/home/suela/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/suela/google-cloud-sdk/completion.zsh.inc'; fi
 source /home/suela/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-. "$HOME/.local/bin/env"
