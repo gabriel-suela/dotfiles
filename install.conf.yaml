@@ -1,0 +1,27 @@
+- defaults:
+    link:
+      relink: true
+
+- clean: ["~"]
+
+- create:
+    - ~/.gnupg
+    - ~/.config
+    - ~/.local/scripts
+
+- link:
+    ~/.zshrc: .zshrc
+    ~/.xprofile: .xprofile
+    ~/.gitconfig: .gitconfig
+    ~/.gnupg/gpg.conf: gpg.conf
+    ~/.gnupg/gpg-agent.conf: gpg-agent.conf
+    ~/.config/tmux: tmux
+    ~/.config/dotbins: dotbins
+    ~/.config/picom: picom
+    ~/.config/i3: i3
+    ~/.config/dunst: dunst
+    ~/.local/scripts/tmux-sessionizer: scripts/tmux-sessionizer
+    ~/.local/scripts/sysmaintence.sh: scripts/sysmaintence.sh
+# - shell:
+# - [git submodule update --init --recursive, "Submodule att"]
+# - [./setup.sh, "Starting custom script"]
