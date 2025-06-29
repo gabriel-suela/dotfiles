@@ -16,6 +16,7 @@
     ~/.gnupg/gpg.conf: gpg.conf
     ~/.gnupg/gpg-agent.conf: gpg-agent.conf
     ~/.config/tmux: tmux
+    ~/.config/alacritty: alacritty
     ~/.config/dotbins: dotbins
     ~/.config/picom: picom
     ~/.config/i3: i3

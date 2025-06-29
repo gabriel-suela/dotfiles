@@ -3,7 +3,6 @@
 set -e
 
 REPO_URL="git@github.com:gabriel-suela/dotfiles.git"
-NVIM_REPO="git@github.com:gabriel-suela/nvim.git"
 NVIM_DIR="$HOME/.config/nvim"
 
 CYAN='\033[0;36m'
@@ -38,8 +37,8 @@ install_yay() {
 }
 
 install_packages() {
-    local common=(ripgrep tmux python python-pip neovim yarn unzip docker docker-compose kubectl zsh)
-    local desktop=(flameshot zen-browser bitwarden alacritty ttf-jetbrains-mono-nerd wine umu-launcher tandem-chat)
+    local common=(ripgrep tmux python python-pip neovim unzip docker docker-compose kubectl zsh)
+    local desktop=(flameshot bitwarden alacritty ttf-jetbrains-mono-nerd wine umu-launcher)
     local packages=("${common[@]}")
     $IS_WSL || packages+=("${desktop[@]}")
 
@@ -50,14 +49,6 @@ install_packages() {
     done
 }
 
-clone_nvim() {
-    if [ ! -d "$NVIM_DIR" ]; then
-        log "Cloning Neovim config"
-        run "git clone $NVIM_REPO $NVIM_DIR"
-    else
-        ok "Neovim config already exists"
-    fi
-}
 
 install_tools() {
     log "Installing additional tools"
@@ -78,10 +69,10 @@ install_tools() {
 
 post_install() {
     log "Post-install steps"
-    run "gcloud components install gke-gcloud-auth-plugin"
     groups | grep -q docker || {
         run "sudo usermod -aG docker $USER"
         run "systemctl enable docker"
+        run "pip install --break-system-packages dotbins"
     }
     $IS_WSL || {
         [ -f "/etc/modprobe.d/audio_disable_powersave.conf" ] || echo "options snd_hda_intel power_save=0" | sudo tee /etc/modprobe.d/audio_disable_powersave.conf >/dev/null
@@ -89,13 +80,11 @@ post_install() {
 }
 
 main() {
-    echo -e "\n${CYAN}Iniciando bootstrap pós-Dotbot${NC}\n"
     install_yay
     install_packages
-    clone_nvim
     install_tools
     post_install
-    echo -e "\n${GREEN}Bootstrap finalizado com sucesso!${NC}"
+    echo -e "\n${GREEN}Setup finished${NC}"
 }
 
 main
