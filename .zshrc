@@ -62,7 +62,6 @@ stty stop undef # disable accidental ctrl s
 zstyle ':completion:*' menu select # tab opens cmp menu
 zstyle ':completion:*' special-dirs true # force . and .. to show in cmp menu
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS} ma=0\;33 # colorize cmp menu
-# zstyle ':completion:*' file-list true # more detailed list
 zstyle ':completion:*' squeeze-slashes false # explicit disable to allow /*/ expansion
 
 
@@ -82,16 +81,6 @@ bindkey '^[[1;5D' emacs-backward-word
 bindkey "^[[3~" delete-char
 
 alias ls='ls --color=auto -hv'
-alias gs='git status --short'
-alias gp='git push'
-alias ga='git add'
-alias gc='git commit'
-alias gd='git diff'
-alias gu='git pull'
-alias gl='git log'
-alias gb='git branch'
-alias gcl='git clone'
-alias gm='git commit'
 alias v='nvim'
 alias grep='grep --color=auto'
 alias diff='diff --color=auto'
@@ -102,9 +91,7 @@ alias ip='ip -c=auto'
 # -----------------------------------------------------
 source <(fzf --zsh)
 bindkey -s "^F" "tmux-sessionizer\n"
-alias lt='eza -a --tree --level=1 --icons'
 alias v='$EDITOR'
-alias vim='$EDITOR'
 #alias dbsync="GITHUB_TOKEN=$(gh auth token) dotbins sync"
 alias k="kubectl"
 
