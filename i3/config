@@ -10,7 +10,8 @@ exec --no-startup-id amixer -c 4 sset PCM 100%
 exec --no-startup-id nm-applet
 exec --no-startup-id greenclip daemon & 
 exec --no-startup-id feh --bg-fill ~/Pictures/open.png
-exec --no-startup-id xrandr --output displayport-1 --mode 2560x1440 --rate 75
+exec --no-startup-id xrandr --output DisplayPort-1 --mode 2560x1440 --rate 75 --pos 0x349 --rotate normal --output HDMI-A-0 --mode 1920x1080 --rate 75 --pos 2560x0 --rotate left
+
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
@@ -20,7 +21,7 @@ bindsym XF86AudioPause exec playerctl play-pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
-bindsym $mod+m exec --no-startup-id pactl set-source-mute alsa_input.usb-3142_fifine_Microphone-00.analog-stereo toggle
+#bindsym $mod+m exec --no-startup-id pactl set-source-mute alsa_input.usb-3142_fifine_Microphone-00.analog-stereo toggle
 
 
 # Use Mouse+$mod to drag floating windows to their wanted position
@@ -148,6 +149,9 @@ bindsym $mod+Shift+7 move container to workspace number $ws7
 bindsym $mod+Shift+8 move container to workspace number $ws8
 bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10
+
+workspace "6" output HDMI-A-0
+bindsym $mod+m move workspace to output right
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
