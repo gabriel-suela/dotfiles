@@ -37,8 +37,8 @@ install_yay() {
 }
 
 install_packages() {
-    local common=(ripgrep tmux python python-pip neovim unzip docker docker-compose kubectl zsh yazi)
-    local desktop=(flameshot bitwarden alacritty ttf-jetbrains-mono-nerd wine umu-launcher)
+    local common=(ripgrep tmux python python-pip neovim unzip docker docker-compose kubectl zsh yazi umu-launcher tandem-chat qbittorrent)
+    local desktop=(flameshot bitwarden alacritty ttf-jetbrains-mono-nerd wine )
     local packages=("${common[@]}")
     $IS_WSL || packages+=("${desktop[@]}")
 
