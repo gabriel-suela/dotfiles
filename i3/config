@@ -10,7 +10,9 @@ exec --no-startup-id amixer -c 4 sset PCM 100%
 exec --no-startup-id nm-applet
 exec --no-startup-id greenclip daemon & 
 exec --no-startup-id feh --bg-fill ~/Pictures/open.png
-exec --no-startup-id xrandr --output DisplayPort-1 --mode 2560x1440 --rate 75 --pos 0x349 --rotate normal --output HDMI-A-0 --mode 1920x1080 --rate 75 --pos 2560x0 --rotate left
+exec --no-startup-id xrandr --output DisplayPort-1 --mode 2560x1440 --rate 75 --pos 0x349 --rotate normal --output HDMI-A-0 --mode 1920x1080 --rate 75 --pos 2560x0 --rotate right
+exec --no-startup-id xrdb merge ~/.Xresources
+exec_always --no-startup-id ~/.config/polybar/launch.sh &
 
 
 # Use pactl to adjust volume in PulseAudio.
@@ -161,10 +163,10 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
 # finds out, if available)
-bar {
-       status_command i3status
-       font pango:JetBrains Mono Nerd Font 10
-}
+# bar {
+#        status_command i3status
+#        font pango:JetBrains Mono Nerd Font 10
+# }
 
 #configure workspace 7 (default for steam)
 exec --no-startup-id sleep 2 && i3-msg "workspace 7; exec /usr/bin/tandem -silent %U"
