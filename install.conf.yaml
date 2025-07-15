@@ -15,6 +15,7 @@
     ~/.gitconfig: .gitconfig
     ~/.gnupg/gpg.conf: gpg.conf
     ~/.gnupg/gpg-agent.conf: gpg-agent.conf
+    ~/.config/polybar: polybar
     ~/.config/tmux: tmux
     ~/.config/alacritty: alacritty
     ~/.config/dotbins: dotbins
