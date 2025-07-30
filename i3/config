@@ -1,6 +1,6 @@
 set $mod Mod4
 
-font pango:JetBrains Nerd Font 12
+font pango:JetBrains Mono Nerd Font 10
 
 #start up applications
 exec --no-startup-id dex --autostart --environment i3
@@ -9,10 +9,11 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec --no-startup-id amixer -c 4 sset PCM 100%
 exec --no-startup-id nm-applet
 exec --no-startup-id greenclip daemon & 
-exec --no-startup-id feh --bg-fill ~/Pictures/open.png
-exec --no-startup-id xrandr --output DisplayPort-1 --mode 2560x1440 --rate 75 --pos 0x349 --rotate normal --output HDMI-A-0 --mode 1920x1080 --rate 75 --pos 2560x0 --rotate right
+exec --no-startup-id feh --bg-fill ~/Pictures/tyler-smith-jaderender04.jpg
+# exec --no-startup-id xrandr --output DisplayPort-1 --mode 2560x1440 --rate 75 --pos 349x0 --rotate normal --output HDMI-A-0 --mode 1920x1080 --rate 75 --pos 2560x0 --rotate right
+exec --no-startup-id xrandr --output DisplayPort-1 --mode 2560x1440 --rate 75 --pos 1080x240 --rotate normal --output HDMI-A-0 --mode 1920x1080 --rate 100 --pos 0x0 --rotate right
 exec --no-startup-id xrdb merge ~/.Xresources
-exec_always --no-startup-id ~/.config/polybar/launch.sh &
+# exec_always --no-startup-id ~/.config/polybar/launch.sh &
 
 
 # Use pactl to adjust volume in PulseAudio.
@@ -45,15 +46,21 @@ default_floating_border pixel 2
 # client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
 # client.background       #ffffff
 
-# DEFAULT
+#DEFAULT
 client.focused          #4C7899 #285577 #FFFFFF #4C7899   #4C7899
 client.focused_inactive #333333 #5F676A #FFFFFF #484E50   #5F676A
 client.unfocused        #333333 #222222 #888888 #292D2E   #222222
 client.urgent           #2F343A #900000 #FFFFFF #900000   #900000
 client.placeholder      #000000 #0C0C0C #FFFFFF #000000   #0C0C0C
 
+
+# DARK
+# client.focused          #ffffff #ffffff #ffffff #ffffff   #ffffff
+# client.focused_inactive #484848 #484848 #484848 #484848   #484848
+# client.unfocused        #484848 #484848 #484848 #484848   #484848
+
 #config displays
-exec_always --no-startup-id picom &
+exec_always --no-startup-id picom --no-frame-pacing &
 exec_always --no-startup-id setxkbmap -layout us -variant intl
 exec_always --no-startup-id autotiling
 # start a terminal
@@ -68,8 +75,8 @@ bindsym $mod+d exec --no-startup-id dmenu_run -fn 'JetBrains Mono Nerd Font-10'
 bindsym $mod+Shift+q exec --no-startup-id rofi -show power-menu -modi power-menu:rofi-power-menu
 bindsym $mod+v exec --no-startup-id rofi -modi "clipboard:greenclip print" -show
 
-gaps inner 8
-gaps outer 8
+# gaps inner 8
+# gaps outer 8
 
 # change focus
 bindsym $mod+h focus left
@@ -88,7 +95,7 @@ bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
 #bindsym $mod+s layout stacking
-#bindsym $mod+w layout tabbed
+bindsym $mod+w layout tabbed
 #bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
@@ -118,7 +125,11 @@ set $ws10 "10"
 
 # Rules
 #for_window [class="Tandem"] floating enable
+for_window [window_role="pop-up"] floating enable
 for_window [class="ranger"] floating enable
+for_window [class="Steam"] floating enable
+for_window [class="steam"] floating enable
+for_window [class="steamwebhelper"] floating enable
 for_window [class="awakened-poe-trade"] floating enable
 for_window [class="pavucontrol"] floating enable
 for_window [class="Lxappearance"] floating enable
@@ -163,10 +174,10 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
 # finds out, if available)
-# bar {
-#        status_command i3status
-#        font pango:JetBrains Mono Nerd Font 10
-# }
+bar {
+       status_command i3status
+       font pango:JetBrains Mono Nerd Font 10
+}
 
 #configure workspace 7 (default for steam)
 exec --no-startup-id sleep 2 && i3-msg "workspace 7; exec /usr/bin/tandem -silent %U"
