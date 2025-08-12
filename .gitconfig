@@ -21,6 +21,11 @@
   whitespace = yellow reverse
   old = red
 
+[url "git@github.com:"]
+    insteadOf = https://github.com/
+[url "git@gist.github.com:"]
+    insteadOf = https://gist.github.com/
+
 [push]
   default = current
   followTags = true
