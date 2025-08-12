@@ -8,8 +8,8 @@ offset = {x = 0, y = 0}
 program = "/bin/zsh"
 
 [window]
-# opacity = 0.9
-opacity = 1
+opacity = 0.8
+# opacity = 1
 startup_mode = "Maximized"
 # opacity = 1
 
