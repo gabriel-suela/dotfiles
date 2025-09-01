@@ -4,6 +4,7 @@ plataforms:
 tools:
   zoxide: ajeetdsouza/zoxide
   fzf: junegunn/fzf
+  dnscontrol: StackExchange/dnscontrol
   kubectl-krew:
     repo: kubernetes-sigs/krew
     extract_archive: true
@@ -20,6 +21,10 @@ tools:
     path_in_archive: tetra
   hubble: cilium/hubble
   argo: argoproj/argo-workflows
+  tofu:
+    repo: opentofu/opentofu
+    shell_code: |
+      alias terraform="tofu"
   vals: helmfile/vals
   vcluster:
     repo: loft-sh/vcluster
@@ -40,6 +45,5 @@ tools:
     extract_archive: true
     path_in_archive: bao
   task: go-task/task
-  tofu: opentofu/opentofu
   yq: mikefarah/yq
   k9s: derailed/k9s
