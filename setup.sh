@@ -64,7 +64,7 @@ install_tools() {
     [ -d "$HOME/.zsh/pure" ] || run "git clone https://github.com/sindresorhus/pure.git $HOME/.zsh/pure"
     [ -d "$HOME/zsh-syntax-highlighting" ] || run "git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $HOME/zsh-syntax-highlighting"
     [ -d "$HOME/.tmux/plugins/tpm" ] || run "git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm"
-    command -v nvm &>/dev/null || run "curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.2/install.sh | bash"
+    command -v nvm &>/dev/null || run "curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.2/install.sh | sh"
 }
 
 post_install() {

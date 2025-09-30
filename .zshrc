@@ -5,6 +5,8 @@ export EDITOR=nvim
 export TERMINAL=alacritty
 export PATH="/usr/lib/ccache/bin:$HOME/bin:$HOME/.local/bin:$HOME/.local/scripts:${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 export HELM_DIFF_THREE_WAY_MERGE=true
+export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH
+
 
 # Onlinefix vars
 export WINEPREFIX='~/.local/share/Steam/steamapps/compatdata/480'
