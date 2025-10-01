@@ -1,0 +1,147 @@
+set $mod Mod4
+
+font pango:CaskaydiaMono Nerd Font 10
+
+### STARTUP PROGRAMS ###
+exec dex --autostart --environment sway
+exec dunst
+exec xss-lock --transfer-sleep-lock -- i3lock --nofork
+exec amixer -c 4 sset PCM 100%
+exec nm-applet
+exec greenclip daemon
+# Wallpaper (recomendado: usar swaybg)
+exec swaybg -i ~/Pictures/background.png -m fill
+exec waybar
+
+# Configurar monitores (sway usa output)
+output HDMI-A-1 {
+    mode 1920x1080@100Hz
+    transform normal
+    pos 0 0
+}
+
+output DisplayPort-1 {
+    mode 2560x1440@75Hz
+    pos 1080 240
+    transform normal
+}
+
+# Compositor interno do sway, não usar picom
+#exec_always picom  ❌ Não necessário
+
+# Teclado
+input * {
+    xkb_layout us
+    xkb_variant intl
+}
+
+# Auto-tiling para sway
+exec autotiling
+
+### BINDS ###
+bindsym $mod+Return exec alacritty
+bindsym $mod+q kill
+bindsym $mod+d exec wmenu-run
+
+bindsym $mod+Shift+q exec rofi -show power-menu -modi power-menu:rofi-power-menu
+bindsym $mod+v exec rofi -modi "clipboard:greenclip print" -show
+
+# Flameshot (funciona via XWayland)
+bindsym $mod+Shift+s exec flameshot gui
+
+# Playerctl
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioPause exec playerctl play-pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+
+floating_modifier $mod
+
+default_border pixel 1
+default_floating_border pixel 2
+
+### WORKSPACES ###
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+
+# Switch workspaces
+bindsym $mod+1 workspace number $ws1
+bindsym $mod+2 workspace number $ws2
+bindsym $mod+3 workspace number $ws3
+bindsym $mod+4 workspace number $ws4
+bindsym $mod+5 workspace number $ws5
+bindsym $mod+6 workspace number $ws6
+bindsym $mod+7 workspace number $ws7
+bindsym $mod+8 workspace number $ws8
+bindsym $mod+9 workspace number $ws9
+bindsym $mod+0 workspace number $ws10
+
+# Move containers
+bindsym $mod+Shift+1 move container to workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5
+bindsym $mod+Shift+6 move container to workspace number $ws6
+bindsym $mod+Shift+7 move container to workspace number $ws7
+bindsym $mod+Shift+8 move container to workspace number $ws8
+bindsym $mod+Shift+9 move container to workspace number $ws9
+bindsym $mod+Shift+0 move container to workspace number $ws10
+
+workspace $ws6 output HDMI-A-1
+
+bindsym $mod+m move workspace to output right
+
+### WINDOW FOCUS ###
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+bindsym $mod+f fullscreen toggle
+bindsym $mod+w layout tabbed
+bindsym $mod+Shift+space floating toggle
+bindsym $mod+space focus mode_toggle
+bindsym $mod+a focus parent
+
+# Resize
+bindsym $mod+minus resize shrink width 5 px or 5 ppt
+bindsym $mod+equal resize grow width 5 px or 5 ppt
+
+### RULES ###
+for_window [window_role="pop-up"] floating enable
+for_window [app_id="ranger"] floating enable
+for_window [app_id="steam"] floating enable
+for_window [app_id="steamwebhelper"] floating enable
+for_window [app_id="awakened-poe-trade"] floating enable
+for_window [app_id="pavucontrol"] floating enable
+for_window [app_id="Lxappearance"] floating enable
+for_window [app_id="Thunar"] floating enable
+for_window [app_id="Google-chrome" window_role="pop-up"] floating enable
+
+### Swaybar ###
+
+### AUTOSTART ###
+exec sleep 2 && swaymsg "workspace 7; exec /usr/bin/tandem -silent %U"
+exec sleep 4 && swaymsg 'workspace 1'
+
+bindsym $mod+s workspace $ws8; exec steam
+
+# Reload / Restart / Exit
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+r restart
+bindsym $mod+Shift+e exec swaymsg exit
+

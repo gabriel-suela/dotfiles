@@ -20,7 +20,7 @@
     ~/.config/alacritty: alacritty
     ~/.config/dotbins: dotbins
     ~/.config/picom: picom
-    ~/.config/i3: i3
+    ~/.config/sway: sway
     ~/.config/dunst: dunst
     ~/.local/scripts/tmux-sessionizer: scripts/tmux-sessionizer
     ~/.local/scripts/sysmaintence.sh: scripts/sysmaintence.sh
