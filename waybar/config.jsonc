@@ -31,11 +31,18 @@
     "on-click": "activate",
     "sort-by-number": true,
     "persistent_workspaces": {
-      "1": [],
-      "2": [],
-      "3": [],
-      "4": []
-    }
+        // Workspaces do monitor DP-2
+    "1": ["DP-2"],
+    "2": ["DP-2"],
+    "3": ["DP-2"],
+    "4": ["DP-2"],
+    "5": ["DP-2"],
+
+    // Workspaces do monitor HDMI-A-1
+    "6": ["HDMI-A-1"],
+    "7": ["HDMI-A-1"],
+    "8": ["HDMI-A-1"],
+    "9": ["HDMI-A-1"]}
   },
   "clock": {
     "format": "󰅐 {:%H:%M}",
@@ -79,3 +86,4 @@
     "tooltip": false
   }
 }
+

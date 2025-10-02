@@ -4,32 +4,35 @@ font pango:CaskaydiaMono Nerd Font 10
 
 ### STARTUP PROGRAMS ###
 exec dex --autostart --environment sway
+exec xwayland force
 exec dunst
 exec xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec amixer -c 4 sset PCM 100%
 exec nm-applet
 exec greenclip daemon
+exec mako
 # Wallpaper (recomendado: usar swaybg)
 exec swaybg -i ~/Pictures/background.png -m fill
 exec waybar
+
+set $gtk_theme WhiteSur-Dark
+
+gaps inner 0
+gaps outer 0
 
 # Configurar monitores (sway usa output)
 output HDMI-A-1 {
     mode 1920x1080@100Hz
     transform normal
-    pos 0 0
+    pos -1920 0
 }
 
-output DisplayPort-1 {
+output DP-2 {
     mode 2560x1440@75Hz
-    pos 1080 240
+    pos 0 0
     transform normal
 }
 
-# Compositor interno do sway, não usar picom
-#exec_always picom  ❌ Não necessário
-
-# Teclado
 input * {
     xkb_layout us
     xkb_variant intl
@@ -42,12 +45,9 @@ exec autotiling
 bindsym $mod+Return exec alacritty
 bindsym $mod+q kill
 bindsym $mod+d exec wmenu-run
-
-bindsym $mod+Shift+q exec rofi -show power-menu -modi power-menu:rofi-power-menu
-bindsym $mod+v exec rofi -modi "clipboard:greenclip print" -show
-
-# Flameshot (funciona via XWayland)
-bindsym $mod+Shift+s exec flameshot gui
+bindsym $mod+F2 exec amixer set Mic toggle
+bindsym Print exec grim - | wl-copy
+bindsym $mod+Shift+s exec grim -g "$(slurp)" - | wl-copy
 
 # Playerctl
 bindsym XF86AudioPlay exec playerctl play-pause
@@ -112,7 +112,7 @@ bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
 
 bindsym $mod+f fullscreen toggle
-bindsym $mod+w layout tabbed
+# bindsym $mod+w layout tabbed
 bindsym $mod+Shift+space floating toggle
 bindsym $mod+space focus mode_toggle
 bindsym $mod+a focus parent
@@ -124,7 +124,7 @@ bindsym $mod+equal resize grow width 5 px or 5 ppt
 ### RULES ###
 for_window [window_role="pop-up"] floating enable
 for_window [app_id="ranger"] floating enable
-for_window [app_id="steam"] floating enable
+for_window [app_id="Steam"] floating enable
 for_window [app_id="steamwebhelper"] floating enable
 for_window [app_id="awakened-poe-trade"] floating enable
 for_window [app_id="pavucontrol"] floating enable
