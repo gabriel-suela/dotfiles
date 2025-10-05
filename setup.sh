@@ -37,10 +37,10 @@ install_yay() {
 }
 
 install_packages() {
-    local common=(ripgrep tmux python python-pip neovim unzip docker docker-compose kubectl zsh yazi umu-launcher tandem-chat qbittorrent)
-    local desktop=(flameshot bitwarden alacritty ttf-cascadia-mono-nerd wine sway swaybg wmenu discord)
+    local common=(ripgrep tmux python python-pip neovim unzip docker docker-compose kubectl zsh yazi)
+    local desktop=(flameshot bitwarden alacritty ttf-cascadia-mono-nerd wine sway swaybg wmenu discord umu-launcher tandem-chat qbittorrent grim slurp)
     local packages=("${common[@]}")
-    $IS_WSL || packages+=("${desktop[@]}")
+    $IS_WSL || packages+=("${common[@]}")
 
     log "Installing system packages"
     run "yay -Syu --noconfirm"
