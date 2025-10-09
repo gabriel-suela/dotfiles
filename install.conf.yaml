@@ -2,7 +2,7 @@
     link:
       relink: true
 
-- clean: ["~"]
+- clean: ['~']
 
 - create:
     - ~/.gnupg
@@ -11,17 +11,15 @@
 
 - link:
     ~/.zshrc: .zshrc
-    ~/.xprofile: .xprofile
     ~/.gitconfig: .gitconfig
     ~/.gnupg/gpg.conf: gpg.conf
     ~/.gnupg/gpg-agent.conf: gpg-agent.conf
-    ~/.config/polybar: polybar
     ~/.config/tmux: tmux
     ~/.config/alacritty: alacritty
     ~/.config/dotbins: dotbins
-    ~/.config/picom: picom
     ~/.config/sway: sway
     ~/.config/dunst: dunst
+    ~/.config/mako: mako
     ~/.local/scripts/tmux-sessionizer: scripts/tmux-sessionizer
     ~/.local/scripts/sysmaintence.sh: scripts/sysmaintence.sh
 # - shell:
