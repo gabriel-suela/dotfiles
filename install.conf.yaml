@@ -21,7 +21,7 @@
     ~/.config/dunst: dunst
     ~/.config/mako: mako
     ~/.local/scripts/tmux-sessionizer: scripts/tmux-sessionizer
-    ~/.local/scripts/sysmaintence.sh: scripts/sysmaintence.sh
+    ~/.local/scripts/sysmaintence: scripts/sysmaintence
 # - shell:
 # - [git submodule update --init --recursive, "Submodule att"]
 # - [./setup.sh, "Starting custom script"]
