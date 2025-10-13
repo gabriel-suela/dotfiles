@@ -9,8 +9,8 @@ export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH
 
 
 # Onlinefix vars
-export WINEPREFIX='~/.local/share/Steam/steamapps/compatdata/480'
-export PROTONPATH='/usr/share/steam/compatibilitytools.d/proton-cachyos'
+# export WINEPREFIX='~/.local/share/Steam/steamapps/compatdata/480'
+# export PROTONPATH='/usr/share/steam/compatibilitytools.d/proton-cachyos'
 export WINEDLLOVERRIDES="OnlineFix64=n;SteamOverlay64=n;winmm=n,b;dnet=n;steam\_api64=n"
 export GAMEID=480
 
@@ -42,9 +42,7 @@ prompt pure
 eval "$(zoxide init zsh)"
 
 gcof() {
-  
   git branch --all | sed -E 's|^\*? +||; s|remotes/origin/||' | sort -u | fzf --height 40% --border --prompt "Checkout branch: " | xargs git checkout
-
 }
 
 
@@ -63,7 +61,7 @@ stty stop undef # disable accidental ctrl s
 
 # cmp opts
 zstyle ':completion:*' menu select # tab opens cmp menu
-zstyle ':completion:*' special-dirs true # force . and .. to show in cmp menu
+# zstyle ':completion:*' special-dirs true # force . and .. to show in cmp menu
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS} ma=0\;33 # colorize cmp menu
 zstyle ':completion:*' squeeze-slashes false # explicit disable to allow /*/ expansion
 
