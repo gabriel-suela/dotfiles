@@ -5,7 +5,7 @@ TERM = "xterm-256color"
 normal = { family = "CaskaydiaMono Nerd Font", style = "Regular" }
 bold = { family = "CaskaydiaMono Nerd Font", style = "Bold" }
 italic = { family = "CaskaydiaMono Nerd Font", style = "Italic" }
-size = 12
+size = 10.5
 offset = {x = 0, y = 0}
 
 [terminal.shell]
@@ -30,33 +30,22 @@ draw_bold_text_with_bright_colors = false
 # import = ["~/.cache/wal/colors-alacritty.toml"]
 
 [colors.primary]
-foreground = "#c0caf5"
-background = "#1a1b26"
+background = '#1F1F1F'
+foreground = '#D4D4D4'
 
 [colors.cursor]
-text = "#1a1b26"
-cursor = "#c0caf5"
-
-[colors.selection]
-text = "#c0caf5"
-background = "#283457"
+text = "#1F1F1F"
+cursor = "#D4D4D4"
 
 [colors.normal]
-black = "#15161e"
-red = "#f7768e"
-green = "#9ece6a"
-yellow = "#e0af68"
-blue = "#7aa2f7"
-magenta = "#bb9af7"
-cyan = "#7dcfff"
-white = "#a9b1d6"
+black = "#1F1F1F"
+red = "#F44747"
+green = "#6A9955"
+yellow = "#DCDCAA"
+blue = "#569CD6"
+magenta = "#C586C0"
+cyan = "#56B6C2"
+white = "#D4D4D4"
 
 [colors.bright]
-black = "#414868"
-red = "#f7768e"
-green = "#9ece6a"
-yellow = "#e0af68"
-blue = "#7aa2f7"
-magenta = "#bb9af7"
-cyan = "#7dcfff"
-white = "#c0caf5"
+black = "#808080"
