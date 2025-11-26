@@ -16,6 +16,7 @@
     ~/.gnupg/gpg-agent.conf: gpg-agent.conf
     ~/.config/tmux: tmux
     ~/.config/alacritty: alacritty
+    ~/.config/nvim: nvim
     ~/.config/dotbins: dotbins
     # ~/.config/sway: sway
     # ~/.config/dunst: dunst

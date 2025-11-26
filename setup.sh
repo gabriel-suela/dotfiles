@@ -41,7 +41,7 @@ install_yay() {
 
 install_packages() {
   local common=(ripgrep tmux python python-pip neovim unzip docker docker-compose kubectl zsh yazi)
-  local desktop=(bitwarden alacritty ttf-cascadia-mono-nerd wine rofi discord umu-launcher tandem-chat qbittorrent grim slurp xdg-desktop-portal xdg-desktop-portal-gtk xdg-desktop-portal-gnome xdg-desktop-portal-hyprland gnome-polkit apple-fonts)
+  local desktop=(bitwarden alacritty ttf-cascadia-mono-nerd wine  discord umu-launcher tandem-chat qbittorren gnome-polkit apple-fonts)
   local packages=("${common[@]}")
   $IS_WSL || packages+=("${common[@]}")
 
