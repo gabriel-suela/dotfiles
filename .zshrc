@@ -9,10 +9,13 @@ export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH
 
 
 # Onlinefix vars
-# export WINEPREFIX='~/.local/share/Steam/steamapps/compatdata/480'
+export WINEPREFIX='~/.local/share/Steam/steamapps/compatdata/480'
 # export PROTONPATH='/usr/share/steam/compatibilitytools.d/proton-cachyos'
 export WINEDLLOVERRIDES="OnlineFix64=n;SteamOverlay64=n;winmm=n,b;dnet=n;steam\_api64=n"
 export GAMEID=480
+
+# Fix for appimage on wayland
+QT_QPA_PLATFORM=xcb
 
 # Autostart from tty if im running a WM without a LM
 if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
@@ -115,3 +118,9 @@ if [ -f '/home/suela/google-cloud-sdk/path.zsh.inc' ]; then . '/home/suela/googl
 # The next line enables shell command completion for gcloud.
 if [ -f '/home/suela/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/suela/google-cloud-sdk/completion.zsh.inc'; fi
 source /home/suela/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/home/suela/.lmstudio/bin"
+# End of LM Studio CLI section
+
+export PATH=$PATH:$HOME/go/bin
