@@ -81,12 +81,10 @@ install_arch_packages() {
     bitwarden
     alacritty
     ttf-cascadia-mono-nerd
+    ttf-jetbrains-mono-nerd
     wine
-    discord
     umu-launcher
-    tandem-chat
     qbittorrent
-    gnome-polkit
     apple-fonts
   )
 
