@@ -8,6 +8,8 @@ cd ~/dotfiles
 ./install
 ```
 
+`./install` first applies the symlinks with Dotbot and then runs [`setup.sh`](/home/suela/dotfiles/setup.sh).
+
 ### Update dotbot submodule
 
 ```bash

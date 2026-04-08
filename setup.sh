@@ -1,92 +1,173 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-set -e
-
-REPO_URL="git@github.com:gabriel-suela/dotfiles.git"
-NVIM_DIR="$HOME/.config/nvim"
+set -euo pipefail
 
 CYAN='\033[0;36m'
 GREEN='\033[0;32m'
 RED='\033[0;31m'
 NC='\033[0m'
-ARROW="\033[1;36m→${NC}"
 
-IS_WSL=false
-if grep -qi "microsoft" /proc/version || uname -r | grep -qi "microsoft"; then
-  IS_WSL=true
-fi
+log() { printf '%b==> %s%b\n' "${CYAN}" "$1" "${NC}"; }
+ok() { printf '%b✓ %s%b\n' "${GREEN}" "$1" "${NC}"; }
+fail() { printf '%b✗ %s%b\n' "${RED}" "$1" "${NC}" >&2; }
 
-log() { echo -e "${CYAN}==> $1${NC}"; }
-ok() { echo -e "${GREEN}✓ $1${NC}"; }
-fail() { echo -e "${RED}✗ $1${NC}"; }
 run() {
-  echo -e "${ARROW} ${CYAN}Running: $1${NC}"
-  eval "$1" || {
-    fail "Command failed: $1"
-    exit 1
-  }
+  log "Running: $*"
+  "$@"
 }
 
-install_yay() {
-  if ! command -v yay &>/dev/null; then
-    log "Installing yay (AUR helper)"
-    run "sudo pacman -S --needed --noconfirm base-devel git"
-    run "git clone https://aur.archlinux.org/yay.git /tmp/yay"
-    run "cd /tmp/yay && makepkg -si --noconfirm"
-    run "rm -rf /tmp/yay"
-  else
-    ok "yay already installed"
+has_cmd() {
+  command -v "$1" >/dev/null 2>&1
+}
+
+is_wsl() {
+  grep -qi microsoft /proc/version 2>/dev/null || uname -r | grep -qi microsoft
+}
+
+is_arch() {
+  [[ -r /etc/arch-release ]]
+}
+
+ensure_yay() {
+  has_cmd yay && { ok "yay already installed"; return; }
+
+  if ! is_arch; then
+    log "Skipping yay installation on non-Arch system"
+    return
   fi
+
+  log "Installing yay"
+  run sudo pacman -S --needed --noconfirm base-devel git
+
+  local tmp_dir
+  tmp_dir="$(mktemp -d)"
+
+  run git clone https://aur.archlinux.org/yay.git "${tmp_dir}/yay"
+  (
+    cd "${tmp_dir}/yay"
+    run makepkg -si --noconfirm
+  )
+  rm -rf "${tmp_dir}"
 }
 
-install_packages() {
-  local common=(ripgrep tmux python python-pip neovim unzip docker docker-compose kubectl zsh yazi)
-  local desktop=(bitwarden alacritty ttf-cascadia-mono-nerd wine  discord umu-launcher tandem-chat qbittorren gnome-polkit apple-fonts)
-  local packages=("${common[@]}")
-  $IS_WSL || packages+=("${common[@]}")
+install_arch_packages() {
+  if ! is_arch; then
+    log "Skipping package installation on non-Arch system"
+    return
+  fi
 
-  log "Installing system packages"
-  run "yay -Syu --noconfirm"
-  for pkg in "${packages[@]}"; do
-    yay -Qi "$pkg" &>/dev/null || run "yay -S --noconfirm $pkg"
-  done
+  if ! has_cmd yay; then
+    fail "yay is required to install packages on Arch"
+    return 1
+  fi
+
+  local common_packages=(
+    ripgrep
+    tmux
+    python
+    python-pip
+    neovim
+    unzip
+    docker
+    docker-compose
+    kubectl
+    zsh
+    yazi
+    fzf
+    zoxide
+  )
+
+  local desktop_packages=(
+    bitwarden
+    alacritty
+    ttf-cascadia-mono-nerd
+    wine
+    discord
+    umu-launcher
+    tandem-chat
+    qbittorrent
+    gnome-polkit
+    apple-fonts
+  )
+
+  local packages=("${common_packages[@]}")
+  if ! is_wsl; then
+    packages+=("${desktop_packages[@]}")
+  fi
+
+  log "Installing system packages with yay"
+  run yay -Syu --noconfirm
+  run yay -S --needed --noconfirm "${packages[@]}"
+}
+
+install_google_cloud_sdk() {
+  [[ -d "${HOME}/google-cloud-sdk" ]] && { ok "google-cloud-sdk already installed"; return; }
+
+  log "Installing Google Cloud SDK"
+
+  local archive
+  archive="$(mktemp --suffix=.tar.gz)"
+
+  run curl -fsSL -o "${archive}" \
+    https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-linux-x86_64.tar.gz
+  run tar -xf "${archive}" -C "${HOME}"
+  run "${HOME}/google-cloud-sdk/install.sh" --quiet
+  rm -f "${archive}"
+}
+
+clone_repo_if_missing() {
+  local repo_url="$1"
+  local target_dir="$2"
+
+  if [[ -d "${target_dir}" ]]; then
+    ok "${target_dir} already present"
+    return
+  fi
+
+  run git clone "${repo_url}" "${target_dir}"
 }
 
 install_tools() {
-  log "Installing additional tools"
+  install_google_cloud_sdk
+  clone_repo_if_missing https://github.com/sindresorhus/pure.git "${HOME}/.zsh/pure"
+  clone_repo_if_missing https://github.com/zsh-users/zsh-syntax-highlighting.git "${HOME}/zsh-syntax-highlighting"
+  clone_repo_if_missing https://github.com/tmux-plugins/tpm "${HOME}/.tmux/plugins/tpm"
 
-  [ -d "$HOME/google-cloud-sdk" ] || {
-    run "curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-linux-x86_64.tar.gz"
-    run "tar -xf google-cloud-cli-linux-x86_64.tar.gz -C \$HOME"
-    run "$HOME/google-cloud-sdk/install.sh --quiet"
-    run "rm google-cloud-cli-linux-x86_64.tar.gz"
-    grep -q google-cloud-sdk "$HOME/.zshrc" || echo 'export PATH="$HOME/google-cloud-sdk/bin:$PATH"' >>"$HOME/.zshrc"
-  }
-
-  [ -d "$HOME/.zsh/pure" ] || run "git clone https://github.com/sindresorhus/pure.git $HOME/.zsh/pure"
-  [ -d "$HOME/zsh-syntax-highlighting" ] || run "git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $HOME/zsh-syntax-highlighting"
-  [ -d "$HOME/.tmux/plugins/tpm" ] || run "git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm"
-  command -v nvm &>/dev/null || run "curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.2/install.sh | sh"
+  if has_cmd nvm; then
+    ok "nvm already installed"
+  else
+    log "Installing nvm"
+    run bash -lc 'curl -fsSL https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.2/install.sh | bash'
+  fi
 }
 
 post_install() {
-  log "Post-install steps"
-  groups | grep -q docker || {
-    run "sudo usermod -aG docker $USER"
-    run "systemctl enable docker"
-    run "pip install --break-system-packages dotbins"
-  }
-  $IS_WSL || {
-    [ -f "/etc/modprobe.d/audio_disable_powersave.conf" ] || echo "options snd_hda_intel power_save=0" | sudo tee /etc/modprobe.d/audio_disable_powersave.conf >/dev/null
-  }
+  if has_cmd docker && ! id -nG "${USER}" | grep -qw docker; then
+    run sudo usermod -aG docker "${USER}"
+  fi
+
+  if has_cmd systemctl && systemctl list-unit-files | grep -q '^docker\.service'; then
+    run sudo systemctl enable docker
+  fi
+
+  if has_cmd pip; then
+    run pip install --break-system-packages dotbins
+  fi
+
+  if ! is_wsl; then
+    local audio_conf="/etc/modprobe.d/audio_disable_powersave.conf"
+    if [[ ! -f "${audio_conf}" ]]; then
+      printf 'options snd_hda_intel power_save=0\n' | sudo tee "${audio_conf}" >/dev/null
+    fi
+  fi
 }
 
 main() {
-  install_yay
-  install_packages
+  ensure_yay
+  install_arch_packages
   install_tools
   post_install
-  echo -e "\n${GREEN}Setup finished${NC}"
+  ok "Setup finished"
 }
 
-main
+main "$@"

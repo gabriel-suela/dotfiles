@@ -1,15 +1,41 @@
 #!/usr/bin/env bash
 
-set -e
+set -euo pipefail
 
 CONFIG="install.conf.yaml"
 DOTBOT_DIR="dotbot"
-
 DOTBOT_BIN="bin/dotbot"
 BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+DOTBOT_PATH="${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}"
 
-cd "${BASEDIR}"
-git -C "${DOTBOT_DIR}" submodule sync --quiet --recursive
-git submodule update --init --recursive "${DOTBOT_DIR}"
+log() {
+  printf '==> %s\n' "$1"
+}
 
-"${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${CONFIG}" "${@}"
+main() {
+  cd "${BASEDIR}"
+
+  if ! command -v git >/dev/null 2>&1; then
+    printf 'git is required to run this installer.\n' >&2
+    exit 1
+  fi
+
+  if [[ ! -d "${DOTBOT_DIR}" ]]; then
+    printf 'Dotbot submodule directory not found: %s\n' "${DOTBOT_DIR}" >&2
+    exit 1
+  fi
+
+  log "Syncing Dotbot submodule"
+  git -C "${DOTBOT_DIR}" submodule sync --quiet --recursive
+  git submodule update --init --recursive "${DOTBOT_DIR}"
+
+  if [[ ! -x "${DOTBOT_PATH}" ]]; then
+    printf 'Dotbot binary not found or not executable: %s\n' "${DOTBOT_PATH}" >&2
+    exit 1
+  fi
+
+  log "Applying dotfiles"
+  "${DOTBOT_PATH}" -d "${BASEDIR}" -c "${CONFIG}" "$@"
+}
+
+main "$@"

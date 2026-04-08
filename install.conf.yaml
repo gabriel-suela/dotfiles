@@ -10,6 +10,7 @@
     - ~/.local/scripts
 
 - link:
+    ~/.bashrc: .bashrc
     ~/.zshrc: .zshrc
     ~/.gitconfig: .gitconfig
     ~/.gnupg/gpg.conf: gpg.conf
@@ -28,6 +29,6 @@
     ~/.local/scripts/tmux-sessionizer: scripts/tmux-sessionizer
     ~/.local/scripts/sysmaintence: scripts/sysmaintence
     ~/niri.sh: niri.sh
-# - shell:
-# - [git submodule update --init --recursive, "Submodule att"]
-# - [./setup.sh, "Starting custom script"]
+
+- shell:
+    - [./setup.sh, "Running post-link setup script"]

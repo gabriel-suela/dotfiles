@@ -9,7 +9,7 @@ export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH
 
 
 # Onlinefix vars
-export WINEPREFIX='~/.local/share/Steam/steamapps/compatdata/480'
+#export WINEPREFIX='~/.local/share/Steam/steamapps/compatdata/480'
 # export PROTONPATH='/usr/share/steam/compatibilitytools.d/proton-cachyos'
 export WINEDLLOVERRIDES="OnlineFix64=n;SteamOverlay64=n;winmm=n,b;dnet=n;steam\_api64=n"
 export GAMEID=480
