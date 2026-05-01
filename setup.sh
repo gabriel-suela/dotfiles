@@ -24,6 +24,10 @@ is_wsl() {
   grep -qi microsoft /proc/version 2>/dev/null || uname -r | grep -qi microsoft
 }
 
+is_fedora() {
+  [[ -r /etc/fedora-release ]] || grep -q '^ID=fedora$' /etc/os-release 2>/dev/null
+}
+
 is_arch() {
   [[ -r /etc/arch-release ]]
 }
@@ -161,6 +165,11 @@ post_install() {
 }
 
 main() {
+  if is_fedora; then
+    run "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/setup-fedora.sh" "$@"
+    return
+  fi
+
   ensure_yay
   install_arch_packages
   install_tools
