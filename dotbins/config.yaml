@@ -13,37 +13,15 @@ tools:
   helmfile: helmfile/helmfile
   kustomize: kubernetes-sigs/kustomize
   gh: cli/cli
-  mkcert: FiloSottile/mkcert
-  rclone: rclone/rclone
-  tetragon:
-    repo: cilium/tetragon
-    extract_archive: true
-    path_in_archive: tetra
-  hubble: cilium/hubble
-  argo: argoproj/argo-workflows
   tofu:
     repo: opentofu/opentofu
     shell_code: |
       alias terraform="tofu"
-  vals: helmfile/vals
-  vcluster:
-    repo: loft-sh/vcluster
-    tag: v0.23.1
-    platform_map:
-      macos: darwin
-      linux: linux
-    asset_patterns: vcluster-{platform}-{arch}
-  velero: vmware-tanzu/velero
   micromamba: mamba-org/micromamba-releases
   sops: getsops/sops
-  cilium: cilium/cilium-cli
   lazygit: jesseduffield/lazygit
   lazydocker: jesseduffield/lazydocker
   kind: kubernetes-sigs/kind
-  bao:
-    repo: openbao/openbao
-    extract_archive: true
-    path_in_archive: bao
   task: go-task/task
   yq: mikefarah/yq
   k9s: derailed/k9s
