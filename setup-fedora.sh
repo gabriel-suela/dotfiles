@@ -90,7 +90,7 @@ install_fedora_packages() {
   fi
 
   log "Refreshing Fedora packages"
-  run sudo dnf upgrade --refresh -y
+  run sudo dnf upgrade --refresh --skip-unavailable -y
 
   enable_rpmfusion
 
@@ -107,13 +107,12 @@ install_fedora_packages() {
     unzip
     zsh
     pciutils
-    yazi
     fzf
     zoxide
   )
 
   log "Installing common packages with dnf"
-  run sudo dnf install -y "${common_packages[@]}"
+  run sudo dnf install -y --skip-unavailable "${common_packages[@]}"
 
   install_first_available docker moby-engine docker || true
   install_first_available docker-compose docker-compose-plugin docker-compose || true
