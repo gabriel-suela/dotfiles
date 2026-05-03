@@ -1,103 +1,182 @@
 {
   "layer": "top",
-  "position": "top",
+  "position": "bottom",
+  "height": 26,
+  "exclusive": true,
+  "passthrough": false,
+  "gtk-layer-shell": true,
+  "reload_style_on_change": true,
 
-  "modules-left": [
-    "niri/workspaces"
-  ],
+  "modules-left": ["group/os-logo", "group/media-and-volume"],
+  "modules-center": ["group/workspaces-and-privacy"],
+  "modules-right": ["group/misc", "group/tray-and-battery"],
 
-  "modules-center": [],
+  "group/os-logo": {
+    "orientation": "horizontal",
+    "modules": ["custom/os-logo", "niri/window"]
+  },
 
-  "modules-right": [
-    "tray",
-    "network",
-    "bluetooth",
-    "pulseaudio",
-    "backlight",
-    "battery",
-    "clock#date",
-    "clock#time"
-  ],
+  "group/media-and-volume": {
+    "orientation": "horizontal",
+    "modules": ["custom/media", "pulseaudio"]
+  },
+
+  "group/workspaces-and-privacy": {
+    "orientation": "horizontal",
+    "modules": ["niri/workspaces", "privacy"]
+  },
+
+  "group/misc": {
+    "orientation": "horizontal",
+    "modules": ["backlight", "network", "cpu", "memory", "disk"]
+  },
+
+  "group/tray-and-battery": {
+    "orientation": "horizontal",
+    "modules": ["tray", "battery", "clock"]
+  },
+
+  "custom/os-logo": {
+    "exec": "echo '  '",
+    "interval": "once",
+    "tooltip": false,
+    "on-click": "rofi -show drun",
+    "on-click-right": "wlogout"
+  },
 
   "niri/workspaces": {
-    "all-outputs": true,
     "format": "{icon}",
     "format-icons": {
-      "active": "●",
-      "default": "○"
+      "1": "1",
+      "2": "2",
+      "3": "3",
+      "4": "4",
+      "5": "5",
+      "6": "6",
+      "7": "7",
+      "8": "8",
+      "9": "9",
+      "10": "10"
+    },
+    "on-click": "activate"
+  },
+
+  "niri/window": {
+    "format": "{}",
+    "max-length": 54
+  },
+
+  "custom/media": {
+    "exec": "playerctl metadata --format '{{artist}} - {{title}}' 2>/dev/null || echo ''",
+    "format": "󰝚 {}",
+    "on-click": "playerctl play-pause",
+    "on-click-right": "playerctl next",
+    "on-click-middle": "playerctl previous",
+    "max-length": 52,
+    "tooltip": true
+  },
+
+  "clock": {
+    "format": "{:%b %d %H:%M}",
+    "interval": 60,
+    "tooltip-format": "<span>{calendar}</span>",
+    "calendar": {
+      "mode": "month",
+      "mode-mon-col": 3,
+      "on-scroll": 1,
+      "iso8601": true
+    },
+    "actions": {
+      "on-click": "mode",
+      "on-click-right": "mode",
+      "on-click-middle": "shift_reset",
+      "on-scroll-up": "shift_up",
+      "on-scroll-down": "shift_down"
     }
   },
 
-  "tray": {
-    "icon-size": 18,
-    "spacing": 8,
-    "show-passive-items": true
+  "cpu": {
+    "interval": 10,
+    "format": " {usage}%"
   },
 
-  "clock#date": {
-    "tooltip": false,
-    "format": "{:%a %d %b}",
-    "timezone": "America/Sao_Paulo",
-    "interval": 1
+  "memory": {
+    "interval": 30,
+    "format": " {avail}GiB",
+    "tooltip": true,
+    "tooltip-format": " {percentage}%\n {used:0.1f}GB/{total:0.1f}GB"
   },
 
-  "clock#time": {
-    "tooltip": false,
-    "timezone": "America/Sao_Paulo",
-    "format": "{:%H:%M}",
-    "interval": 1
-  },
-
-  "bluetooth": {
-    "format": "󰂲",
-    "format-on": "{icon}",
-    "format-off": "{icon}",
-    "format-connected": "{icon}",
-    "format-icons": {
-      "on": "󰂯",
-      "off": "󰂲",
-      "connected": "󰂱"
-    },
-    "on-click": "blueman-manager",
-    "tooltip-format-connected": "{device_enumerate}"
+  "disk": {
+    "interval": 30,
+    "format": "󰋊 {free}",
+    "tooltip": true,
+    "tooltip-format": "󰋊 {percentage_used}%\n {used}/{total}"
   },
 
   "network": {
-    "format-wifi": "",
-    "format-ethernet": "󰈀",
-    "format-linked": "󰈀",
-    "format-disconnected": "󰤠",
-    "interval": 5,
-    "tooltip-format": "{essid} ({signalStrength})",
-    "on-click": "nm-connection-editor"
+    "interval": 2,
+    "tooltip": true,
+    "format": " {bandwidthDownBytes}  {bandwidthUpBytes}",
+    "format-linked": "󰈀 {ifname}",
+    "format-disconnected": "󰖪",
+    "tooltip-format": "Interface: {ifname}\nIP: {ipaddr}/{cidr}"
   },
 
   "backlight": {
     "format": "{icon} {percent}%",
-    "format-icons": ["", "󰃜", "󰃛", "󰃞", "󰃝", "󰃟", "󰃠"],
-    "tooltip": false
+    "format-icons": ["", "", "", "", "", "", "", "", ""],
+    "on-scroll-up": "brightnessctl set 1%+",
+    "on-scroll-down": "brightnessctl set 1%-"
   },
 
   "pulseaudio": {
     "format": "{icon} {volume}%",
     "format-muted": "",
+    "on-click": "pavucontrol",
+    "on-click-right": "pamixer -t",
+    "on-scroll-up": "pamixer -i 1",
+    "on-scroll-down": "pamixer -d 1",
+    "tooltip-format": "{icon} {desc} // {volume}%",
     "format-icons": {
+      "headphone": "",
+      "headset": "",
       "default": ["", "", ""]
-    },
-    "on-click": "pavucontrol"
+    }
+  },
+
+  "privacy": {
+    "icon-size": 10,
+    "icon-spacing": 5,
+    "transition-duration": 250,
+    "modules": [
+      {
+        "type": "screenshare",
+        "tooltip": true,
+        "tooltip-icon-size": 24
+      },
+      {
+        "type": "audio-in",
+        "tooltip": true,
+        "tooltip-icon-size": 24
+      }
+    ]
+  },
+
+  "tray": {
+    "icon-size": 14,
+    "spacing": 5
   },
 
   "battery": {
-    "interval": 2,
     "states": {
       "good": 95,
       "warning": 30,
-      "critical": 15
+      "critical": 20
     },
     "format": "{icon} {capacity}%",
     "format-charging": " {capacity}%",
     "format-plugged": " {capacity}%",
-    "format-alt": "{icon} {time}",
-    "format-icons": ["", "", "", "", ""]
+    "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
   }
 }
