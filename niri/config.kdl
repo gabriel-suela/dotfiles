@@ -70,6 +70,7 @@ layout {
 // Startup
 
 spawn-at-startup "waybar"
+spawn-sh-at-startup "swaybg -i ~/Pictures/wall.png -m fill"
 spawn-at-startup "xwayland-satellite"
 spawn-at-startup "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
@@ -125,8 +126,8 @@ window-rule {
 
 // Example: enable rounded corners for all windows.
 // (This example rule is commented out with a "/-" in front.)
-/-window-rule {
-    geometry-corner-radius 12
+window-rule {
+    geometry-corner-radius 3
     clip-to-geometry true
 }
 
@@ -154,7 +155,7 @@ binds {
 
     Mod+O repeat=false { toggle-overview; }
 
-    Mod+W repeat=false { close-window; }
+    Mod+q repeat=false { close-window; }
     Mod+Shift+o { move-column-to-monitor-right; }
     Mod+Shift+p { move-column-to-monitor-left; }
 
@@ -340,7 +341,7 @@ binds {
     // Mod+Space       { switch-layout "next"; }
     // Mod+Shift+Space { switch-layout "prev"; }
 
-    Print { screenshot; }
+    Mod+Shift+s { screenshot; }
     Ctrl+Print { screenshot-screen; }
     Alt+Print { screenshot-window; }
 
