@@ -5,9 +5,19 @@ return {
     priority = 1000,
     config = function()
       require("nightingale").setup({
-        transparent = false, -- set to true for transparent background
+        transparent = true, -- set to true for transparent background
       })
-      vim.cmd("colorscheme nightingale")
+    end,
+  },
+  {
+    "catppuccin/nvim",
+    lazy = false,
+    priority = 1000,
+    config = function()
+      require("catppuccin").setup({
+        transparent_background = true,
+      })
+      vim.cmd("colorscheme catppuccin")
     end,
   },
 }
