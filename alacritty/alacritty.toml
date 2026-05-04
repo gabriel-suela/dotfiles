@@ -12,7 +12,8 @@ offset = {x = 0, y = 0}
 program = "/bin/zsh"
 
 [window]
-opacity = 1
+opacity = 0.8
+blur = true
 # opacity = 1
 # startup_mode = "Maximized"
 # opacity = 1
@@ -30,7 +31,7 @@ draw_bold_text_with_bright_colors = false
 # import = ["~/.cache/wal/colors-alacritty.toml"]
 
 [colors.primary]
-background = '#1F1F1F'
+background = '#000000'
 foreground = '#D4D4D4'
 
 [colors.cursor]
