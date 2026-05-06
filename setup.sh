@@ -33,7 +33,10 @@ is_arch() {
 }
 
 ensure_yay() {
-  has_cmd yay && { ok "yay already installed"; return; }
+  has_cmd yay && {
+    ok "yay already installed"
+    return
+  }
 
   if ! is_arch; then
     log "Skipping yay installation on non-Arch system"
@@ -72,24 +75,34 @@ install_arch_packages() {
     python-pip
     neovim
     unzip
+    unrar
     docker
     docker-compose
     kubectl
     zsh
-    yazi
-    fzf
-    zoxide
   )
 
   local desktop_packages=(
-    bitwarden
+    steam
+    sddm
+    niri
+    mako
+    xwayland-satellite
+    wl-clipboard
+    vesktop
+    xdg-desktop-portal
+    xdg-desktop-portal-gtk
+    pipewire
+    wireplumber
+    libnotify
+    gst-plugin-pipewire
     alacritty
     ttf-cascadia-mono-nerd
     ttf-jetbrains-mono-nerd
     wine
+    protontricks
     umu-launcher
     qbittorrent
-    apple-fonts
   )
 
   local packages=("${common_packages[@]}")
@@ -100,21 +113,6 @@ install_arch_packages() {
   log "Installing system packages with yay"
   run yay -Syu --noconfirm
   run yay -S --needed --noconfirm "${packages[@]}"
-}
-
-install_google_cloud_sdk() {
-  [[ -d "${HOME}/google-cloud-sdk" ]] && { ok "google-cloud-sdk already installed"; return; }
-
-  log "Installing Google Cloud SDK"
-
-  local archive
-  archive="$(mktemp --suffix=.tar.gz)"
-
-  run curl -fsSL -o "${archive}" \
-    https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-linux-x86_64.tar.gz
-  run tar -xf "${archive}" -C "${HOME}"
-  run "${HOME}/google-cloud-sdk/install.sh" --quiet
-  rm -f "${archive}"
 }
 
 clone_repo_if_missing() {
@@ -130,17 +128,10 @@ clone_repo_if_missing() {
 }
 
 install_tools() {
-  install_google_cloud_sdk
   clone_repo_if_missing https://github.com/sindresorhus/pure.git "${HOME}/.zsh/pure"
   clone_repo_if_missing https://github.com/zsh-users/zsh-syntax-highlighting.git "${HOME}/zsh-syntax-highlighting"
   clone_repo_if_missing https://github.com/tmux-plugins/tpm "${HOME}/.tmux/plugins/tpm"
 
-  if has_cmd nvm; then
-    ok "nvm already installed"
-  else
-    log "Installing nvm"
-    run bash -lc 'curl -fsSL https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.2/install.sh | bash'
-  fi
 }
 
 post_install() {
