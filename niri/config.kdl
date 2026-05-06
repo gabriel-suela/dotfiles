@@ -75,7 +75,7 @@ spawn-sh-at-startup "swaybg -i ~/Pictures/wall.png -m fill"
 spawn-at-startup "xwayland-satellite"
 spawn-at-startup "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
-spawn-sh-at-startup "qs -c ~/niri.sh"
+spawn-sh-at-startup "qs -c noctalia-shell"
 hotkey-overlay {
     // Uncomment this line to disable the "Important Hotkeys" pop-up at startup.
     skip-at-startup
