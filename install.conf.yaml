@@ -14,7 +14,7 @@
     - ~/.local/scripts
 
 - link:
-    ~/.bashrc: .bashrc
+    # ~/.bashrc: .bashrc
     ~/.zshrc: .zshrc
     ~/.gitconfig: .gitconfig
     ~/.gnupg/gpg.conf: gpg.conf
@@ -24,15 +24,13 @@
     ~/.config/nvim: nvim
     ~/.config/dotbins: dotbins
     ~/.config/niri: niri
-    # ~/.config/sway: sway
-    # ~/.config/dunst: dunst
-    # ~/.config/hypr: hypr
+    ~/.config/fuzzel: fuzzel
     ~/.config/waybar: waybar
-    ~/.config/rofi: rofi
+    # ~/.config/rofi: rofi
     # ~/.config/mako: mako
     ~/.local/scripts/tmux-sessionizer: scripts/tmux-sessionizer
     ~/.local/scripts/sysmaintence: scripts/sysmaintence
-    ~/niri.sh: niri.sh
+    # ~/niri.sh: niri.sh
 
 - shell:
     - [./setup.sh, "Running post-link setup script"]

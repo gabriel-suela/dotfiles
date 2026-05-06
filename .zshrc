@@ -6,8 +6,8 @@
 export XCOMPOSEFILE="$HOME/.XCompose"
 export GTK_IM_MODULE=cedilla
 export QT_IM_MODULE=cedilla
-export XDG_CURRENT_DESKTOP=gnome
-export XDG_SESSION_DESKTOP=gnome
+#export XDG_CURRENT_DESKTOP=gnome
+#export XDG_SESSION_DESKTOP=gnome
 export GTK_THEME=Fluent-Dark-compact
 export EDITOR=nvim
 export TERMINAL=alacritty
