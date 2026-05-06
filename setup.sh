@@ -152,6 +152,8 @@ post_install() {
     if [[ ! -f "${audio_conf}" ]]; then
       printf 'options snd_hda_intel power_save=0\n' | sudo tee "${audio_conf}" >/dev/null
     fi
+
+    run "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/scripts/chrome-cedilla-workaround"
   fi
 }
 
