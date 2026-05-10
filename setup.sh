@@ -100,6 +100,12 @@ install_arch_packages() {
     ttf-cascadia-mono-nerd
     ttf-jetbrains-mono-nerd
     wine
+    grim
+    slurp
+    tesseract
+    hyprpicker
+    notify-send
+    wl-copy
     protontricks
     umu-launcher
     qbittorrent
