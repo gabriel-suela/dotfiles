@@ -1,51 +1,33 @@
 {
-  "layer": "top",
-  "position": "bottom",
-  "height": 26,
-  "exclusive": true,
-  "passthrough": false,
-  "gtk-layer-shell": true,
   "reload_style_on_change": true,
+  "layer": "top",
+  "position": "top",
+  "spacing": 0,
+  "height": 26,
 
-  "modules-left": ["group/os-logo", "group/media-and-volume"],
-  "modules-center": ["group/workspaces-and-privacy"],
-  "modules-right": ["group/misc", "group/tray-and-battery"],
+  "modules-left": ["custom/menu", "hyprland/workspaces"],
+  "modules-center": ["clock"],
+  "modules-right": [
+    "group/tray-expander",
+    "bluetooth",
+    "network",
+    "pulseaudio",
+    "cpu",
+    "battery"
+  ],
 
-  "group/os-logo": {
-    "orientation": "horizontal",
-    "modules": ["custom/os-logo", "niri/window"]
-  },
-
-  "group/media-and-volume": {
-    "orientation": "horizontal",
-    "modules": ["custom/media", "pulseaudio"]
-  },
-
-  "group/workspaces-and-privacy": {
-    "orientation": "horizontal",
-    "modules": ["hyprland/workspaces", "privacy"]
-  },
-
-  "group/misc": {
-    "orientation": "horizontal",
-    "modules": ["backlight", "network", "cpu", "memory", "disk"]
-  },
-
-  "group/tray-and-battery": {
-    "orientation": "horizontal",
-    "modules": ["tray", "clock"]
-  },
-
-  "custom/os-logo": {
-    "exec": "echo '   '",
-    "interval": "once",
-    "tooltip": false,
-    "on-click-right": "wlogout"
+  "custom/menu": {
+    "format": "󰣇",
+    "on-click": "fuzzel",
+    "on-click-right": "foot",
+    "tooltip-format": "Menu"
   },
 
   "hyprland/workspaces": {
+    "on-click": "activate",
     "format": "{icon}",
     "format-icons": {
+      "default": "",
       "1": "1",
       "2": "2",
       "3": "3",
@@ -55,88 +37,82 @@
       "7": "7",
       "8": "8",
       "9": "9",
-      "10": "10"
+      "10": "0",
+      "active": "󱓻"
     },
-    "on-click": "activate"
-  },
-
-  "niri/window": {
-    "format": "{}",
-    "max-length": 54
-  },
-
-  "custom/media": {
-    "exec": "playerctl metadata --format '{{artist}} - {{title}}' 2>/dev/null || echo ''",
-    "format": "󰝚 {}",
-    "on-click": "playerctl play-pause",
-    "on-click-right": "playerctl next",
-    "on-click-middle": "playerctl previous",
-    "max-length": 52,
-    "tooltip": true
-  },
-
-  "clock": {
-    "format": "{:%b %d %H:%M}",
-    "interval": 60,
-    "tooltip-format": "<span>{calendar}</span>",
-    "calendar": {
-      "mode": "month",
-      "mode-mon-col": 3,
-      "on-scroll": 1,
-      "iso8601": true
+    "persistent-workspaces": {
+      "1": [],
+      "2": [],
+      "3": [],
+      "4": [],
+      "5": []
+    }
     },
-    "actions": {
-      "on-click": "mode",
-      "on-click-right": "mode",
-      "on-click-middle": "shift_reset",
-      "on-scroll-up": "shift_up",
-      "on-scroll-down": "shift_down"
+
+  "niri/workspaces": {
+    "format": "{icon}",
+    "format-icons": {
+      "active": "󱓻",
+      "default": ""
     }
   },
 
-  "cpu": {
-    "interval": 10,
-    "format": " {usage}%"
-  },
-
-  "memory": {
-    "interval": 30,
-    "format": " {avail}GiB",
-    "tooltip": true,
-    "tooltip-format": " {percentage}%\n {used:0.1f}GB/{total:0.1f}GB"
-  },
-
-  "disk": {
-    "interval": 30,
-    "format": "󰋊 {free}",
-    "tooltip": true,
-    "tooltip-format": "󰋊 {percentage_used}%\n {used}/{total}"
+  "clock": {
+    "format": "{:%A %H:%M}",
+    "format-alt": "{:%d %B W%V %Y}",
+    "tooltip": false
   },
 
   "network": {
-    "interval": 2,
-    "tooltip": true,
-    "format": " {bandwidthDownBytes}  {bandwidthUpBytes}",
-    "format-linked": "󰈀 {ifname}",
-    "format-disconnected": "󰖪",
-    "tooltip-format": "Interface: {ifname}\nIP: {ipaddr}/{cidr}"
+    "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
+    "format": "{icon}",
+    "format-wifi": "{icon}",
+    "format-ethernet": "󰀂",
+    "format-disconnected": "󰤮",
+    "tooltip-format-wifi": "{essid} ({frequency} GHz)",
+    "tooltip-format-ethernet": "Connected",
+    "tooltip-format-disconnected": "Disconnected",
+    "interval": 3,
+    "spacing": 1,
+    "on-click": "nm-connection-editor"
   },
 
-  "backlight": {
-    "format": "{icon} {percent}%",
-    "format-icons": ["", "", "", "", "", "", "", "", ""],
-    "on-scroll-up": "brightnessctl set 1%+",
-    "on-scroll-down": "brightnessctl set 1%-"
+  "battery": {
+    "format": "{capacity}% {icon}",
+    "format-discharging": "{icon}",
+    "format-charging": "{icon}",
+    "format-plugged": "",
+    "format-icons": {
+      "charging": ["󰢜", "󰂆", "󰂇", "󰂈", "󰢝", "󰂉", "󰢞", "󰂊", "󰂋", "󰂅"],
+      "default": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
+    },
+    "format-full": "󰂅",
+    "tooltip-format-discharging": "{power:>1.0f}W↓ {capacity}%",
+    "tooltip-format-charging": "{power:>1.0f}W↑ {capacity}%",
+    "interval": 5,
+    "states": {
+      "warning": 20,
+      "critical": 10
+    }
+  },
+
+  "bluetooth": {
+    "format": "",
+    "format-off": "󰂲",
+    "format-disabled": "󰂲",
+    "format-connected": "󰂱",
+    "format-no-controller": "",
+    "tooltip-format": "Devices connected: {num_connections}",
+    "on-click": "blueman-manager"
   },
 
   "pulseaudio": {
-    "format": "{icon} {volume}%",
-    "format-muted": "",
+    "format": "{icon}",
     "on-click": "pavucontrol",
     "on-click-right": "pamixer -t",
-    "on-scroll-up": "pamixer -i 1",
-    "on-scroll-down": "pamixer -d 1",
-    "tooltip-format": "{icon} {desc} // {volume}%",
+    "tooltip-format": "Playing at {volume}%",
+    "scroll-step": 5,
+    "format-muted": "",
     "format-icons": {
       "headphone": "",
       "headset": "",
@@ -144,27 +120,33 @@
     }
   },
 
-  "privacy": {
-    "icon-size": 10,
-    "icon-spacing": 5,
-    "transition-duration": 250,
-    "modules": [
-      {
-        "type": "screenshare",
-        "tooltip": true,
-        "tooltip-icon-size": 24
-      },
-      {
-        "type": "audio-in",
-        "tooltip": true,
-        "tooltip-icon-size": 24
-      }
-    ]
+  "cpu": {
+    "interval": 5,
+    "format": "󰍛",
+    "on-click": "foot -e btop",
+    "on-click-right": "foot"
+  },
+
+  "group/tray-expander": {
+    "orientation": "inherit",
+    "drawer": {
+      "transition-duration": 600,
+      "children-class": "tray-group-item"
+    },
+    "modules": ["custom/expand-icon", "tray"]
+  },
+
+  "custom/expand-icon": {
+    "format": "",
+    "tooltip": false,
+    "on-scroll-up": "",
+    "on-scroll-down": "",
+    "on-scroll-left": "",
+    "on-scroll-right": ""
   },
 
   "tray": {
-    "icon-size": 14,
-    "spacing": 5
-  },
-
+    "icon-size": 12,
+    "spacing": 17
+  }
 }
